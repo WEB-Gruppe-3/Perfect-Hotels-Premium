@@ -1,2 +1,5 @@
 # Ignoring PHPStorm IDE project folder
 .idea
+
+# Ignoring config file
+php/classes/Conf.php
