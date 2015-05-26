@@ -1,10 +1,10 @@
 <?php
 require_once("DBConnector.php");
 require_once("Conf.php");
-/**
- * This is the database api.
- */
 
+/**
+ * This class represents the database API.
+ */
 class Database {
 
     private $dbConnector;
@@ -16,12 +16,15 @@ class Database {
     }
 
     /**
-     * Private functions
+     * Get the contents of the table.
+     * @param $tableName String The table to get.
+     * @return mysqli_result|false Returns the contents of the table as a mysqli result array.
      */
-    private function getTableAsArray($tableName) {
+    public function getAllTableRows($tableName) {
         $query = "SELECT * FROM $tableName";
+        $result = mysqli_query($this->dbConnector->getDBLink(), $query);
+        return $result;
     }
-
 
     /**
      * Get all table names in this database.
@@ -35,11 +38,11 @@ class Database {
 
     /**
      * Get all column names for this table.
-     * @param $table String The name of the table.
+     * @param $tableName String The name of the table.
      * @return mysqli_result|false Returns a mysqli result array with column names on success, false otherwise.
      */
-    public function getColumnNames($table) {
-        $query = "SELECT `column_name` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_NAME`='$table'";
+    public function getColumnNames($tableName) {
+        $query = "SELECT `column_name` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_NAME`='$tableName'";
         $result = mysqli_query($this->dbConnector->getDBLink(), $query);
         return $result;
     }

@@ -20,9 +20,18 @@ while($row = mysqli_fetch_row($result)) {
     echo($row[0] . "<br>");
 }
 
-/* Function: getColumnNames() */
-echo("<h3>getColumnNames(romtype)</h3>");
+/* Function: getColumnNames("RomType") */
+echo("<h3>getColumnNames(\"RomType\")</h3>");
 $result = $dbApi->getColumnNames("RomType");
+while($row = mysqli_fetch_row($result)) {
+    echo($row[0] . "<br>");
+}
+
+/* Function: getAllTableRows("RomType") */
+echo("<h3>getAllTableRows(\"RomType\")</h3>");
+echo("Nothing will show here if there are no rows in the table!<br>");
+$result = $dbApi->getAllTableRows("RomType");
+
 while($row = mysqli_fetch_row($result)) {
     echo($row[0] . "<br>");
 }
