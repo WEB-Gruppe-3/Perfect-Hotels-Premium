@@ -58,14 +58,35 @@ class Database {
      *               "NumOfBeds" => "value",
      *               "Price" => "value",
      *               "ImageID" => "value",
-     *               "Description" => "value");
+     *               "Description" => "value" );
      *
      * @param $tableName String The name of the table.
-     * @param $values Array An ASSOCIATIVE array of KEY->VALUE pairs to be inserted.
+     * @param $row Array An ASSOCIATIVE array of KEY->VALUE pairs to be inserted.
      * @return boolean Returns true if successful, false otherwise.
      */
-    public function insertValues($tableName, Array $values) {
-        
+    public function insertRow($tableName, Array $row) {
+        $columns = array_keys($row);
+        $values = array_values($row);
+
+        // Create two formatted strings with the columns and the values that we can insert into the query.
+        $columnString = null;
+        $valueString = null;
+
+        for($i = 0; $i < count($row); $i++) {
+            $columnString = $columnString . $columns[$i];
+            $valueString = $valueString . $values[$i];
+
+            // At the last loop-through, avoid adding a comma at the end.
+            if(false === ($i === count($columns) - 1)) {
+                $columnString = $columnString . ", ";
+                $valueString = $valueString . ", ";
+            }
+        }
+
+        // Now, lets make our query and fire it off!
+        $query = "INSERT INTO $tableName ($columnString) VALUES($valueString)";
+        $result = mysqli_query($this->dbConnector->getDBLink(), $query);
+        return $result;
     }
 
     /**

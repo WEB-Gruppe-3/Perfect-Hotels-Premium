@@ -40,6 +40,10 @@ while($row = mysqli_fetch_row($result)) {
 echo("<h3>getAllTableRows(1)</h3>");
 echo($dbApi->getImageURL(1));
 
+/* Function: insertRow() */
+echo("<h3>insertRow()</h3>");
+echo($dbApi->insertRow("RoomType", $arr = array("Key1" => "Val1", "Key2" => "Val2", "Key3" => "Val3")));
+
 
 /* Function: getHotels() */
 //echo("<h3>getHotels()</h3>");
