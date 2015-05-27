@@ -22,8 +22,9 @@ class Database {
      *
      * @return array Returns an array of Hotel objects.
      */
-    public function getHotels() {
+    public function getHotels() { // TODO!
         // Getting all rows from relevant tables so we can create hotel objects
+        /*
         $result_image = $this->getAllRows("Image");
         $result_hotel = $this->getAllRows("Hotel");
         $result_hotelRoom = $this->getAllRows("HotelRoomType");
@@ -44,8 +45,7 @@ class Database {
         }
 
         // Creating an array of HotelRooms //TODO: $id, $name, $roomType
-
-
+        */
     }
 
     /**
