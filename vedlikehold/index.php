@@ -16,11 +16,18 @@ $dbApi = new Database();
 <h3>Velg tabell</h3>
 <select name='table_name' id='table_list'>
 <?php
+    $valgt_table=$_POST ["table_name"];
     $result = $dbApi->getTableNames();
     while($row = mysqli_fetch_row($result)) 
         {
-        echo("<option value='" . $row[0] . "'>" . $row[0] . "</option>");
-        }
+        
+        
+        echo("<option value='" . $row[0] . "'");
+                            if ($row[0]==$valgt_table) {
+                                echo("selected");
+                            }
+                            echo(">" . $row[0] . "</option>");
+                            }
 ?>
 </select><input type='submit' value='OK' name='velgtabellknapp' id='velgtabellknapp'></form><br>
 
@@ -187,7 +194,11 @@ $dbApi = new Database();
                         $result2 = $dbApi->getAllRows("$foreigntable");
                         while($row2 = mysqli_fetch_row($result2)) 
                             {
-                            echo("<option value='" . $row2[0] . "'>" . $row2[0] . "</option>");
+                            echo("<option value='" . $row2[0] . "'");
+                            if ($row2[0]==$row[$nr]) {
+                                echo("selected");
+                            }
+                            echo(">" . $row2[0] . "</option>");
                             }
                         print ("</select></td>");
                         }
