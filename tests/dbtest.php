@@ -9,8 +9,13 @@ $dbApi = new Database();
  * DbLink
  */
 echo("<h2>Test: DbLink</h2>");
-var_dump($dbCon->getDBLink());
-echo("<br>");
+$dbLink = $dbCon->getDBLink();
+if($dbLink != null && $dbLink->connect_error === null && $dbLink->errno === 0) {
+    echo("<span style='color:limegreen'>Database connection is GOOD!</span>");
+}
+else {
+    echo("<span style='color:red'>Error with database connection :( !</span>");
+}
 
 echo("<h2>Test: Database API functions</h2>");
 
@@ -62,10 +67,10 @@ $tableName = "Test";
 $row = array("Col1" => "ezBezt", "Col2" => "isW0rst");
 $result = $dbApi->insertRow($tableName, $row);
 if($result) {
-    echo("Successfully inserted row in table Test");
+    echo("<span style='color:limegreen'>Successfully inserted row in table Test!</span>");
 }
 else {
-    echo("<strong>Inserting of row into table Test FAILED!</strong>");
+    echo("<span style='color:red'><strong>Inserting of row into table Test FAILED!</strong></span>");
 }
 
 /**
@@ -74,9 +79,10 @@ else {
 echo("<h3>updateRow()</h3>");
 
 $tableName = "Test";
-$result = $dbApi->updateRow($tableName, 1, array("Col1" => "UpdatedValue"));
+$update = array("Col1" => "UpdatedValue");
+$result = $dbApi->updateRow($tableName, 1, $update);
 if($result) {
-    echo("Successfully updated Col1 in table Test");
+    echo("<span style='color:limegreen'>Updating of " . array_keys($update)[0] . " in table " . $tableName . " is SUCCESS!</span>");
 } else {
-    echo("<strong>Updating of Col1 in table Test FAILED!</strong>");
+    echo("<span style='color:red'><strong>Updating of " . array_keys($update)[0] . " in table " . $tableName . " FAILED!!!!</strong></span>");
 }

@@ -86,7 +86,7 @@ class Database {
         // Now, lets make our query and fire it off!
         $query = "INSERT INTO $tableName ($columnString) VALUES($valueString);";
         $result = mysqli_query($this->dbConnector->getDBLink(), $query);
-        
+
         return $result;
     }
 
