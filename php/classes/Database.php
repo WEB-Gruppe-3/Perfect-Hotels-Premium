@@ -50,6 +50,8 @@ class Database {
 
     /**
      * Get the image URL from image ID
+     * @param $id Integer The ID of the image.
+     * @return String The image URL.
      */
     public function getImageURL($id) {
         $query = "SELECT Bildeurl FROM Bilder WHERE idBilder = $id";
