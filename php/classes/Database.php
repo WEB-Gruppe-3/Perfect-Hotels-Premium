@@ -18,33 +18,33 @@ class Database {
     }
 
     /**
-     * TODO: remove this. $id, $name, $imageURL, $hotelRooms
+     * TODO: $id, $name, $imageURL, $hotelRooms
      * Creates and returns all Hotel objects.
      * @return array Returns an array of Hotel objects.
      */
     public function getHotels() {
         // Getting all rows from relevant tables so we can create hotel objects
-        $result_image = $this->getAllTableRows("Bilder");
-        $result_hotel = $this->getAllTableRows("Hotell");
-        $result_hotelRoom = $this->getAllTableRows("HR");
-        $result_room = $this->getAllTableRows("Rom");
-        $result_roomType = $this->getAllTableRows("RomType");
+        $result_image = $this->getAllTableRows("Image");
+        $result_hotel = $this->getAllTableRows("Hotel");
+        $result_hotelRoom = $this->getAllTableRows("HotelRoomType");
+        $result_room = $this->getAllTableRows("Room");
+        $result_roomType = $this->getAllTableRows("RoomType");
 
         // Creating an array of RoomTypes
         $roomTypes = array();
 
         while($row = mysqli_fetch_assoc($result_roomType)) {
-            $id = $row["idRomType"];
-            $name = $row["Navn"];
-            $beds = $row["Senger"];
-            $price = $row["Pris"];
-            $imageURL = $this->getImageURL($row["Bilder_idBilder"]);
+            $id = $row["ID"];
+            $name = $row["Name"];
+            $beds = $row["NumOfBeds"];
+            $price = $row["Price"];
+            $imageURL = $this->getImageURL($row["ImageID"]);
 
             array_push($roomTypes, new RoomType($id, $name, $beds, $price, $imageURL));
         }
 
-        // Creating an array of HotelRooms
-        //TODO: $hotelRooms = array();
+        // Creating an array of HotelRooms //TODO: $id, $name, $roomType
+
 
     }
 
@@ -54,7 +54,7 @@ class Database {
      * @return String The image URL.
      */
     public function getImageURL($id) {
-        $query = "SELECT Bildeurl FROM Bilder WHERE idBilder = $id";
+        $query = "SELECT URL FROM Image WHERE ID = $id";
         $result = mysqli_query($this->dbConnector->getDBLink(), $query);
         return mysqli_fetch_row($result)[0];
     }

@@ -20,17 +20,17 @@ while($row = mysqli_fetch_row($result)) {
     echo($row[0] . "<br>");
 }
 
-/* Function: getColumnNames("RomType") */
-echo("<h3>getColumnNames(\"RomType\")</h3>");
-$result = $dbApi->getColumnNames("RomType");
+/* Function: getColumnNames() */
+echo("<h3>getColumnNames(\"RoomType\")</h3>");
+$result = $dbApi->getColumnNames("RoomType");
 while($row = mysqli_fetch_row($result)) {
     echo($row[0] . "<br>");
 }
 
-/* Function: getAllTableRows("RomType") */
-echo("<h3>getAllTableRows(\"RomType\")</h3>");
+/* Function: getAllTableRows() */
+echo("<h3>getAllTableRows(\"RoomType\")</h3>");
 echo("Nothing will show here if there are no rows in the table!<br>");
-$result = $dbApi->getAllTableRows("RomType");
+$result = $dbApi->getAllTableRows("RoomType");
 
 while($row = mysqli_fetch_row($result)) {
     echo($row[0] . "<br>");
@@ -42,5 +42,5 @@ echo($dbApi->getImageURL(1));
 
 
 /* Function: getHotels() */
-echo("<h3>getHotels()</h3>");
-echo($dbApi->getHotels());
+//echo("<h3>getHotels()</h3>");
+//echo($dbApi->getHotels());
