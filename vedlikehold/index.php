@@ -57,7 +57,8 @@ $dbApi = new Database();
                  }
                 echo ("<td><input type='submit' value='Edit' name='editknapp' id='editknapp'>
                         <input type='submit' value='Delete' name='deleteknapp' id='deleteknapp'>
-                        <input type='hidden' size='10' type='text' name='rowID' value='" . $row[0] . "'>
+                        <input type='text' size='10' type='text' name='rowID' value='" . $row[0] . "'>
+                        <input type='text' size='10' type='text' name='table_name' value='$valgt_table'>
                       </td></form></tr>");
             }
             print ("<tr><form action='' method='post' id='addForm' name='addForm'><td></td>");
@@ -88,31 +89,16 @@ $dbApi = new Database();
         }
 
 
-        @$deleteknapp=$_POST ["deleteknapp"];
-                if ($deleteknapp)
-                    {
-                    $ID = $_POST['rowID'];
-                    print ("Row ($ID) is now 'deleted'<br>"); 
-                    }
-
-        @$editknapp=$_POST ["editknapp"];
-                if ($editknapp)
-                    {
-                    $ID = $_POST['rowID'];
-                    print ("Here is where you edit the selected row $ID<br>");
-                    }
-        @$addknapp=$_POST ["addknapp"];
+                @$addknapp=$_POST ["addknapp"];
                 if ($addknapp)
                     {
                     $valgt_table=$_POST ["table_name"];
-                    
                     $column = array();
                     $input = array();
                     $result = $dbApi->getColumnNames("$valgt_table");
                         while($row = mysqli_fetch_row($result)) {
                                 $column[]=$row[0];
                         }
-
                     $rows=count($column);
                     $nr="1";
                     for ($x=1;$x<=$rows;$x++)
@@ -120,6 +106,7 @@ $dbApi = new Database();
                             $input[] = $_POST[$nr];
                          $nr++;
                          }
+                    print ("Table: $valgt_table<br>");
                     $nr="1";
                     $nr2="0";
                     for ($x=2;$x<=$rows;$x++)
@@ -128,32 +115,55 @@ $dbApi = new Database();
                          $nr++;
                           $nr2++;
                           }
-                    print ("Now it could be added to the table: $valgt_table<br>");
-
-
+                    
                     $nr="1";
                     $nr2="0";
                     $data = array();
                     for ($x=2;$x<=$rows;$x++)
                             {
-                            $data[]= array($column[$nr] => $input[$nr2]);
+                            $data[$column[$nr]] = $input[$nr2];
                          $nr++;
                          $nr2++;
                          }
-                    print($valgt_table);
-                    print_r($data);
-
-
-$result = $dbApi->insertRow($valgt_table, $data);
-if($result) {
-    echo("<span style='color:limegreen'>Successfully inserted row in table Test!</span>");
-}
-else {
-    echo("<span style='color:red'><strong>Inserting of row into table Test FAILED!</strong></span>");
-}
-
-
+                    $result = $dbApi->insertRow($valgt_table, $data);
+                    if($result) {
+                        echo("<br><span style='color:limegreen'>Successfully inserted row in table $valgt_table!</span>");
                     }
+                    else {
+                        echo("<br><span style='color:red'><strong>Inserting of row into table $valgt_table FAILED!</strong></span>");
+                    }
+                }
+
+        @$deleteknapp=$_POST ["deleteknapp"];
+                if ($deleteknapp)
+                    {
+                    $id = $_POST['rowID'];
+                    $valgt_table=$_POST ["table_name"];
+                    print ("Row ($id) is now 'deleted'<br>"); 
+                    
+                    $result = $dbApi->deleteRow($valgt_table, $id);
+                     if($result) {
+                        echo("<br><span style='color:limegreen'>Successfully deleted row in table $valgt_table!</span>");
+                    }
+                    else {
+                        echo("<br><span style='color:red'><strong>Deleting of row ($id) into table $valgt_table FAILED!</strong></span>");
+                    }
+
+                }
+
+        
+        @$editknapp=$_POST ["editknapp"];
+                if ($editknapp)
+                    {
+                    $ID = $_POST['rowID'];
+                    $valgt_table=$_POST ["table_name"];
+                    print ("Here is where you edit the selected row $ID<br>");
+                }
+       
+
+
+
+
 
 
 
