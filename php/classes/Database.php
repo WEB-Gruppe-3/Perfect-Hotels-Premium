@@ -90,6 +90,19 @@ class Database {
     }
 
     /**
+     * Delete a row from a selected table.
+     *
+     * @param $tableName String The table from which to delete.
+     * @param $ID Integer The id of the row to delete.
+     * @return boolean Returns true on success, false otherwise.
+     */
+    public function deleteRow($tableName, $ID) {
+        $query = "DELETE FROM $tableName WHERE ID = $ID";
+        $result = mysqli_query($this->dbConnector->getDBLink(), $query);
+        return $result;
+    }
+
+    /**
      * Get the image URL from image ID.
      *
      * @param $id Integer The ID of the image.
