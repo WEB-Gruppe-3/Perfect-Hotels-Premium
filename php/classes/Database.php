@@ -74,7 +74,7 @@ class Database {
 
         for($i = 0; $i < count($row); $i++) {
             $columnString = $columnString . $columns[$i];
-            $valueString = $valueString . $values[$i];
+            $valueString = $valueString . "'" . $values[$i] . "'";
 
             // At the last loop-through, avoid adding a comma at the end.
             if(false === ($i === count($columns) - 1)) {
@@ -84,8 +84,9 @@ class Database {
         }
 
         // Now, lets make our query and fire it off!
-        $query = "INSERT INTO $tableName ($columnString) VALUES($valueString)";
+        $query = "INSERT INTO $tableName ($columnString) VALUES($valueString);";
         $result = mysqli_query($this->dbConnector->getDBLink(), $query);
+        
         return $result;
     }
 
