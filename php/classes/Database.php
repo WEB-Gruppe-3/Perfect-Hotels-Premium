@@ -18,8 +18,8 @@ class Database {
     }
 
     /**
-     * TODO: $id, $name, $imageURL, $hotelRooms
      * Creates and returns all Hotel objects.
+     *
      * @return array Returns an array of Hotel objects.
      */
     public function getHotels() {
@@ -49,7 +49,28 @@ class Database {
     }
 
     /**
-     * Get the image URL from image ID
+     * Insert values to a table.
+     * This function takes an associative array where the KEY matches the COLUMN-name in the table.
+     *
+     * Example: To insert a row into table 'RoomType', you would pass an array like this.
+     *
+     * $arr = array( "Name" => "value",
+     *               "NumOfBeds" => "value",
+     *               "Price" => "value",
+     *               "ImageID" => "value",
+     *               "Description" => "value");
+     *
+     * @param $tableName String The name of the table.
+     * @param $values Array An ASSOCIATIVE array of KEY->VALUE pairs to be inserted.
+     * @return boolean Returns true if successful, false otherwise.
+     */
+    public function insertValues($tableName, Array $values) {
+        
+    }
+
+    /**
+     * Get the image URL from image ID.
+     *
      * @param $id Integer The ID of the image.
      * @return String The image URL.
      */
@@ -61,6 +82,7 @@ class Database {
 
     /**
      * Get the contents of the table.
+     *
      * @param $tableName String The table to get.
      * @return mysqli_result|false Returns the contents of the table as a mysqli result array.
      */
@@ -72,6 +94,7 @@ class Database {
 
     /**
      * Get all table names in this database.
+     *
      * @return mysqli_result|false Returns a mysqli result array with table names on success, false otherwise.
      */
     public function getTableNames() {
@@ -82,6 +105,7 @@ class Database {
 
     /**
      * Get all column names for this table.
+     *
      * @param $tableName String The name of the table.
      * @return mysqli_result|false Returns a mysqli result array with column names on success, false otherwise.
      */
