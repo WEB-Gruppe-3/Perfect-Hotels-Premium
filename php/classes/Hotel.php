@@ -7,13 +7,13 @@ class Hotel {
     private $imageURL;
 
     /* Array of this hotel's rooms */
-    private $rooms;
+    private $hotelRooms;
 
-    public function __construct($id, $name, $imageURL, $rooms) {
+    public function __construct($id, $name, $imageURL, $hotelRooms) {
         $this->id = $id;
         $this->name = $name;
         $this->imageURL = $imageURL;
-        $this->rooms = $rooms;
+        $this->hotelRooms = $hotelRooms;
     }
 
 }

@@ -35,3 +35,12 @@ $result = $dbApi->getAllTableRows("RomType");
 while($row = mysqli_fetch_row($result)) {
     echo($row[0] . "<br>");
 }
+
+/* Function: getImageURL(1) */
+echo("<h3>getAllTableRows(1)</h3>");
+echo($dbApi->getImageURL(1));
+
+
+/* Function: getHotels() */
+echo("<h3>getHotels()</h3>");
+echo($dbApi->getHotels());
