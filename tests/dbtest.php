@@ -37,13 +37,20 @@ while($row = mysqli_fetch_row($result)) {
 }
 
 /* Function: getImageURL(1) */
-echo("<h3>getAllRows(1)</h3>");
+echo("<h3>getImageURL(1)</h3>");
 echo($dbApi->getImageURL(1));
 
 /* Function: insertRow() */
 echo("<h3>insertRow()</h3>");
-echo($dbApi->insertRow("RoomType", $arr = array("Key1" => "Val1", "Key2" => "Val2", "Key3" => "Val3")));
+$tableName = "Test";
+$row = array("Col1" => "Val1", "Col2" => "Val2");
+$result = $dbApi->insertRow($tableName, $row);
+echo("Success: " . $result);
 
+/* Function: updateRow() */
+echo("<h3>insertRow()</h3>");
+
+//$dbApi->updateRow("RoomType", 1, array("Name" => "newName", "NumOfBeds" => "7"));
 
 /* Function: getHotels() */
 //echo("<h3>getHotels()</h3>");

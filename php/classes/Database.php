@@ -103,6 +103,36 @@ class Database {
     }
 
     /**
+     * This function updates columns in a row.
+     *
+     * The $update parameter must be an associative array structured like so:
+     * $update = array( "Col1ToBeUpdated" => "newValue",
+     *                  "Col2ToBeUpdated" => "newValue",
+     *                  "Col3ToBeUpdated" => "newValue" );
+     *
+     * @param $tableName String The name of the table to update.
+     * @param $id Integer The id of the row to update.
+     * @param $update Array An ASSOCIATIVE array with the columns and values to be updated.
+     * @return boolean Returns true on success, false otherwise.
+     */
+    public function updateRow($tableName, $id, $update) {
+        $keys = array_keys($update);
+        $updateString = null;
+        for($i = 0; $i < count($update); $i++) {
+            $updateString = $updateString . $keys[$i] . "=" . "'" .$update[$keys[$i]] . "'";
+
+            // Don't append comma on the last loop-through
+            if(false === ($i === count($update) - 1)) {
+                $updateString = $updateString . ",";
+            }
+        }
+
+        $query = "UPDATE $tableName SET $updateString WHERE ID = $id";
+        $result = mysqli_query($this->dbConnector->getDBLink(), $query);
+        return $result;
+    }
+
+    /**
      * Get the image URL from image ID.
      *
      * @param $id Integer The ID of the image.
