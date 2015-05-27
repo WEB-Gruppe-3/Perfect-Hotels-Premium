@@ -27,17 +27,17 @@ while($row = mysqli_fetch_row($result)) {
     echo($row[0] . "<br>");
 }
 
-/* Function: getAllTableRows() */
-echo("<h3>getAllTableRows(\"RoomType\")</h3>");
+/* Function: getAllRows() */
+echo("<h3>getAllRows(\"RoomType\")</h3>");
 echo("Nothing will show here if there are no rows in the table!<br>");
-$result = $dbApi->getAllTableRows("RoomType");
+$result = $dbApi->getAllRows("RoomType");
 
 while($row = mysqli_fetch_row($result)) {
     echo($row[0] . "<br>");
 }
 
 /* Function: getImageURL(1) */
-echo("<h3>getAllTableRows(1)</h3>");
+echo("<h3>getAllRows(1)</h3>");
 echo($dbApi->getImageURL(1));
 
 /* Function: insertRow() */

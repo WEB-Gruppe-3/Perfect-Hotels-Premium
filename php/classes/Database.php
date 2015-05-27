@@ -24,11 +24,11 @@ class Database {
      */
     public function getHotels() {
         // Getting all rows from relevant tables so we can create hotel objects
-        $result_image = $this->getAllTableRows("Image");
-        $result_hotel = $this->getAllTableRows("Hotel");
-        $result_hotelRoom = $this->getAllTableRows("HotelRoomType");
-        $result_room = $this->getAllTableRows("Room");
-        $result_roomType = $this->getAllTableRows("RoomType");
+        $result_image = $this->getAllRows("Image");
+        $result_hotel = $this->getAllRows("Hotel");
+        $result_hotelRoom = $this->getAllRows("HotelRoomType");
+        $result_room = $this->getAllRows("Room");
+        $result_roomType = $this->getAllRows("RoomType");
 
         // Creating an array of RoomTypes
         $roomTypes = array();
@@ -93,11 +93,11 @@ class Database {
      * Delete a row from a selected table.
      *
      * @param $tableName String The table from which to delete.
-     * @param $ID Integer The id of the row to delete.
+     * @param $id Integer The id of the row to delete.
      * @return boolean Returns true on success, false otherwise.
      */
-    public function deleteRow($tableName, $ID) {
-        $query = "DELETE FROM $tableName WHERE ID = $ID";
+    public function deleteRow($tableName, $id) {
+        $query = "DELETE FROM $tableName WHERE ID = $id";
         $result = mysqli_query($this->dbConnector->getDBLink(), $query);
         return $result;
     }
@@ -115,12 +115,24 @@ class Database {
     }
 
     /**
+     * Get a row from a table.
+     *
+     * @param $tableName String The name of the table from which to recieve the row.
+     * @return mysqli_result Returns a result object.
+     */
+    public function getRow($tableName, $id) {
+        $query = "SELECT * FROM $tableName WHERE ID = $id";
+        $result = mysqli_query($this->dbConnector->getDBLink(), $query);
+        return $result;
+    }
+
+    /**
      * Get the contents of the table.
      *
      * @param $tableName String The table to get.
      * @return mysqli_result|false Returns the contents of the table as a mysqli result array.
      */
-    public function getAllTableRows($tableName) {
+    public function getAllRows($tableName) {
         $query = "SELECT * FROM $tableName";
         $result = mysqli_query($this->dbConnector->getDBLink(), $query);
         return $result;
