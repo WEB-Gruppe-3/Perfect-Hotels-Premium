@@ -170,6 +170,46 @@ class Database {
     }
 
     /**
+     * Checks if a row exists in the database.
+     *
+     * The array should look like this:
+     * $row = array("Col1" => "value",
+     *              "Col2" => "value");
+     *
+     * @param $tableName String Name of the table to check in.
+     * @param $row Array An associative array with column => value pairs.
+     * @return boolean Returns true if the row exists, false otherwise.
+     */
+    public function doesRowExist($tableName, $row) {
+        $columns = array_keys($row);
+        $values = array_values($row);
+
+        // Making our WHERE string
+        $conditions = null;
+        for($i = 0; $i < count($row); $i++) {
+            $conditions = $conditions . $columns[$i] . "=" . "'" . $values[$i] . "'";
+
+            // Append "AND", unless its the last loop through
+            if(false === ($i === count($row) - 1)) {
+                $conditions = $conditions . " AND ";
+            } else {
+                $conditions = $conditions . ";";
+            }
+        }
+
+        // Now lets make and fire off our query!
+        $query = "SELECT * FROM $tableName WHERE $conditions";
+        $result = mysqli_query($this->dbConnector->getDBLink(), $query);
+
+        // If the result object has > 0 num_rows, the row exists
+        if($result->num_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Get all table names in this database.
      *
      * @return mysqli_result|false Returns a mysqli result array with table names on success, false otherwise.

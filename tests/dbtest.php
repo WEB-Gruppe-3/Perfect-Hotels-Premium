@@ -86,3 +86,34 @@ if($result) {
 } else {
     echo("<span style='color:red'><strong>Updating of " . array_keys($update)[0] . " in table " . $tableName . " FAILED!!!!</strong></span>");
 }
+
+/**
+ * doesRowExist()
+ */
+echo("<h3>doesRowExist()</h3>");
+
+$tableName = "RoomType";
+$row = array("ID" => "1",
+             "Name" => "Vanlig",
+             "NumOfBeds" => "2",
+             "Price" => "1000",
+             "ImageID" => "1",
+             "Description" => "Et helt vanlig hotellrom.");
+
+$isExist = $dbApi->doesRowExist($tableName, $row);
+if($isExist) {
+    echo("<span style='color:limegreen'>Test PASSED!</span>");
+} else {
+    echo("<span style='color:red'><strong>Test FAILED!</strong></span>");
+}
+
+$row["ID"] = 2;
+$isExist = $dbApi->doesRowExist($tableName, $row);
+echo("<br>");
+
+if(! $isExist) {
+    echo("<span style='color:limegreen'>Test PASSED!</span>");
+} else {
+    echo("<span style='color:red'><strong>Test FAILED!</strong></span>");
+}
+echo("<br>");
