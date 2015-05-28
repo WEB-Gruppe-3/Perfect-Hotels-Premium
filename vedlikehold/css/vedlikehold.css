@@ -1,0 +1,135 @@
+html, body
+{
+	color: white;
+	font: 11px/16px "trebuchet ms", arial, helvetica, sans;
+	background: #ababab;
+	margin: 0;
+	padding: 0;
+}
+
+p
+{
+	font: 11px/16px "trebuchet ms", arial, helvetica, sans;
+	text-align: justify;
+	letter-spacing: 1px;
+	margin: 0 0 0;
+	padding: 0 22px 15px;
+}
+
+a
+{
+	color: #59365f;
+	text-decoration: none;
+	background-color: #ffae00;
+}
+
+a:hover
+{
+	color: #feffff;
+	text-decoration: underline;
+}
+
+acronym
+{
+	color: #ffae00;
+	text-transform: uppercase;
+	cursor: help;
+}
+
+#footer
+{
+	padding: 20px 0 60px 22px;
+}
+
+#container
+{
+	display: block;
+	margin: 0 auto;
+	padding: 0;
+	position: relative;
+	width: 770px;
+	background-color: #e3e3e3;
+}
+
+#lselect
+{
+	padding-bottom: 30px;
+	position: relative;
+}
+
+#larchives, #lresources
+{
+	margin-top: 26px;
+	padding-bottom: 15px;
+}
+
+
+#pageHeader
+{
+	background: url(../img/top.jpg) no-repeat 0 0;
+	margin: 0;
+	padding: 0;
+	height: 318px;
+	position: relative;
+	border-bottom: 8px solid #000;
+}
+h3
+{
+	margin: 0;
+	padding: 0;
+}
+
+h1, h2 { }
+
+#preamble h3
+{
+	margin: 0;
+	padding: 20px;
+	width: 370px;
+	height: 20px;
+}
+
+#explanation h3
+{
+	margin: 0;
+	padding: 20px;
+	width: 370px;
+	height: 20px;
+}
+
+#participation h3
+{
+	margin: 0;
+	padding: 20px;
+	width: 370px;
+	height: 20px;
+}
+
+#benefits h3
+{
+	margin: 0;
+	padding: 20px;
+	width: 370px;
+	height: 20px;
+}
+
+#content, #supportingText
+{
+	background-color: #ffffff;
+	
+	
+	
+}
+
+#innholdRight
+{
+		background-color: #000;
+		  padding-left: 20px;
+}
+
+#innholdLeft
+{
+		background-color: #000;
+		  padding-left: 20px;
+}
+

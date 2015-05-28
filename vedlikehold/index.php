@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once("../nettsted/template/start.html");
+    require_once("template/start.html");
     require_once("../nettsted/php/classes/DBConnector.php");
     require_once("../nettsted/php/classes/Database.php");
 
@@ -214,7 +214,10 @@
                                 }
                             print ("</select></td>");
                             }
-
+                            else if ($column[$nr]=="ID") 
+                            {
+                                echo("<td>" . $row["$nr"] . "</td>");
+                            }
                             else 
                             {
                                 echo ("<td><input type='text' size='10' type='text' name='$nr' value='" . $row["$nr"] . "'></td>");
@@ -226,7 +229,7 @@
                             <input type='hidden' size='10' type='text' name='table_name' value='$valgt_table'>
                           </td></form></tr></table>");
                 }
-                        print ("Here is where you edit the selected row $id<br>");
+                        
                     }
            
 
@@ -275,4 +278,4 @@
         ?></div>
 </div>
 
-<?php require_once("../nettsted/template/end.html") ?>
+<?php require_once("template/end.html") ?>
