@@ -149,19 +149,7 @@
                         }
                     }
 
-            @$deleteknapp=$_POST ["deleteknapp"];
-                    if ($deleteknapp)
-                        {
-                        $result = $dbApi->deleteRow($valgt_table, $id);
-                         if($result) {
-                            echo("<br><span style='color:limegreen'>Successfully deleted row in table $valgt_table!</span><meta http-equiv='refresh' content='0'>");
-                        }
-                        else {
-                            echo("<br><span style='color:red'><strong>Deleting of row ($id) in table $valgt_table FAILED!</strong></span>");
-                        }
-                    }
-
-            
+                       
             @$editknapp=$_POST ["editknapp"];
                     if ($editknapp)
                         {
@@ -271,7 +259,17 @@
                         }
                     }
 
-
+            @$deleteknapp=$_POST ["deleteknapp"];
+                    if ($deleteknapp)
+                        {
+                        $result = $dbApi->deleteRow($valgt_table, $id);
+                         if($result) {
+                            echo("<br><span style='color:limegreen'>Successfully deleted row in table $valgt_table!</span><meta http-equiv='refresh' content='0'>");
+                        }
+                        else {
+                            echo("<br><span style='color:red'><strong>Deleting of row ($id) in table $valgt_table FAILED!</strong></span>");
+                        }
+                    }
 
 
 
