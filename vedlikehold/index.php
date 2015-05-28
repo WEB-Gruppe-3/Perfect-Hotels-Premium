@@ -1,13 +1,13 @@
 <?php
+session_start();
 
-session_start(); 
 require_once("../nettsted/php/classes/DBConnector.php");
 require_once("../nettsted/php/classes/Database.php");
+
 $dbCon = new DBConnector();
 $dbApi = new Database();
 
-
-$valgt_table=$_POST ["table_name"];
+@$valgt_table=$_POST ["table_name"];
 if (!$valgt_table) {
     $valgt_table=$_SESSION["table_name"];
 }
@@ -17,11 +17,7 @@ $_SESSION["table_name"] = "$valgt_table";
 
 
 
-
-
-
-
-$id = $_POST['rowID'];
+@$id = $_POST['rowID'];
 $column = array();
 $input = array();
 $data = array();
