@@ -113,7 +113,7 @@ h1, h2 { }
 	height: 20px;
 }
 
-#preamble, #supportingText
+#content, #supportingText
 {
 	background-color: #ffffff;
 	text-align: left;
@@ -122,15 +122,19 @@ h1, h2 { }
 	
 }
 
-#hvitarea
+#innholdRight
 {
 background-color: #ffffff;
 float: right;
+text-align: left;
 }
 
-#graarea
+#innholdLeft
 {
+float: left;
 position:static;
 width: 250px;
 background-color: #000000;
+text-align: left;
 }
+
