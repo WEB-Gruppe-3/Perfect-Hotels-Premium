@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("top.html");
+require_once("../nettsted/template/start.html");
 require_once("../nettsted/php/classes/DBConnector.php");
 require_once("../nettsted/php/classes/Database.php");
 
@@ -22,8 +22,8 @@ $column = array();
 $input = array();
 $data = array();
 ?>
-<div id="preamble">
-        <div id="hvitarea">
+<div id="content">
+    <div id="innholdLeft">
 <form method="post" action="" id="velgtabellknapp" name="velgtabellknapp">
 <h3>Velg tabell</h3>
 <select name='table_name' id='table_list'>
@@ -41,7 +41,7 @@ $data = array();
 </select><input type='submit' value='OK' name='velgtabellknapp' id='velgtabellknapp'></form><br>
 </div>
 
-<div id="graarea">
+<div id="innholdRight">
 <?php
     @$velgtabellknapp=$_POST ["velgtabellknapp"];
     if ($velgtabellknapp || $valgt_table)
@@ -276,19 +276,5 @@ $data = array();
 
 ?>
 </div>
-
-        </div>
-
-          <div id="larchives">
-            
-            
-          </div>
-      </div>
-    </div>
 </div>
-<div> 
-</div>
-<div>
-</div>
-</body>
-</html>
+<?php require_once("../nettsted/template/end.html") ?>
