@@ -118,7 +118,19 @@ h1, h2 { }
 	background-color: #ffffff;
 	text-align: left;
 	position: static;
-	width: 550px;
-	margin-left: 220px;
+	
+	
 }
 
+#hvitarea
+{
+background-color: #ffffff;
+float: right;
+}
+
+#graarea
+{
+position:static;
+width: 250px;
+background-color: #000000;
+}
