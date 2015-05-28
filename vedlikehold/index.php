@@ -1,8 +1,8 @@
 <?php
 
 session_start(); 
-require_once("../php/classes/DBConnector.php");
-require_once("../php/classes/Database.php");
+require_once("../nettsted/php/classes/DBConnector.php");
+require_once("../nettsted/php/classes/Database.php");
 $dbCon = new DBConnector();
 $dbApi = new Database();
 

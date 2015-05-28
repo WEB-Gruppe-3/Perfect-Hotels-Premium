@@ -2,4 +2,4 @@
 .idea
 
 # Ignoring config file
-php/classes/Conf.php
+nettsted/php/classes/Conf.php
