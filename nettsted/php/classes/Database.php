@@ -215,7 +215,7 @@ class Database {
      * @return mysqli_result|false Returns a mysqli result array with table names on success, false otherwise.
      */
     public function getTableNames() {
-        $query = "SELECT `table_name` FROM `INFORMATION_SCHEMA`.`TABLES` WHERE `TABLE_SCHEMA`='$this->dbName'";
+        $query = "SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='$this->dbName'";
         $result = mysqli_query($this->dbConnector->getDBLink(), $query);
         return  $result;
     }
@@ -227,7 +227,7 @@ class Database {
      * @return mysqli_result|false Returns a mysqli result array with column names on success, false otherwise.
      */
     public function getColumnNames($tableName) {
-        $query = "SELECT `column_name` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_NAME`='$tableName'";
+        $query = "SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='$tableName'";
         $result = mysqli_query($this->dbConnector->getDBLink(), $query);
         return $result;
     }
