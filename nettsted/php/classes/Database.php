@@ -1,8 +1,6 @@
 <?php
 require_once("DBConnector.php");
 require_once("Conf.php");
-require_once("Hotel.php");
-require_once("RoomType.php");
 
 /**
  * This class represents the database API.
