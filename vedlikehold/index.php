@@ -58,9 +58,9 @@
                      }
                     echo ("<td><input type='submit' value='Edit' name='editknapp' id='editknapp'>
                             <input type='submit' value='Delete' name='deleteknapp' id='deleteknapp'>
-                            <input type='hidden' size='10' type='text' name='rowID' value='" . $row[0] . "'>
-                            <input type='hidden' size='10' type='text' name='table_name' value='$valgt_table'>
-                          </td></form></tr>");
+                            
+                            
+                          </td><input type='hidden' size='2'name='rowID' value='" . $row[0] . "'></form></tr>");
                 }
                 print ("<tr><form action='' method='post' id='addForm' name='addForm'><td></td>");
                 $nr=1;
@@ -85,11 +85,11 @@
                         print ("</select></td>");
                     }
                     else {
-                        print ("<td><input name=$nr type='input'></td>");
+                        print ("<td><input size='1' name=$nr type='input'></td>");
                     }
                     $nr++;
                 }
-                print ("<td><input type='submit' value='Add' name='addknapp' id='addknapp'></td> <input type='hidden' size='10' type='text' name='table_name' value='$valgt_table'></form><tr></table>");
+                print ("<td><input type='submit' value='Add' name='addknapp' id='addknapp'></td><input type='hidden' name='table_name' value='$valgt_table'></form><tr></table>");
             }
 
             @$addknapp=$_POST ["addknapp"];
@@ -177,7 +177,7 @@
                 echo ("document.getElementById('overlaypopup').style.visibility = 'visible';");
                 echo ("</script>");
                 $result = $dbApi->getColumnNames("$valgt_table");
-                print("<table><tr>");
+                print("<h3>Edit View</h3><br><table><tr>");
                 while($row = mysqli_fetch_row($result)) {
                     echo("<th>" . $row[0] . "</th>");                
                 }
@@ -219,14 +219,22 @@
                             echo("<td>" . $row["$nr"] . "</td>");
                         }
                         else {
-                            echo ("<td><input type='text' size='10' type='text' name='$nr' value='" . $row["$nr"] . "'></td>");
+                            echo ("<td><input type='text' type='text' name='$nr' value='" . $row["$nr"] . "'></td>");
                         }
                         $nr++;
                     }
                     echo ("<td><input type='submit' value='Update' name='updateknapp' id='updateknapp'>
-                            <input type='hidden' size='10' type='text' name='rowID' value='" . $row[0] . "'>
-                            <input type='hidden' size='10' type='text' name='table_name' value='$valgt_table'>
-                          </td></form></tr></table>");
+                            <input type='hidden' name='rowID' value='" . $row[0] . "'>
+                          </td></form></tr></table><br>
+                            
+                            <script>function closepopup() {
+                                document.getElementById('popup').style.visibility = 'hidden';
+                                document.getElementById('overlaypopup').style.visibility = 'hidden';
+                            }
+                            </script>
+
+
+                          <input type='button' value='Exit' onclick='closepopup()'>");
                 }        
             }       
         ?> </div>

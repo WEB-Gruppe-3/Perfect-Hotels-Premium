@@ -125,6 +125,7 @@ h1, h2 { }
 {
 		background-color: #000;
 		  padding-left: 20px;
+		  padding-right: 20px;
 }
 
 #innholdLeft
@@ -163,4 +164,18 @@ h1, h2 { }
 	
     
 
+}
+
+input[type="input"] {
+        resize: horizontal;
+        min-width: 95%;
+    }
+select[type="input"] {
+        resize: horizontal;
+        min-width: 95%;
+    }
+    
+
+table {
+	width: 100%;
 }
