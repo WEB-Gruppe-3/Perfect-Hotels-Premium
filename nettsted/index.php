@@ -1,11 +1,11 @@
 <?php require_once("template/start.html") ?>
+<div id="content"> <!-- Start of content -->
 
-<!-- Start of content -->
-<div id="content">
-    <div id="innholdLeft"> </div>
 
-    <div id="innholdRight"> </div>
-</div>
-<!-- End of content -->
+    <form>
+        Velg hotel:
+        <select></select>
+    </form>
 
+</div> <!-- End of content -->
 <?php require_once("template/end.html") ?>

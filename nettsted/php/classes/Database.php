@@ -2,6 +2,10 @@
 require_once("DBConnector.php");
 require_once("Conf.php");
 
+require_once("Image.php");
+require_once("RoomType.php");
+require_once("Hotel.php");
+
 /**
  * This class represents the database API.
  */
@@ -14,7 +18,70 @@ class Database {
         $this->dbConnector = new DBConnector();
         $this->dbName = Conf::$DB_NAME;
     }
-    
+
+    /**
+     * Get all the hotels present in the database.
+     *
+     * @return Array Returns an array of Hotel objects.
+     */
+    public function getHotels() { //todo remove dis: $id, $name, $image, $description, Array $roomTypes
+        // TODO
+    }
+
+    /**
+     * Get supported room types for a given hotel.
+     *
+     * @return Array Returns an array of RoomType objects.
+     */
+    public function getRoomTypes($hotelID) {
+        // Find all room types with a certain hotel id
+        $query = "SELECT * FROM HotelRoomType WHERE HotelID = '$hotelID'";
+        $result = mysqli_query($this->dbConnector->getDBLink(), $query);
+
+        $roomTypes = array();
+        while($row = mysqli_fetch_assoc($result)) {
+            array_push($roomTypes, $this->getRoomType($row["RoomTypeID"]));
+        }
+
+        return $roomTypes;
+    }
+
+    /**
+     * Get a room type for a give ID.
+     *
+     * @return RoomType Returns a RoomType object.
+     */
+    public function getRoomType($roomTypeID) {
+        $query = "SELECT * FROM RoomType WHERE ID = '$roomTypeID'";
+        $result = mysqli_query($this->dbConnector->getDBLink(), $query);
+        $row = mysqli_fetch_assoc($result);
+
+        return new RoomType($row["ID"],
+                            $row["Name"],
+                            $row["NumOfBeds"],
+                            $row["Price"],
+                            $this->getImage($row["ImageID"]),
+                            $row["Description"]);
+    }
+
+    /**
+     * Get an Image.
+     *
+     * @param $imageID Integer The ID of the image.
+     * @return Image Returns an Image object.
+     */
+    public function getImage($imageID) {
+        $query = "SELECT * FROM Image WHERE ID ='$imageID'";
+        $result = mysqli_query($this->dbConnector->getDBLink(), $query);
+
+        $data = mysqli_fetch_assoc($result);
+        $imageID = $data["ID"];
+        $imageURL = $data["URL"];
+        $imageDescription = $data["Description"];
+        $image = new Image($imageID, $imageURL, $imageDescription);
+        return $image;
+    }
+
     /**
      * Insert values to a table.
      * This function takes an associative array where the KEY matches the COLUMN-name in the table.
@@ -98,18 +165,6 @@ class Database {
         $query = "UPDATE $tableName SET $updateString WHERE ID = $id";
         $result = mysqli_query($this->dbConnector->getDBLink(), $query);
         return $result;
-    }
-
-    /**
-     * Get the image URL from image ID.
-     *
-     * @param $id Integer The ID of the image.
-     * @return String The image URL.
-     */
-    public function getImageURL($id) {
-        $query = "SELECT URL FROM Image WHERE ID = $id";
-        $result = mysqli_query($this->dbConnector->getDBLink(), $query);
-        return mysqli_fetch_row($result)[0];
     }
 
     /**

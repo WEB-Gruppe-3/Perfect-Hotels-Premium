@@ -52,13 +52,6 @@ while($row = mysqli_fetch_row($result)) {
 }
 
 /**
- * getImageURL()
- */
-echo("<h3>getImageURL(1)</h3>");
-
-echo($dbApi->getImageURL(1));
-
-/**
  * insertRow()
  */
 echo("<h3>insertRow()</h3>");
@@ -117,3 +110,23 @@ if(! $isExist) {
     echo("<span style='color:red'><strong>Test FAILED!</strong></span>");
 }
 echo("<br>");
+
+/**
+ * getImage()
+ */
+echo("<h3>getImage()</h3>");
+var_dump($dbApi->getImage(1));
+
+
+/**
+ * getRoomType()
+ */
+echo("<h3>getRoomType()</h3>");
+var_dump($dbApi->getRoomType(1));
+
+
+/**
+ * getRoomTypes()
+ */
+echo("<h3>getRoomTypes(1)</h3>");
+var_dump($dbApi->getRoomTypes(1));
