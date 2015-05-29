@@ -16,38 +16,7 @@ class Database {
         $this->dbConnector = new DBConnector();
         $this->dbName = Conf::$DB_NAME;
     }
-
-    /**
-     * Creates and returns all Hotel objects.
-     *
-     * @return array Returns an array of Hotel objects.
-     */
-    public function getHotels() { // TODO!
-        // Getting all rows from relevant tables so we can create hotel objects
-        /*
-        $result_image = $this->getAllRows("Image");
-        $result_hotel = $this->getAllRows("Hotel");
-        $result_hotelRoom = $this->getAllRows("HotelRoomType");
-        $result_room = $this->getAllRows("Room");
-        $result_roomType = $this->getAllRows("RoomType");
-
-        // Creating an array of RoomTypes
-        $roomTypes = array();
-
-        while($row = mysqli_fetch_assoc($result_roomType)) {
-            $id = $row["ID"];
-            $name = $row["Name"];
-            $beds = $row["NumOfBeds"];
-            $price = $row["Price"];
-            $imageURL = $this->getImageURL($row["ImageID"]);
-
-            array_push($roomTypes, new RoomType($id, $name, $beds, $price, $imageURL));
-        }
-
-        // Creating an array of HotelRooms //TODO: $id, $name, $roomType
-        */
-    }
-
+    
     /**
      * Insert values to a table.
      * This function takes an associative array where the KEY matches the COLUMN-name in the table.
