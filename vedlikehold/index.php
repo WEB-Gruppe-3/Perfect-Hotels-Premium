@@ -21,6 +21,12 @@
     $data = array();
 ?>
 
+
+
+
+
+
+
 <div id="content">
     <div id="innholdLeft"> 
 
@@ -103,7 +109,7 @@
                         }
                         $nr++;
                      }
-                print ("<td><input type='submit' value='Add' name='addknapp' id='addknapp'></td> <input type='hidden' size='10' type='text' name='table_name' value='$valgt_table'></form><tr></table><br>");
+                print ("<td><input type='submit' value='Add' name='addknapp' id='addknapp'></td> <input type='hidden' size='10' type='text' name='table_name' value='$valgt_table'></form><tr></table>");
                 
             }
 
@@ -118,12 +124,12 @@
                                 $input[] = $_POST[$nr];
                              $nr++;
                              }
-                        print ("Table: $valgt_table<br>");
+                        /* print ("Table: $valgt_table<br>"); */
                         $nr="1";
                         $nr2="0";
                         for ($x=2;$x<=$rows;$x++)
                              {
-                             print("$column[$nr] = $input[$nr2]<br>");
+                             /* print("$column[$nr] = $input[$nr2]<br>"); */
                              $nr++;
                               $nr2++;
                               }
@@ -132,27 +138,112 @@
                         $nr2="0";
                         
                         for ($x=2;$x<=$rows;$x++)
+                            {
+                                
+                            $data[$column[$nr]] = $input[$nr2];
+                                
+                            $nr++;
+                            $nr2++;
+                            }
+                        
+                        /* print_r($data); */
+
+                        $result = $dbApi->doesRowExist($valgt_table, $data);
+                        
+                        if($result) {
+                            echo("<p style='color:red'><strong>There was already a row containing this.. </strong></p>");
+                        }
+                        else {
+                            
+                            $result2 = $dbApi->insertRow($valgt_table, $data);
+                            if($result2) {
+                            echo("<br><span style='color:limegreen'>Successfully inserted row in table $valgt_table!<meta http-equiv='refresh' content='0'></span>");
+                            }
+                            else {
+                            echo("<br><span style='color:red'><strong>Inserting of row into table $valgt_table FAILED!</strong></span>");
+                            }
+                        }
+
+                    }
+
+            @$updateknapp=$_POST ["updateknapp"];
+                    if ($updateknapp)
+                        {
+                        $rows=count($column);
+                        $nr="1";
+                        for ($x=1;$x<=$rows;$x++)
                                 {
-                                
+                                $input[] = $_POST[$nr];
+                             $nr++;
+                             }
+                        /* print ("Table: $valgt_table<br>"); */
+                        $nr="1";
+                        $nr2="0";
+                        /* print("$column[$nr] = $input[$nr2]<br>");*/
+                        for ($x=2;$x<=$rows;$x++)
+                             {
+                             /* print("$column[$nr] = $input[$nr2]<br>"); */
+                             $nr++;
+                              $nr2++;
+                              }
+                        $nr="1";
+                        $nr2="0";
+                        for ($x=2;$x<=$rows;$x++)
+                                {
                                 $data[$column[$nr]] = $input[$nr2];
-                                
                              $nr++;
                              $nr2++;
                              }
-                             print_r($data);
-                        $result = $dbApi->insertRow($valgt_table, $data);
+                        /* print_r($data); */
+                        
+                        $result = $dbApi->doesRowExist($valgt_table, $data);
+                        
                         if($result) {
-                            echo("<br><span style='color:limegreen'>Successfully inserted row in table $valgt_table!</span><meta http-equiv='refresh' content='0'>");
+                            echo("<p style='color:red'><strong>There was already a row in $valgt_table containing this.. </strong></p>");
                         }
                         else {
-                            echo("<br><span style='color:red'><strong>Inserting of row into table $valgt_table FAILED!</strong></span>");
+                            
+                            $result2 = $dbApi->updateRow($valgt_table, $id, $data);
+                            if($result2) {
+                                echo("<br><span style='color:limegreen'>Successfully updated row in table $valgt_table!</span><meta http-equiv='refresh' content='0'>");
+                            }
+                            else {
+                                echo("<br><span style='color:red'><strong>Updating of row into table $valgt_table FAILED!</strong></span>");
+                            }
+                        }
+
+                    }            
+            
+
+            @$deleteknapp=$_POST ["deleteknapp"];
+                    if ($deleteknapp)
+                        {
+                        $result = $dbApi->deleteRow($valgt_table, $id);
+                         if($result) {
+                            echo("<br><span style='color:limegreen'>Successfully deleted row in table $valgt_table!</span><meta http-equiv='refresh' content='0'>");
+                        }
+                        else {
+                            echo("<br><span style='color:red'><strong>Deleting of row ($id) in table $valgt_table FAILED!</strong></span>");
                         }
                     }
 
-                       
+
+
+        ?>
+        </div>
+        <div id="overlaypopup"></div>
+
+        <div id="popup">
+        <?php 
             @$editknapp=$_POST ["editknapp"];
                     if ($editknapp)
                         {
+
+                echo ("<script type='text/javascript'>");
+                echo ("document.getElementById('popup').style.visibility = 'visible';");
+                echo ("document.getElementById('overlaypopup').style.visibility = 'visible';");
+                echo ("</script>");
+
                 $result = $dbApi->getColumnNames("$valgt_table");
                 print("<table><tr>");
                 while($row = mysqli_fetch_row($result)) 
@@ -221,59 +312,9 @@
                     }
            
 
-                    @$updateknapp=$_POST ["updateknapp"];
-                    if ($updateknapp)
-                        {
-                        $rows=count($column);
-                        $nr="1";
-                        for ($x=1;$x<=$rows;$x++)
-                                {
-                                $input[] = $_POST[$nr];
-                             $nr++;
-                             }
-                        print ("Table: $valgt_table<br>");
-                        $nr="1";
-                        $nr2="0";
-                        print("$column[$nr] = $input[$nr2]<br>");
-                        for ($x=2;$x<=$rows;$x++)
-                             {
-                             print("$column[$nr] = $input[$nr2]<br>");
-                             $nr++;
-                              $nr2++;
-                              }
-                        $nr="1";
-                        $nr2="0";
-                        for ($x=2;$x<=$rows;$x++)
-                                {
-                                $data[$column[$nr]] = $input[$nr2];
-                             $nr++;
-                             $nr2++;
-                             }
-                        print_r($data);
-                        $result = $dbApi->updateRow($valgt_table, $id, $data);
-                        if($result) {
-                            echo("<br><span style='color:limegreen'>Successfully updated row in table $valgt_table!</span><meta http-equiv='refresh' content='0'>");
-                        }
-                        else {
-                            echo("<br><span style='color:red'><strong>Updating of row into table $valgt_table FAILED!</strong></span>");
-                        }
-                    }
-
-            @$deleteknapp=$_POST ["deleteknapp"];
-                    if ($deleteknapp)
-                        {
-                        $result = $dbApi->deleteRow($valgt_table, $id);
-                         if($result) {
-                            echo("<br><span style='color:limegreen'>Successfully deleted row in table $valgt_table!</span><meta http-equiv='refresh' content='0'>");
-                        }
-                        else {
-                            echo("<br><span style='color:red'><strong>Deleting of row ($id) in table $valgt_table FAILED!</strong></span>");
-                        }
-                    }
-
-
-
-        ?></div>
+                    
+        ?>
+        
 </div>
 
 <?php require_once("template/end.html") ?>
