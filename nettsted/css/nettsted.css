@@ -14,6 +14,7 @@ p
 	letter-spacing: 1px;
 	margin: 0 0 0;
 	padding: 0 22px 15px;
+	color:#000000;
 }
 
 a
@@ -29,17 +30,7 @@ a:hover
 	text-decoration: underline;
 }
 
-acronym
-{
-	color: #ffae00;
-	text-transform: uppercase;
-	cursor: help;
-}
 
-#footer
-{
-	padding: 20px 0 60px 22px;
-}
 
 #container
 {
@@ -47,20 +38,18 @@ acronym
 	margin: 0 auto;
 	padding: 0;
 	position: relative;
-	width: 770px;
-	background-color: #e3e3e3;
+	width: 1200px;
+	background-color: #0284be;
 }
 
-#lselect
-{
-	padding-bottom: 30px;
-	position: relative;
-}
 
-#larchives, #lresources
+
+#footer, 
 {
 	margin-top: 26px;
 	padding-bottom: 15px;
+	
+	
 }
 
 
@@ -69,7 +58,7 @@ acronym
 	background: url(../img/top.jpg) no-repeat 0 0;
 	margin: 0;
 	padding: 0;
-	height: 318px;
+	height: 320px;
 	position: relative;
 	border-bottom: 8px solid #000;
 }
@@ -81,60 +70,22 @@ h3
 
 h1, h2 { }
 
-#preamble h3
-{
-	margin: 0;
-	padding: 20px;
-	width: 370px;
-	height: 20px;
-}
-
-#explanation h3
-{
-	margin: 0;
-	padding: 20px;
-	width: 370px;
-	height: 20px;
-}
-
-#participation h3
-{
-	margin: 0;
-	padding: 20px;
-	width: 370px;
-	height: 20px;
-}
-
-#benefits h3
-{
-	margin: 0;
-	padding: 20px;
-	width: 370px;
-	height: 20px;
-}
-
-#content, #supportingText
-{
-	background-color: #ffffff;
-	text-align: left;
-	position: static;
-	
-	
-}
 
 #innholdRight
 {
 background-color: #ffffff;
-float: right;
+
 text-align: left;
 }
+
+
 
 #innholdLeft
 {
 float: left;
-position:static;
-width: 250px;
-background-color: #000000;
+
+width: 400px;
+background-color: #e4e4e4;
 text-align: left;
 }
 
