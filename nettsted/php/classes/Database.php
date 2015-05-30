@@ -25,7 +25,19 @@ class Database {
      * @return Array Returns an array of Hotel objects.
      */
     public function getHotels() { //todo remove dis: $id, $name, $image, $description, Array $roomTypes
-        // TODO
+        $query = "SELECT * FROM Hotel";
+        $result = mysqli_query($this->dbConnector->getDBLink(), $query);
+
+        $hotels = array();
+        while($row = mysqli_fetch_assoc($result)) {
+            $hotel = new Hotel( $row["ID"],
+                                $row["Name"],
+                                $this->getImage($row["ImageID"]),
+                                $row["Description"],
+                                $this->getRoomTypes($row["ID"]) );
+            array_push($hotels, $hotel);
+        }
+        return $hotels;
     }
 
     /**

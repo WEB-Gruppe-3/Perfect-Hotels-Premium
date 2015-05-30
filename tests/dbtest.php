@@ -130,3 +130,9 @@ var_dump($dbApi->getRoomType(1));
  */
 echo("<h3>getRoomTypes(1)</h3>");
 var_dump($dbApi->getRoomTypes(1));
+
+/**
+ * getHotels()
+ */
+echo("<h3>getHotels()</h3>");
+var_dump($dbApi->getHotels());
