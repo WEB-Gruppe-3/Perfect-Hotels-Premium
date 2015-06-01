@@ -1,26 +1,47 @@
-<?php require_once("template/start.html") ?>
-<div id="content"> <!-- Start of content -->
+<?php
+require_once("php/classes/Database.php");
+require_once("php/classes/Hotel.php");
+require_once("template/start.html");
+
+$db = new Database();
+
+$hotels = $db->getHotels();
+?>
+
+<div id="content">
 
     <div id="innholdLeft">
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-    
+        <form id="searchForm">
+
+            <select id="hotelSelect" onChange='getAndSetRoomTypes()'>
+                <?php // Printing options
+                foreach($hotels as $hotel) {
+                    $hotelName = $hotel->getName();
+                    $hotelId = $hotel->getId();
+                    print("<option value='$hotelId'>$hotelName</option>\n");
+                }
+                ?>
+            </select> <br>
+
+            <select id="roomTypeSelect">
+                // Print options based on selected hotel
+            </select>
+            <br>
+
+        </form>
+
     </div>
 
     <div id="innholdRight">
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
+
     </div>
-    <p>&nbsp;</p>
-      <p>&nbsp;</p>
+
 
 </div> <!-- End of content -->
-<?php require_once("template/end.html") ?>
+
+<script src="js/jquery-1.11.3.js"></script>
+<script src="js/index.js"></script>
+
+<?php require_once("template/end.html"); ?> <!-- End of page -->
+
+
