@@ -20,5 +20,5 @@ if(isset($_GET["hotelID"])) {
 
    print(json_encode($names));
 } else {
-    print("hotelID not in GET-array");
+    exit("hotelID not in GET-array");
 }

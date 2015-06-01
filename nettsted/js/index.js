@@ -1,6 +1,8 @@
-// TODO: after i understand this, reformat this so its not just copy paste.
+/**
+ * JS Stuff for index.php
+ */
 
-function getAndSetRoomTypes() {
+function populateRoomTypeList() {
     // Figure out the hotels' ID
     var hotelId = $("#hotelSelect").val();
 
@@ -20,33 +22,19 @@ function getAndSetRoomTypes() {
         // The type of data we expect back
         dataType : "json",
 
-        // Code to run if the request succeeds;
-        // the response is passed to the function
+        // Upon completion, populate the dropdown menu.
         success: function( roomTypes ) {
-            populateRoomTypeSelect(roomTypes);
-        },
+            var roomTypeSelect = $("#roomTypeSelect");
 
-        // Code to run if the request fails; the raw request and
-        // status codes are passed to the function
-        error: function( xhr, status, errorThrown ) {
-            alert( "Sorry, there was a problem!" );
-            console.log( "Error: " + errorThrown );
-            console.log( "Status: " + status );
-            console.dir( xhr );
-        },
+            // Clear dropdown list
+            roomTypeSelect.empty();
 
-        // Code to run regardless of success or failure
-        complete: function( xhr, status ) {
-            alert( "The request is complete!" );
+            // Populate the list
+            var items = null;
+            for(var i = 0; i < roomTypes.length; i++) {
+                items += "<option value='" + roomTypes[i] + "'>" + roomTypes[i] + "</option>";
+            }
+            roomTypeSelect.append(items);
         }
     });
-
-}
-
-/**
- * Callback for ajax request. Populates the RoomType dropdown
- * @param roomTypes Array of supported room types.
- */
-function populateRoomTypeSelect(roomTypes) {
-    console.log(roomTypes);
 }

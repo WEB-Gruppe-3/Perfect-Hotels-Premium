@@ -9,11 +9,11 @@ $hotels = $db->getHotels();
 ?>
 
 <div id="content">
-
     <div id="innholdLeft">
         <form id="searchForm">
 
-            <select id="hotelSelect" onChange='getAndSetRoomTypes()'>
+            Velg hotell:
+            <select id="hotelSelect" onChange='populateRoomTypeList()'>
                 <?php // Printing options
                 foreach($hotels as $hotel) {
                     $hotelName = $hotel->getName();
@@ -21,15 +21,24 @@ $hotels = $db->getHotels();
                     print("<option value='$hotelId'>$hotelName</option>\n");
                 }
                 ?>
-            </select> <br>
-
-            <select id="roomTypeSelect">
-                // Print options based on selected hotel
             </select>
+
             <br>
 
-        </form>
+            Velg rom type:
+            <select id="roomTypeSelect">
+                <!-- Populates via JS -->
+            </select>
 
+            <br>
+
+            Velg dato:
+            <input id="startDate" type="text"> - <input id="endDate" type="text">
+
+            <br>
+
+            <button type="button">LoL!</button>
+        </form>
     </div>
 
     <div id="innholdRight">
