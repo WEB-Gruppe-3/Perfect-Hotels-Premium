@@ -24,7 +24,7 @@ class Database {
      *
      * @return Array Returns an array of Hotel objects.
      */
-    public function getHotels() { //todo remove dis: $id, $name, $image, $description, Array $roomTypes
+    public function getHotels() {
         $query = "SELECT * FROM Hotel";
         $result = mysqli_query($this->dbConnector->getDBLink(), $query);
 
@@ -43,6 +43,7 @@ class Database {
     /**
      * Get supported room types for a given hotel.
      *
+     * @param $hotelID Integer The id of the hotel.
      * @return Array Returns an array of RoomType objects.
      */
     public function getRoomTypes($hotelID) {
@@ -61,6 +62,7 @@ class Database {
     /**
      * Get a room type for a give ID.
      *
+     * @param $roomTypeID Integer The room type id.
      * @return RoomType Returns a RoomType object.
      */
     public function getRoomType($roomTypeID) {
@@ -182,7 +184,8 @@ class Database {
     /**
      * Get a row from a table.
      *
-     * @param $tableName String The name of the table from which to recieve the row.
+     * @param $tableName String The name of the table from which to receive the row.
+     * @param $id Integer The id of the row.
      * @return mysqli_result Returns a result object.
      */
     public function getRow($tableName, $id) {
