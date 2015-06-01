@@ -43,6 +43,10 @@ function getAndSetRoomTypes() {
 
 }
 
+/**
+ * Callback for ajax request. Populates the RoomType dropdown
+ * @param roomTypes Array of supported room types.
+ */
 function populateRoomTypeSelect(roomTypes) {
     console.log(roomTypes);
 }

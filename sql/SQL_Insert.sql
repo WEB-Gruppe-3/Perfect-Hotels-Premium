@@ -1,4 +1,4 @@
--- Eksamen i IS-WEB1000 Vår 2015, Gruppe 3.
+-- Eksamen i IS-WEB1000 Vï¿½r 2015, Gruppe 3.
 -- Dummy data for Perfect Hotels Premium
 
 -- Image
@@ -36,7 +36,25 @@ INSERT INTO HotelRoomType(RoomTypeID, HotelID)
 VALUES('1', '1');
 
 INSERT INTO HotelRoomType(RoomTypeID, HotelID)
+VALUES('1', '2');
+
+INSERT INTO HotelRoomType(RoomTypeID, HotelID)
+VALUES('1', '3');
+
+INSERT INTO HotelRoomType(RoomTypeID, HotelID)
+VALUES('2', '1');
+
+INSERT INTO HotelRoomType(RoomTypeID, HotelID)
 VALUES('2', '2');
+
+INSERT INTO HotelRoomType(RoomTypeID, HotelID)
+VALUES('2', '3');
+
+INSERT INTO HotelRoomType(RoomTypeID, HotelID)
+VALUES('3', '1');
+
+INSERT INTO HotelRoomType(RoomTypeID, HotelID)
+VALUES('3', '2');
 
 INSERT INTO HotelRoomType(RoomTypeID, HotelID)
 VALUES('3', '3');
