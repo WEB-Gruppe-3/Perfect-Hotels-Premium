@@ -9,48 +9,83 @@ $hotels = $db->getHotels();
 ?>
 
 <div id="content">
+
+    <!-- Search -->
     <div id="innholdLeft">
         <form id="searchForm">
 
-            Velg hotell:
-            <select id="hotelSelect" onChange='populateRoomTypeList()'>
-                <?php // Printing options
-                foreach($hotels as $hotel) {
-                    $hotelName = $hotel->getName();
-                    $hotelId = $hotel->getId();
-                    print("<option value='$hotelId'>$hotelName</option>\n");
-                }
-                ?>
-            </select>
+            <table>
+                <tr>
+                    <td>Velg hotell:</td>
+                    <td>
+                        <select id="hotelSelect" onChange='populateRoomTypeList()'>
+                            <?php // Printing options
+                            foreach($hotels as $hotel) {
+                                $hotelName = $hotel->getName();
+                                $hotelId = $hotel->getId();
+                                print("<option value='$hotelId'>$hotelName</option>\n");
+                            }
+                            ?>
+                        </select></td>
+                </tr>
 
-            <br>
+                <tr>
+                    <td>Velg rom type:</td>
+                    <td>
+                        <select id="roomTypeSelect" disabled>
+                            <!-- Populates via JS -->
+                            <option>----------</option>
+                        </select>
+                    </td>
+                </tr>
 
-            Velg rom type:
-            <select id="roomTypeSelect">
-                <!-- Populates via JS -->
-            </select>
+                <tr>
+                    <td>Velg dato:</td>
+                    <td>
+                        <input id="startDateInput" type="text" size="9" readonly> -
+                        <input id="endDateInput" type="text" size="9" readonly>
+                    </td>
+                </tr>
 
-            <br>
+                <tr>
+                    <td><button type="button">Søk</button><button type="reset">Nullstill</button></td>
+                </tr>
+            </table>
 
-            Velg dato:
-            <input id="startDate" type="text"> - <input id="endDate" type="text">
 
-            <br>
 
-            <button type="button">LoL!</button>
+
+
+
+
+
+
         </form>
     </div>
 
+    <!-- Result -->
     <div id="innholdRight">
+        <h2 id="hotelTitle">selected hotel</h2>
+        <img id="hotelImage" src="img/top.jpg" width="200" height="200">
+        <p id="hotelDescription">placeholder hotel description</p>
+
+        <h3 id="roomTypeTitle">selected roomType</h3>
+
+        <h4 id="dateTitle">selected date</h4>
+
+        <img id="roomTypeImage" src="img/top.jpg" width="200" height="200">
+
+        <p id="roomTypeDescription">placeholder roomtype description</p>
 
     </div>
-    
+
 </div> <!-- End of content -->
 
 <!-- Javascript -->
 <script src="js/jquery-1.11.3.js"></script>
 <script src="js/jquery-ui-1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="js/jquery-ui-1.11.4/datepicker-no.js"></script>
+<link rel="stylesheet" href="js/jquery-ui-1.11.4/jquery-ui.css">
 <script src="js/index.js"></script>
 
 <?php require_once("template/end.html"); ?> <!-- End of page -->

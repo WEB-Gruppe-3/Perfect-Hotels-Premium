@@ -3,11 +3,26 @@
  */
 
 /**
- * Setting the date picker
+ * Date picker
  */
 $(function() {
-    $("#startDate").datepicker();
-    $("#endDate").datepicker();
+
+    // Clearing inputs and setting the datepicker
+    var startDate = $("#startDateInput");
+    var endDate = $("#endDateInput");
+    startDate.datepicker();
+    endDate.datepicker();
+    startDate.empty();
+
+    // Configuring
+    $.datepicker.setDefaults(
+        $.extend(
+            {'dateFormat':'dd-mm-yy'},
+            $.datepicker.regional['no']
+        )
+    );
+
+
 });
 
 
@@ -40,6 +55,9 @@ function populateRoomTypeList() {
 
             // Clear dropdown list
             roomTypeSelect.empty();
+
+            // Enable input
+            roomTypeSelect.prop('disabled', false);
 
             // Populate the list
             var items = null;
