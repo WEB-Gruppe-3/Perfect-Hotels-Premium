@@ -2,6 +2,18 @@
  * JS Stuff for index.php
  */
 
+/**
+ * Setting the date picker
+ */
+$(function() {
+    $("#startDate").datepicker();
+    $("#endDate").datepicker();
+});
+
+
+/**
+ * Functions
+ */
 function populateRoomTypeList() {
     // Figure out the hotels' ID
     var hotelId = $("#hotelSelect").val();
