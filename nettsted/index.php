@@ -13,7 +13,6 @@ $hotels = $db->getHotels();
     <!-- Search -->
     <div id="innholdLeft">
         <form id="searchForm">
-
             <table>
                 <tr>
                     <td>Velg hotell:</td>
@@ -51,20 +50,22 @@ $hotels = $db->getHotels();
                     <td><button type="button">Søk</button><button type="reset">Nullstill</button></td>
                 </tr>
             </table>
-
-
-
-
-
-
-
-
-
         </form>
+
     </div>
 
     <!-- Result -->
     <div id="innholdRight">
+
+        <p>Antall ledige rom: X</p>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <!--
         <h2 id="hotelTitle">selected hotel</h2>
         <img id="hotelImage" src="img/top.jpg" width="200" height="200">
         <p id="hotelDescription">placeholder hotel description</p>
@@ -76,7 +77,7 @@ $hotels = $db->getHotels();
         <img id="roomTypeImage" src="img/top.jpg" width="200" height="200">
 
         <p id="roomTypeDescription">placeholder roomtype description</p>
-
+    -->
     </div>
 
 </div> <!-- End of content -->
