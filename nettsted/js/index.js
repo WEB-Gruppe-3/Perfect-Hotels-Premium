@@ -31,7 +31,7 @@ $(function() {
  */
 function populateRoomTypeList() {
     // Figure out the hotels' ID
-    var hotelId = $("#hotelSelect").val();
+    var hotelID = $("#hotelSelect").val();
 
     // Request a JSON with the room types of this hotel.
     $.ajax({
@@ -40,7 +40,8 @@ function populateRoomTypeList() {
 
         // The data to send (will be converted to a query string)
         data: {
-            hotelID: hotelId
+            requestedData: "roomTypes",
+            hotelID: hotelID
         },
 
         // Whether this is a POST or GET request
@@ -67,4 +68,8 @@ function populateRoomTypeList() {
             roomTypeSelect.append(items);
         }
     });
+}
+
+function getSearchData() {
+    
 }

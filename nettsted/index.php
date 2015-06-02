@@ -58,7 +58,7 @@ $hotels = $db->getHotels();
     <div id="innholdRight">
 
         <p>Antall ledige rom: X</p>
-        <br>
+
         <br>
         <br>
         <br>

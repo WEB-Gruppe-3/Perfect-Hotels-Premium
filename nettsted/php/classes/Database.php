@@ -52,6 +52,24 @@ class Database {
     }
 
     /**
+     * Get all active bookings for a hotel and room type
+     * @param $hotelID Integer The hotel id.
+     * @param $roomTypeID Integer The room type id.
+     * @return Array Returns an array of active Booking objects.
+     */
+    public function getActiveBookings($hotelID, $roomTypeID) {
+        $bookings = $this->getBookings($hotelID, $roomTypeID);
+
+        $activeBookings = array();
+        for($i = 0; $i < count($bookings); $i++) {
+            if(false === $bookings[$i]->isExpired()) {
+                array_push($activeBookings, $bookings[$i]);
+            }
+        }
+        return $activeBookings;
+    }
+
+    /**
      * Get all the hotels present in the database.
      *
      * @return Array Returns an array of Hotel objects.
