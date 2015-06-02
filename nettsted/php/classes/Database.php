@@ -6,6 +6,7 @@ require_once("Image.php");
 require_once("RoomType.php");
 require_once("Room.php");
 require_once("Hotel.php");
+require_once("Booking.php");
 
 /**
  * This class represents the database API.
@@ -18,6 +19,36 @@ class Database {
     public function __construct() {
         $this->dbConnector = new DBConnector();
         $this->dbName = Conf::$DB_NAME;
+    }
+
+    /**
+     * Get bookings for a hotel and a room type.
+     *
+     * @param $hotelID Integer The hotel id.
+     * @param $roomTypeID Integer The room type id.
+     * @return Array Returns an array of Booking objects.
+     */
+    public function getBookings($hotelID, $roomTypeID) {
+        // Find the HotelRoomTypeID
+        $query = "SELECT ID FROM HotelRoomType WHERE HotelID = '$hotelID' AND RoomTypeID = '$roomTypeID'";
+        $result = mysqli_query($this->dbConnector->getDBLink(), $query);
+        $hotelRoomTypeId = intval(mysqli_fetch_assoc($result)["ID"]);
+
+        // Get all bookings with this ID
+        $query = "SELECT ID, FromDate, ToDate, RoomID FROM Booking WHERE HotelRoomTypeID = '$hotelRoomTypeId'";
+        $result = mysqli_query($this->dbConnector->getDBLink(), $query);
+
+        // Make Booking objects
+        $bookings = array();
+        while($row = mysqli_fetch_assoc($result)) {
+            $id = intval($row["ID"]);
+            $startDate = new DateTime($row["FromDate"]);
+            $endDate = new DateTime($row["ToDate"]);
+            $roomID = $row["RoomID"];
+
+            array_push($bookings, new Booking($id, $startDate, $endDate, $roomID));
+        }
+        return $bookings;
     }
 
     /**
