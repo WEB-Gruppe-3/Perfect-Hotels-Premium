@@ -64,7 +64,25 @@ INSERT INTO Room(RoomNumber, HotelRoomTypeID)
 VALUES('101', '1');
 
 INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('102', '1');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('103', '1');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('101', '2');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
 VALUES('102', '2');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('103', '2');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('101', '3');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('102', '3');
 
 INSERT INTO Room(RoomNumber, HotelRoomTypeID)
 VALUES('103', '3');

@@ -122,7 +122,7 @@ var_dump($dbApi->getImage(1));
  * getRoomType()
  */
 echo("<h3>getRoomType()</h3>");
-var_dump($dbApi->getRoomType(1));
+var_dump($dbApi->getRoomType(1, 1));
 
 
 /**
@@ -136,3 +136,10 @@ var_dump($dbApi->getRoomTypes(1));
  */
 echo("<h3>getHotels()</h3>");
 var_dump($dbApi->getHotels());
+
+/**
+ * getRooms()
+ */
+echo("<h3>getRooms()</h3>");
+var_dump($dbApi->getRooms(1, 1));
+

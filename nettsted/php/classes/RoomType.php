@@ -9,13 +9,17 @@ class RoomType {
     private $image;
     private $description;
 
-    function __construct($id, $name, $numOfBeds, $price, Image $image, $description) {
+    // Array of rooms belonging to this room type
+    private $rooms;
+
+    function __construct($id, $name, $numOfBeds, $price, Image $image, $description, Array $rooms) {
         $this->id = $id;
         $this->name = $name;
         $this->numOfBeds = $numOfBeds;
         $this->price = $price;
         $this->image = $image;
         $this->description = $description;
+        $this->rooms = $rooms;
     }
 
     /**
@@ -58,6 +62,13 @@ class RoomType {
      */
     public function getDescription() {
         return $this->description;
+    }
+
+    /**
+     * @return Array Returns an array of Room objects.
+     */
+    public function getRooms() {
+        return $this->rooms;
     }
 
 }

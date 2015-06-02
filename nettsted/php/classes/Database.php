@@ -4,6 +4,7 @@ require_once("Conf.php");
 
 require_once("Image.php");
 require_once("RoomType.php");
+require_once("Room.php");
 require_once("Hotel.php");
 
 /**
@@ -53,19 +54,20 @@ class Database {
 
         $roomTypes = array();
         while($row = mysqli_fetch_assoc($result)) {
-            array_push($roomTypes, $this->getRoomType($row["RoomTypeID"]));
+            array_push($roomTypes, $this->getRoomType($row["RoomTypeID"], $hotelID));
         }
 
         return $roomTypes;
     }
 
     /**
-     * Get a room type for a give ID.
+     * Get a room type object.
      *
      * @param $roomTypeID Integer The room type id.
+     * @param $hotelID Integer The id of the hotel.
      * @return RoomType Returns a RoomType object.
      */
-    public function getRoomType($roomTypeID) {
+    public function getRoomType($roomTypeID, $hotelID) {
         $query = "SELECT * FROM RoomType WHERE ID = '$roomTypeID'";
         $result = mysqli_query($this->dbConnector->getDBLink(), $query);
         $row = mysqli_fetch_assoc($result);
@@ -75,7 +77,38 @@ class Database {
                             $row["NumOfBeds"],
                             $row["Price"],
                             $this->getImage($row["ImageID"]),
-                            $row["Description"]);
+                            $row["Description"],
+                            $this->getRooms($hotelID, $roomTypeID));
+    }
+
+    /**
+     * Get rooms for a hotel and a room type.
+     *
+     * @param $hotelID Integer The id of the hotel.
+     * @param $roomTypeID Integer The id of the room type.
+     * @return Array Returns an array of Room objects.
+     */
+    public function getRooms($hotelID, $roomTypeID) {
+        // Find the ID of HotelRoomType for a certain roomtype and hotel
+        $query = "SELECT ID FROM HotelRoomType WHERE HotelID = '$hotelID' AND RoomTypeID = '$roomTypeID'";
+        $result = mysqli_query($this->dbConnector->getDBLink(), $query);
+        $row = mysqli_fetch_assoc($result);
+        $hotelRoomTypeID = $row["ID"];
+
+        // Get the rooms which has that hotelroomtypeid
+        $roomQuery = "SELECT * FROM Room WHERE HotelRoomTypeID = '$hotelRoomTypeID'";
+        $result = mysqli_query($this->dbConnector->getDBLink(), $roomQuery);
+
+        // Make Room objects
+        $rooms = array();
+        while($row = mysqli_fetch_assoc($result)) {
+            $id = intval($row["ID"]);
+            $roomNumber = intval($row["RoomNumber"]);
+            array_push($rooms, new Room($id, $roomNumber));
+        }
+
+        // Return those rooms
+        return $rooms;
     }
 
     /**
