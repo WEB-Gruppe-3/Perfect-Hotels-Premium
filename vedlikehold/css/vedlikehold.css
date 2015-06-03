@@ -14,32 +14,33 @@ p
 	letter-spacing: 1px;
 	margin: 0 0 0;
 	padding: 0 22px 15px;
+	color:#000000;
 }
 
 a
 {
-	color: #59365f;
+	color: #ffffff;
 	text-decoration: none;
-	background-color: #ffae00;
+	background-color: #01486E;
+	display: block;
+	width: 380px;
+	padding: 10px;
+	text-align:center;
+	font-size:20px;
+
+
+	
+	
 }
 
 a:hover
 {
 	color: #feffff;
-	text-decoration: underline;
+	text-decoration: none;
+	background-color:#017bbe;
 }
 
-acronym
-{
-	color: #ffae00;
-	text-transform: uppercase;
-	cursor: help;
-}
 
-#footer
-{
-	padding: 20px 0 60px 22px;
-}
 
 #container
 {
@@ -47,20 +48,19 @@ acronym
 	margin: 0 auto;
 	padding: 0;
 	position: relative;
-	width: 770px;
-	background-color: #e3e3e3;
+	width: 1200px;
+	background-color: #01486E;
+	
 }
 
-#lselect
-{
-	padding-bottom: 30px;
-	position: relative;
-}
 
-#larchives, #lresources
+
+#footer 
 {
-	margin-top: 26px;
-	padding-bottom: 15px;
+	padding: 10px 10px 10px 10px;
+
+	
+	
 }
 
 
@@ -69,9 +69,11 @@ acronym
 	background: url(../img/top.jpg) no-repeat 0 0;
 	margin: 0;
 	padding: 0;
-	height: 318px;
+	height: 320px;
 	position: relative;
-	border-bottom: 8px solid #000;
+	
+	
+	
 }
 h3
 {
@@ -81,101 +83,36 @@ h3
 
 h1, h2 { }
 
-#preamble h3
-{
-	margin: 0;
-	padding: 20px;
-	width: 370px;
-	height: 20px;
-}
-
-#explanation h3
-{
-	margin: 0;
-	padding: 20px;
-	width: 370px;
-	height: 20px;
-}
-
-#participation h3
-{
-	margin: 0;
-	padding: 20px;
-	width: 370px;
-	height: 20px;
-}
-
-#benefits h3
-{
-	margin: 0;
-	padding: 20px;
-	width: 370px;
-	height: 20px;
-}
-
-#content, #supportingText
-{
-	background-color: #ffffff;
-	
-	
-	
-}
 
 #innholdRight
 {
-		background-color: #000;
-		  padding-left: 20px;
-		  padding-right: 20px;
+background-color: #ffffff;
+
+text-align: left;
 }
+
+
 
 #innholdLeft
 {
-		background-color: #000;
-		  padding-left: 20px;
+float: left;
+
+width: 400px;
+background-color: #ffefdf;
+text-align: left;
 }
 
-#overlaypopup {
-    visibility: hidden;
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width:100%;
-    height:100%;
-    text-align:center;
-    z-index: 1003;
-    background-color:#111;
-    opacity: 0.65;
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 	
 }
 
-#popup {
-	position: absolute;
-	visibility: hidden;
-	top: 50%;
-
-    
-
-    background-color: #5D9494;
-    border: 1px solid #000;
-    padding: 15px;
-    text-align: center;
-       z-index: 1004;
-	vertical-align: middle;
-	
-    
+li {
+    display: inline;
+	float: left;
 
 }
 
-input[type="input"] {
-        resize: horizontal;
-        min-width: 95%;
-    }
-select[type="input"] {
-        resize: horizontal;
-        min-width: 95%;
-    }
-    
 
-table {
-	width: 100%;
-}
