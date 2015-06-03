@@ -47,7 +47,10 @@ $hotels = $db->getHotels();
                 </tr>
 
                 <tr>
-                    <td><button type="button">Søk</button><button type="reset">Nullstill</button></td>
+                    <td>
+                        <button type="button" onClick="getAvailableRooms()">Søk</button>
+                        <button type="reset">Nullstill</button>
+                    </td>
                 </tr>
             </table>
         </form>
@@ -57,7 +60,7 @@ $hotels = $db->getHotels();
     <!-- Result -->
     <div id="innholdRight">
 
-        <p>Antall ledige rom: X</p>
+        <p>Antall ledige rom: <span id="numOfAvailableRooms"></span></p>
 
         <br>
         <br>

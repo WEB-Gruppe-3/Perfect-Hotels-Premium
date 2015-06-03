@@ -15,6 +15,7 @@ class Booking {
     }
 
     /**
+     * Checks if the end date- and time is less than the current date- and time.
      * @return bool Returns True if the booking is expired, false otherwise.
      */
     public function isExpired() {

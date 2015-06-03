@@ -25,7 +25,7 @@ class RoomType {
     /**
      * @return Integer Returns the room type id.
      */
-    public function getId() {
+    public function getID() {
         return $this->id;
     }
 
