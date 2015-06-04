@@ -80,7 +80,7 @@ $hotels = $db->getHotels();
         <img id="roomTypeImage" src="img/top.jpg" width="200" height="200">
 
         <p id="roomTypeDescription">placeholder roomtype description</p>
-    -->
+        -->
     </div>
 
 </div> <!-- End of content -->
