@@ -124,7 +124,9 @@ function getAvailableRooms() {
 
         // Upon completion, do this.
         success: function( numOfAvailRooms ) {
-            $("#numOfAvailableRooms").append(numOfAvailRooms[0]);
+            var span = $("#numOfAvailableRooms");
+            span.empty();
+            span.append(numOfAvailRooms[0]);
         }
     });
 }
