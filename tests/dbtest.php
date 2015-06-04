@@ -122,7 +122,7 @@ var_dump($dbApi->getImage(1));
  * getRoomType()
  */
 echo("<h3>getRoomType()</h3>");
-var_dump($dbApi->getRoomType(1));
+var_dump($dbApi->getRoomType(1, 1));
 
 
 /**
@@ -136,3 +136,36 @@ var_dump($dbApi->getRoomTypes(1));
  */
 echo("<h3>getHotels()</h3>");
 var_dump($dbApi->getHotels());
+
+/**
+ * getRooms()
+ */
+echo("<h3>getRooms()</h3>");
+var_dump($dbApi->getRooms(1, 1));
+
+
+/**
+ * getBookings()
+ */
+echo("<h3>getBookings()</h3>");
+$bookings = $dbApi->getBookings(1, 1);
+echo("<h4>Var dumping of all bookings: </h4><br>");
+var_dump($bookings);
+
+/**
+ * Booking->isExpired()
+ */
+echo("<h3>Booking->isExpired()</h3>");
+$expiredEndDate = new DateTime("2015-01-01 10:00:00");
+$validEndDate = new DateTime("2030-01-01 10:00:00");
+$now = new DateTime();
+
+$expiredBook = new Booking(1, $now, $expiredEndDate, 1);
+$validBook = new Booking(1, $now, $validEndDate, 1);
+
+if(($expiredBook->isExpired() === true) && ($validBook->isExpired() === false)) {
+    echo("<span style='color:limegreen'>Test PASSED!</span>");
+} else {
+    echo("<span style='color:red'>Test FAILED!</span>");
+}
+

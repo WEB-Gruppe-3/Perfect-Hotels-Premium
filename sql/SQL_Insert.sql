@@ -1,4 +1,4 @@
--- Eksamen i IS-WEB1000 Vår 2015, Gruppe 3.
+-- Eksamen i IS-WEB1000 Vï¿½r 2015, Gruppe 3.
 -- Dummy data for Perfect Hotels Premium
 
 -- Image
@@ -36,7 +36,25 @@ INSERT INTO HotelRoomType(RoomTypeID, HotelID)
 VALUES('1', '1');
 
 INSERT INTO HotelRoomType(RoomTypeID, HotelID)
+VALUES('1', '2');
+
+INSERT INTO HotelRoomType(RoomTypeID, HotelID)
+VALUES('1', '3');
+
+INSERT INTO HotelRoomType(RoomTypeID, HotelID)
+VALUES('2', '1');
+
+INSERT INTO HotelRoomType(RoomTypeID, HotelID)
 VALUES('2', '2');
+
+INSERT INTO HotelRoomType(RoomTypeID, HotelID)
+VALUES('2', '3');
+
+INSERT INTO HotelRoomType(RoomTypeID, HotelID)
+VALUES('3', '1');
+
+INSERT INTO HotelRoomType(RoomTypeID, HotelID)
+VALUES('3', '2');
 
 INSERT INTO HotelRoomType(RoomTypeID, HotelID)
 VALUES('3', '3');
@@ -46,7 +64,25 @@ INSERT INTO Room(RoomNumber, HotelRoomTypeID)
 VALUES('101', '1');
 
 INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('102', '1');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('103', '1');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('101', '2');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
 VALUES('102', '2');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('103', '2');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('101', '3');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('102', '3');
 
 INSERT INTO Room(RoomNumber, HotelRoomTypeID)
 VALUES('103', '3');
