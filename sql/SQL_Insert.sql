@@ -99,13 +99,13 @@ VALUES('3');
 
 -- Booking
 INSERT INTO Booking(FromDate, ToDate, RoomID, HotelRoomTypeID, CustomerOrderID)
-VALUES('2015-01-01 11:55:56', '2015-01-03 10:00:00', '1', '1', '1');
+VALUES('2015-01-01', '2015-01-03', '1', '1', '1');
 
 INSERT INTO Booking(FromDate, ToDate, RoomID, HotelRoomTypeID, CustomerOrderID)
-VALUES('2015-02-05 10:00:00', '2015-02-07 10:00:00', '2', '2', '2');
+VALUES('2015-02-05', '2015-02-07', '2', '2', '2');
 
 INSERT INTO Booking(FromDate, ToDate, RoomID, HotelRoomTypeID, CustomerOrderID)
-VALUES('2015-03-07 14:33:01', '2015-03-10 12:00:00', '3', '3', '3');
+VALUES('2015-03-07', '2015-03-10', '3', '3', '3');
 
 -- MaintenanceUser
 INSERT INTO MaintenanceUser(UserName, Password)
