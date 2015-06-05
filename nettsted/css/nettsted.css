@@ -1,6 +1,6 @@
 html, body
 {
-	color: white;
+	color: black;
 	font: 11px/16px "trebuchet ms", arial, helvetica, sans;
 	background: #ababab;
 	margin: 0;
@@ -23,7 +23,7 @@ ul li a
 	text-decoration: none;
 	background-color: #01486E;
 	display: block;
-	width: 380px;
+	width: 280px;
 	padding: 10px;
 	text-align:center;
 	font-size:20px;
