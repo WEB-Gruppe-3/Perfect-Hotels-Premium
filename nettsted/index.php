@@ -11,60 +11,56 @@ $hotels = $db->getHotels();
 <div id="content">
 
     <!-- Left div -->
-    <div id="innholdLeft">
+    <div id="rightDiv">
         <form id="searchForm">
 
-            <div id="test1">
+            <div class="searchDiv" id="hotelSelectDiv">
+                <div class="searchTitle">Velg hotell</div>
 
+                <select class="searchInput" id="hotelSelect" onChange='populateRoomTypeList()'>
+                    <?php // Printing options
+                    foreach($hotels as $hotel) {
+                        $hotelName = $hotel->getName();
+                        $hotelId = $hotel->getId();
+                        print("<option value='$hotelId'>$hotelName</option>\n");
+                    }
+                    ?>
+                </select>
             </div>
 
-            <table>
-                <tr>
-                    <td>Velg hotell:</td>
-                    <td>
-                        <select id="hotelSelect" onChange='populateRoomTypeList()'>
-                            <?php // Printing options
-                            foreach($hotels as $hotel) {
-                                $hotelName = $hotel->getName();
-                                $hotelId = $hotel->getId();
-                                print("<option value='$hotelId'>$hotelName</option>\n");
-                            }
-                            ?>
-                        </select>
-                    </td>
-                </tr>
+            <div class="searchDiv searchDivExtraMargin" id="roomTypeSelectDiv">
+                <div class="searchTitle">Velg type rom</div>
 
-                <tr>
-                    <td>Velg rom type:</td>
-                    <td>
-                        <select id="roomTypeSelect" disabled>
-                            <!-- Populates via JS -->
-                            <option>----------</option>
-                        </select>
-                    </td>
-                </tr>
+                <select class="searchInput" id="roomTypeSelect" disabled>
+                    <!-- Populates via JS -->
+                </select>
+            </div>
 
-                <tr>
-                    <td>Velg dato:</td>
-                    <td>
-                        <input id="startDateInput" type="text" size="9" readonly> -
-                        <input id="endDateInput" type="text" size="9" readonly>
-                    </td>
-                </tr>
+            <div class="searchDiv searchDivExtraMargin" id="dateSelectDiv">
+                <div class="searchTitle">Velg dato</div>
 
-                <tr>
-                    <td>
-                        <button type="button" onClick="search()">Søk</button>
-                        <button type="reset">Nullstill</button>
-                    </td>
-                </tr>
-            </table>
+                <table class="searchInput">
+                    <tr>
+                        <td>
+                            <input id="startDateInput" type="text" size="9" readonly> -
+                            <input id="endDateInput" type="text" size="9" readonly>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <br>
+            <br>
+
+            <button type="button" onClick="search()">Søk</button>
+            <button type="reset">Nullstill</button>
+
         </form>
 
     </div>
 
     <!-- Right div -->
-    <div id="innholdRight">
+    <div id="leftDiv">
 
         <p>Antall ledige rom: <span id="numOfAvailableRooms"></span></p>
 
