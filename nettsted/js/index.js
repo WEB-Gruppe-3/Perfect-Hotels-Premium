@@ -3,19 +3,33 @@
  */
 
 /**
- * Date picker
+ * Declaring elements and inputs for later use
  */
+// Search form elements
+hotelSelect = $("#hotelSelect");
+roomTypeSelect = $("#roomTypeSelect");
+startDateInput = $("#startDateInput");
+endDateInput = $("#endDateInput");
+
+// Modal window elements
+modalWindow = $(".modalWindow");
+modalHotelTitle = $("#modalHotelTitle");
+modalRoomTypeTitle = $("#modalRoomTypeTitle");
+modalDateTitle = $("#modalDateTitle");
+emailInput = $("#emailInput");
+
 $(function() {
+    // Resetting search form
+    hotelSelect.find("option:first").attr("selected", "selected");
+    startDateInput.val("");
+    endDateInput.val("");
 
-    // Clearing inputs and setting the datepicker
-    var startDate = $("#startDateInput");
-    var endDate = $("#endDateInput");
-    startDate.datepicker();
-    endDate.datepicker();
-    startDate.empty();
-    endDate.empty();
+    populateRoomTypeList();
 
-    // Configuring
+    // Setting and configuring date picker
+    startDateInput.datepicker();
+    endDateInput.datepicker();
+
     $.datepicker.setDefaults(
         $.extend(
             {'dateFormat':'dd-mm-yy'},
@@ -31,11 +45,79 @@ $(function() {
  */
 
 /**
+ * OnClick: Book room button
+ */
+function openModalWindow() {
+    // Setting search values
+    modalHotelTitle.append(hotelSelect.find("option:selected").html());
+    modalRoomTypeTitle.append(roomTypeSelect.find("option:selected").html());
+    modalDateTitle.html(startDateInput.val() + " - " + endDateInput.val());
+
+    // Make the modal window visible
+    modalWindow.css("visibility", "visible");
+}
+
+/**
+ * OnClick: Modal close
+ */
+function closeModalWindow() {
+    // Clearing elements
+    emailInput.val("");
+    modalHotelTitle.html("");
+    modalRoomTypeTitle.html("");
+    modalDateTitle.html("");
+
+    modalWindow.css("visibility", "hidden");
+}
+
+/**
+ * OnClick: Modal order room
+ *
+ * Adds a booking to the database, then informs the user of success or failiure!
+ */
+function bookRoom() {
+    // Getting the selected values
+    var hotelID = hotelSelect.val();
+    var roomTypeID = roomTypeSelect.val();
+    var startDate = startDateInput.val();
+    var endDate = endDateInput.val();
+    var email = emailInput.val();
+
+    // Now that we have the dataz, lets get the server to add the shit
+    // Request a JSON with the room types of this hotel.
+    $.ajax({
+        // The URL for the request
+        url: "index.ajax.php",
+
+        // The data to send (will be converted to a query string)
+        data: {
+            requestedData: "addBook",
+            hotelID: hotelID,
+            roomTypeID: roomTypeID,
+            startDate: startDate,
+            endDate: endDate,
+            email: email
+        },
+
+        // Whether this is a POST or GET request
+        type: "GET",
+
+        // The type of data we expect back
+        dataType : "json",
+
+        success: function( data ) {
+            console.log(data);
+        }
+    });
+
+}
+
+/**
  * OnChange: hotelSelect
  */
 function populateRoomTypeList() {
     // Figure out the hotels' ID
-    var hotelID = $("#hotelSelect").val();
+    var hotelID = hotelSelect.val();
 
     // Request a JSON with the room types of this hotel.
     $.ajax({
@@ -56,8 +138,8 @@ function populateRoomTypeList() {
 
         // Upon completion, populate the dropdown menu.
         success: function( roomTypeData ) {
-            ids = roomTypeData[0];
-            names = roomTypeData[1];
+            var ids = roomTypeData[0];
+            var names = roomTypeData[1];
 
             var roomTypeSelect = $("#roomTypeSelect");
 
@@ -81,26 +163,31 @@ function populateRoomTypeList() {
  * OnClick: Søk
  */
 function getAvailableRooms() {
-    // Getting the form data
-    var hotelID = $("#hotelSelect").val();
-    var roomTypeID = $("#roomTypeSelect").val();
-    var startDate = $("#startDateInput").val();
-    var endDate = $("#endDateInput").val();
+    // Getting the selected values
+    var hotelID = hotelSelect.val();
+    var roomTypeID = roomTypeSelect.val();
+    var startDate = startDateInput.val();
+    var endDate = endDateInput.val();
 
-    console.log("Data sent in JSON: \n" +
-                "hotelID: " + hotelID +
-                " roomTypeID: " + roomTypeID +
-                " startDate: " + startDate +
-                " endDate: " + endDate );
+    // Setting search parameters in result screen
+    var hotelTitle = hotelSelect.find(":selected").text();
+    $("#hotelTitle").text(hotelTitle);
+    var roomTypeTitle = roomTypeSelect.find(":selected").text();
+    $("#roomTypeTitle").text(roomTypeTitle);
+    $("#dateTitle").text(startDate + " - " + endDate);
 
-    // Request a JSON with the number of available rooms.
+    // Requesting a JSON from server containing:
+    // - Hotel image URL
+    // - Hotel description
+    // - RoomType image URL
+    // - RoomType description
     $.ajax({
         // The URL for the request
         url: "index.ajax.php",
 
         // The data to send (will be converted to a query string)
         data: {
-            requestedData: "numOfAvailableRooms",
+            requestedData: "searchData",
             hotelID: hotelID,
             roomTypeID: roomTypeID,
             startDate: startDate,
@@ -122,11 +209,23 @@ function getAvailableRooms() {
             console.dir( xhr );
         },
 
-        // Upon completion, do this.
-        success: function( numOfAvailRooms ) {
-            var span = $("#numOfAvailableRooms");
-            span.empty();
-            span.append(numOfAvailRooms[0]);
+        // On completion, set data from JSON
+        success: function( data ) {
+            // Finding elements
+            var numRoomsElement = $("#numOfAvailableRooms");
+            var hotelImageElement = $("#hotelImage");
+            var hotelDescElement = $("#hotelDescription");
+            var roomTypeImageElement = $("#roomTypeImage");
+            var roomTypeDescElement = $("#roomTypeDescription");
+
+            // Setting element values
+            numRoomsElement.html(data.numRooms);
+            hotelImageElement.attr("src", data.hotelImageURL);
+            hotelDescElement.html(data.hotelDescription);
+            roomTypeImageElement.attr("src", data.roomTypeImageURL);
+            roomTypeDescElement.html(data.roomTypeDescription);
+
+            console.log(data);
         }
     });
 }

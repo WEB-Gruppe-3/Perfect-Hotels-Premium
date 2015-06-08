@@ -1,12 +1,13 @@
 <?php
-require_once("php/classes/Database.php");
-
 /**
  * Serves AJAX requests from index.php
  */
 
+require_once("php/classes/Database.php");
+
 $dbApi = new Database();
 
+/* -------------------- SCRIPT START -------------------- */
 // Decide what method to run based on data from request
 if(isset($_GET["requestedData"])) {
 
@@ -15,12 +16,21 @@ if(isset($_GET["requestedData"])) {
             printRoomTypes($dbApi, $_GET["hotelID"]);
             break;
 
-        case "numOfAvailableRooms":
-            printNumOfAvailableRooms( $dbApi,
-                                      $_GET["hotelID"],
-                                      $_GET["roomTypeID"],
-                                      stringToDate($_GET["startDate"]),
-                                      stringToDate($_GET["endDate"]) );
+        case "searchData":
+            getSearchJSON($dbApi,
+                          $_GET["hotelID"],
+                          $_GET["roomTypeID"],
+                          stringToDate($_GET["startDate"]),
+                          stringToDate($_GET["endDate"]));
+            break;
+
+        case "addBook":
+            addNewOrderAndBooking(  $dbApi,
+                                    $_GET["email"],
+                                    $_GET["hotelID"],
+                                    $_GET["roomTypeID"],
+                                    $_GET["startDate"],
+                                    $_GET["endDate"]);
             break;
 
         default:
@@ -28,12 +38,33 @@ if(isset($_GET["requestedData"])) {
             break;
     }
 }
+/* -------------------- SCRIPT END -------------------- */
 
+/**
+ * Add a order and booking, then returns the reference number and success/failure in a JSON
+ */
+function addNewOrderAndBooking(Database $dbApi, $email, $hotelID, $roomTypeID, $startDate, $endDate) {
+    // Compute order reference
+    $orderReference = md5($email);
+
+    // Make DateTimes
+    $dt_startDate = DateTime::createFromFormat("d.m.Y", $startDate);
+    $dt_endDate = DateTime::createFromFormat("d.m.Y", $endDate);
+
+    // $orderReference, $hotelID, $roomTypeID, DateTime $startDate, DateTime $endDate
+    $isSuccess = $dbApi->addBooking($orderReference, $hotelID, $roomTypeID, $dt_startDate, $dt_endDate);
+
+    $json = array();
+    $json["isSuccess"] = $isSuccess;
+    $json["refNr"] = $orderReference;
+
+    print(json_encode($json));
+}
 
 /**
  * Print room types for a hotel
  */
-function printRoomTypes($dbApi, $hotelID) {
+function printRoomTypes(Database $dbApi, $hotelID) {
     if(isset($_GET["hotelID"])) {
         $roomTypes = $dbApi->getRoomTypes($_GET["hotelID"]);
 
@@ -53,9 +84,12 @@ function printRoomTypes($dbApi, $hotelID) {
 }
 
 /**
- * Prints the number of available rooms during based upon the search parameters.
+ * Prints search-data JSON
  */
-function printNumOfAvailableRooms(Database $dbApi, $hotelID, $roomTypeID, DateTime $startDate, DateTime $endDate) {
+function getSearchJSON(Database $dbApi, $hotelID, $roomTypeID, DateTime $startDate, DateTime $endDate) {
+    $searchData = array();
+
+    /** Number of available rooms */
     $searchStartTs = $startDate->getTimestamp();
     $searchEndTs = $endDate->getTimestamp();
 
@@ -88,11 +122,21 @@ function printNumOfAvailableRooms(Database $dbApi, $hotelID, $roomTypeID, DateTi
     $rooms = $dbApi->getRooms($hotelID, $roomTypeID);
     $numOfRooms = count($rooms);
 
-    // Subtract the taken rooms from the total number of rooms to find the available number of rooms
+    // Add the num of avail rooms to search data.
     $numOfAvailableRooms = $numOfRooms - $numOfBusyBookings;
+    $searchData["numRooms"] = $numOfAvailableRooms;
 
-    // Deliver the JSON
-    print(json_encode(array($numOfAvailableRooms)));
+    /** Hotel image url and description */
+    $hotel = $dbApi->getHotel($hotelID);
+    $searchData["hotelImageURL"] = $hotel->getImageURL();
+    $searchData["hotelDescription"] = $hotel->getDescription();
+
+    /** Room type image url and description */
+    $roomType = $dbApi->getRoomType($roomTypeID, $hotelID);
+    $searchData["roomTypeImageURL"] = $roomType->getImageURL();
+    $searchData["roomTypeDescription"] = $roomType->getDescription();
+
+    print(json_encode($searchData));
 }
 
 /**

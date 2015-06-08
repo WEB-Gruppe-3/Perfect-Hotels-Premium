@@ -22,6 +22,64 @@ class Database {
     }
 
     /**
+     * Adds a new booking to a order reference
+     *
+     * @return boolean Returns true on success, false otherwise.
+     */
+    public function addBooking($orderReference, $hotelID, $roomTypeID, DateTime $startDate, DateTime $endDate) {
+        // First, add new order so we can get the orderID from it.
+        $this->addCustomerOrder($orderReference);
+
+        // Now, lets add the booking entry.
+        // To do that, we need to know its HotelRoomTypeID & CustomerOrderID.
+        $customerOrderID = $this->getCustomerOrderID($orderReference);
+        $hotelRoomTypeID = $this->getHotelRoomTypeID($hotelID, $roomTypeID);
+
+        // Formatting the dates
+        $sqlStartDate = $startDate->format("Y-m-d");
+        $sqlEndDate = $endDate->format("Y-m-d");
+
+        // Great, lets make our query
+        $query = "INSERT INTO Booking(FromDate, ToDate, HotelRoomTypeID, CustomerOrderID) VALUES('$sqlStartDate', '$sqlEndDate', $hotelRoomTypeID, $customerOrderID)";
+        $result = mysqli_query($this->dbConnector->getDBLink(), $query);
+
+        return $result;
+    }
+
+    /**
+     * Add a new CustomerOrder
+     *
+     * @return boolean Returns true on success, false otherwise.
+     */
+    public function addCustomerOrder($reference) {
+        $query = "INSERT INTO CustomerOrder(Reference) VALUES('$reference')";
+        $result = mysqli_query($this->dbConnector->getDBLink(), $query);
+        return $result;
+    }
+
+    /**
+     * Get a CustomerOrder ID from a reference
+     */
+    public function getCustomerOrderID($reference) {
+        $query ="SELECT ID FROM CustomerOrder WHERE Reference = '$reference'";
+        $result = mysqli_query($this->dbConnector->getDBLink(), $query);
+        $row = mysqli_fetch_assoc($result);
+        return $row["ID"];
+    }
+
+    /**
+     * Get a HotelRoomTypeID
+     */
+    public function getHotelRoomTypeID($hotelID, $roomTypeID) {
+        $query = "SELECT ID FROM HotelRoomType WHERE HotelID = '$hotelID' AND RoomTypeID = '$roomTypeID'";
+        $result = mysqli_query($this->dbConnector->getDBLink(), $query);
+        $row = mysqli_fetch_assoc($result);
+        return $row["ID"];
+    }
+
+
+
+    /**
      * Get bookings for a hotel and a room type.
      *
      * @param $hotelID Integer The hotel id.
@@ -88,6 +146,23 @@ class Database {
             array_push($hotels, $hotel);
         }
         return $hotels;
+    }
+
+    /**
+     * Get a single Hotel
+     */
+    public function getHotel($hotelID) {
+        $query = "SELECT * FROM Hotel WHERE ID = '$hotelID'";
+        $result = mysqli_query($this->dbConnector->getDBLink(), $query);
+        $row = mysqli_fetch_assoc($result);
+
+        $hotel = new Hotel( $row["ID"],
+                            $row["Name"],
+                            $this->getImage($row["ImageID"]),
+                            $row["Description"],
+                            $this->getRoomTypes($row["ID"]) );
+
+        return $hotel;
     }
 
     /**
