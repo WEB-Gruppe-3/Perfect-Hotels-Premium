@@ -44,7 +44,7 @@ if(isset($_GET["requestedData"])) {
  * Add a order and booking, then returns the reference number and success/failure in a JSON
  */
 function addNewOrderAndBooking(Database $dbApi, $email, $hotelID, $roomTypeID, $startDate, $endDate) {
-    // Compute order reference
+    // Compute reference
     $orderReference = md5($email);
 
     // Make DateTimes

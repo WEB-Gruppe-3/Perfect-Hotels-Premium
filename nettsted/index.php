@@ -48,7 +48,7 @@ $hotels = $db->getHotels();
 
                 <tr>
                     <td>
-                        <button type="button" onClick="getAvailableRooms()">Søk</button>
+                        <button type="button" onClick="search()">Søk</button>
                         <button type="reset">Nullstill</button>
                     </td>
                 </tr>
@@ -76,7 +76,7 @@ $hotels = $db->getHotels();
 
         <br>
 
-        <button type="button" onClick="openModalWindow()">Bestill!</button>
+        <button type="button" onClick="showOrderOverlay()">Bestill!</button>
 
     </div>
 
@@ -89,18 +89,19 @@ $hotels = $db->getHotels();
 
             <div id="modalPreOrderContent">
                 <h2>Bestilling</h2>
-                <span id="modalClose" onClick="closeModalWindow()">Lukk!</span> <br><br>
+                <span id="modalClose" onClick="closeOrderOverlay()">Lukk!</span> <br><br>
                 Hotell: <span id="modalHotelTitle"></span> <br>
                 Romtype: <span id="modalRoomTypeTitle"></span> <br>
                 Dato: <span id="modalDateTitle"></span> <br><br>
 
                 <form>
                     Epost: <input type="text" id="emailInput">
-                    <button type="button" onClick="bookRoom()">Bestill!</button>
+                    <button type="button" onClick="doOrder()">Bestill!</button>
                 </form>
             </div>
 
             <div id="modalPostOrderContent">
+                <span id="modalClose" onClick="closeOrderOverlay()">Lukk!</span> <br><br>
                 Takk for din bestilling!
                 <br>
                 Ditt referansenummer er: <span id="modalRefNrTitle"></span>

@@ -49,40 +49,50 @@ $(function() {
  */
 
 /**
- * OnClick: Book room button
+ * OnClick: Bestill-button
  */
-function openModalWindow() {
-    // Setting search values
-    modalHotelTitle.append(hotelSelect.find("option:selected").html());
-    modalRoomTypeTitle.append(roomTypeSelect.find("option:selected").html());
-    modalDateTitle.html(startDateInput.val() + " - " + endDateInput.val());
-
-    // Make the modal window visible
+function showOrderOverlay() {
     modalWindow.css("visibility", "visible");
+
+    modalPreOrderContent.css("visibility", "visible");
     modalPostOrderContent.css("visibility", "hidden");
+
+    // Clear email input if there was anything left from previous showing of the window.
+    emailInput.val("");
+
+    // Setting search values
+    modalHotelTitle.html(hotelSelect.find("option:selected").html());
+    modalRoomTypeTitle.html(roomTypeSelect.find("option:selected").html());
+    modalDateTitle.html(startDateInput.val() + " - " + endDateInput.val());
 }
 
 /**
  * OnClick: Modal close
  */
-function closeModalWindow() {
-    // Clearing elements
-    emailInput.val("");
-    modalHotelTitle.html("");
-    modalRoomTypeTitle.html("");
-    modalDateTitle.html("");
-
-    modalRefNrTitle.html("");
-
+function closeOrderOverlay() {
+    modalPostOrderContent.css("visibility", "hidden");
+    modalPreOrderContent.css("visibility", "hidden");
     modalWindow.css("visibility", "hidden");
 }
 
+function showPostOrder(isSuccess, refNr) {
+    if(! isSuccess) {
+        alert("Bestillingen gikk til helvette!");
+    }
+
+    modalPreOrderContent.css("visibility", "hidden");
+    modalPostOrderContent.css("visibility", "visible");
+
+    // Set ref nr
+    modalRefNrTitle.html(refNr);
+}
+
 /**
- * OnClick: Modal order room
+ * OnClick: Order overlay book rooms
  *
  * Adds a booking to the database, then informs the user of success or failiure!
  */
-function bookRoom() {
+function doOrder() {
     // Getting the selected values
     var hotelID = hotelSelect.val();
     var roomTypeID = roomTypeSelect.val();
@@ -117,18 +127,6 @@ function bookRoom() {
             showPostOrder(data.isSuccess, data.refNr);
         }
     });
-}
-
-function showPostOrder(isSuccess, refNr) {
-    if(! isSuccess) {
-        alert("Bestillingen gikk til helvette!");
-    }
-
-    modalPreOrderContent.css("visibility", "hidden");
-    modalPostOrderContent.css("visibility", "visible");
-
-    // Set ref nr
-    modalRefNrTitle.append(refNr);
 }
 
 /**
@@ -181,7 +179,7 @@ function populateRoomTypeList() {
 /**
  * OnClick: Søk
  */
-function getAvailableRooms() {
+function search() {
     // Getting the selected values
     var hotelID = hotelSelect.val();
     var roomTypeID = roomTypeSelect.val();
@@ -222,7 +220,7 @@ function getAvailableRooms() {
         // Code to run if the request fails; the raw request and
         // status codes are passed to the function
         error: function( xhr, status, errorThrown ) {
-            console.log("Error from getAvailableRooms()");
+            console.log("Error from search()");
             console.log( "Error: " + errorThrown );
             console.log( "Status: " + status );
             console.dir( xhr );
