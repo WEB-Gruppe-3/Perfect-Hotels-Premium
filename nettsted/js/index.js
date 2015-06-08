@@ -44,9 +44,24 @@ $(function() {
 });
 
 
+/* -------------------- Functions -------------------- */
+
+/* -------------------- EVENT HANDLER FUNCTIONS -------------------- */
 /**
- * -------------------- Functions --------------------
+ * Display and animate room type select upon press from hotel select
  */
+function displayAndAnimateRoomTypeSelect() {
+    var roomTypeSelectDiv = $("#roomTypeSelectDiv");
+    roomTypeSelectDiv.slideDown();
+}
+
+/**
+ * Display and animate date select upon press from room type select
+ */
+function displayAndAnimateDateSelect() {
+    var dateSelectDiv = $("#dateSelectDiv");
+    dateSelectDiv.slideDown();
+}
 
 /**
  * OnClick: Bestill-button

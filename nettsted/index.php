@@ -17,7 +17,7 @@ $hotels = $db->getHotels();
             <div class="searchDiv" id="hotelSelectDiv">
                 <div class="searchTitle">Velg hotell</div>
 
-                <select class="searchInput" id="hotelSelect" onChange='populateRoomTypeList()'>
+                <select class="searchInput" id="hotelSelect" onChange='displayAndAnimateRoomTypeSelect(); populateRoomTypeList();'>
                     <?php // Printing options
                     foreach($hotels as $hotel) {
                         $hotelName = $hotel->getName();
@@ -31,7 +31,7 @@ $hotels = $db->getHotels();
             <div class="searchDiv searchDivExtraMargin" id="roomTypeSelectDiv">
                 <div class="searchTitle">Velg type rom</div>
 
-                <select class="searchInput" id="roomTypeSelect" disabled>
+                <select class="searchInput" id="roomTypeSelect" onChange='displayAndAnimateDateSelect();' disabled>
                     <!-- Populates via JS -->
                 </select>
             </div>
@@ -52,9 +52,9 @@ $hotels = $db->getHotels();
             <br>
             <br>
 
-            <button type="button" onClick="search()">Søk</button>
-            <button type="reset">Nullstill</button>
-
+            <div id="searchButton" class="searchDiv" onClick="search();">
+                <span id="searchButtonText">Søk</span>
+            </div>
         </form>
 
     </div>
@@ -62,7 +62,7 @@ $hotels = $db->getHotels();
     <!-- Right div -->
     <div id="leftDiv">
 
-        <p>Antall ledige rom: <span id="numOfAvailableRooms"></span></p>
+        Antall ledige rom: <span id="numOfAvailableRooms"></span>
 
         <h2 id="hotelTitle"></h2>
         <img id="hotelImage" width="200" height="200">
