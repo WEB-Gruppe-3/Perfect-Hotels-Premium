@@ -12,18 +12,24 @@ class Booking {
         $this->startDate = $startDate;
         $this->endDate = $endDate;
         $this->roomID = $roomID;
+
+        // Setting time to 00:00:00
+        $this->startDate->setTime(0, 0 ,0);
+        $this->endDate->setTime(0, 0, 0);
     }
 
     /**
-     * Checks if the end date- and time is less than the current date- and time.
-     * @return bool Returns True if the booking is expired, false otherwise.
+     * Checks if this booking has expired.
+     * A booking has expired if it's end date is today, or earlier.
      */
     public function isExpired() {
-        $endDateTimeStamp = $this->endDate->getTimestamp();
-        $now = new DateTime();
-        $nowTimeStamp = $now->getTimestamp();
+        $today = new DateTime();
+        $today->setTime(0, 0, 0);
 
-        if($endDateTimeStamp < $nowTimeStamp) {
+        $todayTS = $today->getTimestamp();
+        $endTS = $this->getEndDate()->getTimestamp();
+
+        if($endTS <= $todayTS) {
             return true;
         } else {
             return false;

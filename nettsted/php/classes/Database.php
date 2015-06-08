@@ -124,6 +124,7 @@ class Database {
                 array_push($activeBookings, $bookings[$i]);
             }
         }
+
         return $activeBookings;
     }
 
