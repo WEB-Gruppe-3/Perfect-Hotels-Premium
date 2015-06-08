@@ -83,6 +83,13 @@ $hotels = $db->getHotels();
         -->
     </div>
 
+    <!-- Modal window -->
+    <div class="modalWindow">
+        <div class="modalWindowContent">
+            <p>test</p>
+        </div>
+    </div>
+
 </div> <!-- End of content -->
 
 <!-- Javascript -->
