@@ -41,13 +41,11 @@ html, body {
 	text-align: left;
 }
 
-#footer
-{
+#footer {
 	padding: 10px 10px 10px 10px;
 }
 
-#pageHeader
-{
+#pageHeader {
 	background: url(../img/top.jpg) no-repeat 0 0;
 	margin: 0;
 	padding: 0;
@@ -55,8 +53,7 @@ html, body {
 	position: relative;
 }
 
-p
-{
+p {
 	font: 11px/16px "trebuchet ms", arial, helvetica, sans;
 	text-align: justify;
 	letter-spacing: 1px;
@@ -65,8 +62,7 @@ p
 	color:#000000;
 }
 
-ul li a
-{
+ul li a {
 	color: #ffffff;
 	text-decoration: none;
 	background-color: #01486E;
@@ -78,32 +74,22 @@ ul li a
 
 }
 
-ul li a:hover
-{
+ul li a:hover {
 	color: #feffff;
 	text-decoration: none;
 	background-color:#017bbe;
 }
 
-
-
-h3
-{
+h3 {
 	margin: 0;
 	padding: 0;
 }
-
-h1, h2 { }
-
-
-
 
 
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-	
 }
 
 li {
@@ -141,4 +127,10 @@ li {
 .clearFix {
 	clear:both;
 	font-size: 1px;
+}
+
+#test1 {
+	width: 100%;
+	height: 100px;
+	background-color: forestgreen;
 }

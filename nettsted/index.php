@@ -13,6 +13,11 @@ $hotels = $db->getHotels();
     <!-- Left div -->
     <div id="innholdLeft">
         <form id="searchForm">
+
+            <div id="test1">
+
+            </div>
+
             <table>
                 <tr>
                     <td>Velg hotell:</td>
@@ -25,7 +30,8 @@ $hotels = $db->getHotels();
                                 print("<option value='$hotelId'>$hotelName</option>\n");
                             }
                             ?>
-                        </select></td>
+                        </select>
+                    </td>
                 </tr>
 
                 <tr>
