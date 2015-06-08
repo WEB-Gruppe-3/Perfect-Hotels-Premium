@@ -88,11 +88,31 @@ INSERT INTO Room(RoomNumber, HotelRoomTypeID)
 VALUES('103', '3');
 
 -- CustomerOrder
--- Should not insert orders
+INSERT INTO CustomerOrder(Reference)
+VALUES('1');
+
+INSERT INTO CustomerOrder(Reference)
+VALUES('2');
+
+INSERT INTO CustomerOrder(Reference)
+VALUES('3');
 
 -- Booking
--- Should not insert bookings
+INSERT INTO Booking(FromDate, ToDate, RoomID, HotelRoomTypeID, CustomerOrderID)
+VALUES('2015-01-01', '2015-01-03', '1', '1', '1');
+
+INSERT INTO Booking(FromDate, ToDate, RoomID, HotelRoomTypeID, CustomerOrderID)
+VALUES('2015-02-05', '2015-02-07', '2', '2', '2');
+
+INSERT INTO Booking(FromDate, ToDate, RoomID, HotelRoomTypeID, CustomerOrderID)
+VALUES('2015-03-07', '2015-03-10', '3', '3', '3');
 
 -- MaintenanceUser
 INSERT INTO MaintenanceUser(UserName, Password)
 VALUES('admin', 'admin');
+
+INSERT INTO MaintenanceUser(UserName, Password)
+VALUES('bjarne', 'dsjkhd@&sjk');
+
+INSERT INTO MaintenanceUser(UserName, Password)
+VALUES('ole', 'password123');

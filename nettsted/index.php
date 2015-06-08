@@ -10,9 +10,14 @@ $hotels = $db->getHotels();
 
 <div id="content">
 
-    <!-- Search -->
+    <!-- Left div -->
     <div id="innholdLeft">
         <form id="searchForm">
+
+            <div id="test1">
+
+            </div>
+
             <table>
                 <tr>
                     <td>Velg hotell:</td>
@@ -25,7 +30,8 @@ $hotels = $db->getHotels();
                                 print("<option value='$hotelId'>$hotelName</option>\n");
                             }
                             ?>
-                        </select></td>
+                        </select>
+                    </td>
                 </tr>
 
                 <tr>
@@ -48,7 +54,7 @@ $hotels = $db->getHotels();
 
                 <tr>
                     <td>
-                        <button type="button" onClick="getAvailableRooms()">Søk</button>
+                        <button type="button" onClick="search()">Søk</button>
                         <button type="reset">Nullstill</button>
                     </td>
                 </tr>
@@ -57,30 +63,59 @@ $hotels = $db->getHotels();
 
     </div>
 
-    <!-- Result -->
+    <!-- Right div -->
     <div id="innholdRight">
 
         <p>Antall ledige rom: <span id="numOfAvailableRooms"></span></p>
 
-        <br>
-        <br>
-        <br>
-        <br>
+        <h2 id="hotelTitle"></h2>
+        <img id="hotelImage" width="200" height="200">
+        <p id="hotelDescription"></p>
+
+        <h3 id="roomTypeTitle"></h3>
+
+        <h4 id="dateTitle"></h4>
+
+        <img id="roomTypeImage" width="200" height="200">
+
+        <p id="roomTypeDescription"></p>
+
         <br>
 
-        <!--
-        <h2 id="hotelTitle">selected hotel</h2>
-        <img id="hotelImage" src="img/top.jpg" width="200" height="200">
-        <p id="hotelDescription">placeholder hotel description</p>
+        <button type="button" onClick="showOrderOverlay()">Bestill!</button>
 
-        <h3 id="roomTypeTitle">selected roomType</h3>
+    </div>
 
-        <h4 id="dateTitle">selected date</h4>
+    <!-- Clear fix -->
+    <div class="clearFix"></div>
 
-        <img id="roomTypeImage" src="img/top.jpg" width="200" height="200">
+    <!-- Modal window -->
+    <div class="modalWindow">
+        <div class="modalWindowContent">
 
-        <p id="roomTypeDescription">placeholder roomtype description</p>
-        -->
+            <div id="modalPreOrderContent">
+                <h2>Bestilling</h2>
+                <span id="modalClose" onClick="closeOrderOverlay()">Lukk!</span> <br><br>
+                Hotell: <span id="modalHotelTitle"></span> <br>
+                Romtype: <span id="modalRoomTypeTitle"></span> <br>
+                Dato: <span id="modalDateTitle"></span> <br><br>
+
+                <form>
+                    Epost: <input type="text" id="emailInput">
+                    <button type="button" onClick="doOrder()">Bestill!</button>
+                </form>
+            </div>
+
+            <div id="modalPostOrderContent">
+                <span id="modalClose" onClick="closeOrderOverlay()">Lukk!</span> <br><br>
+                Takk for din bestilling!
+                <br>
+                Ditt referansenummer er: <span id="modalRefNrTitle"></span>
+                <br>
+                <a href="../vedlikehold/checkin.php">Sjekk inn her!</a>
+            </div>
+
+        </div>
     </div>
 
 </div> <!-- End of content -->
