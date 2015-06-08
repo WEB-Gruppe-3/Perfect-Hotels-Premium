@@ -62,11 +62,12 @@ $hotels = $db->getHotels();
     <!-- Right div -->
     <div id="rightDiv">
 
-        Antall ledige rom: <span id="numOfAvailableRooms"></span>
-
         <h2 id="hotelTitle"></h2>
         <img id="hotelImage" width="200" height="200" src="">
         <p id="hotelDescription"></p>
+
+        Antall ledige rom: <span id="numOfAvailableRooms"></span>
+
 
         <h3 id="roomTypeTitle"></h3>
 
