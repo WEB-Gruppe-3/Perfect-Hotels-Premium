@@ -65,14 +65,14 @@ $hotels = $db->getHotels();
         Antall ledige rom: <span id="numOfAvailableRooms"></span>
 
         <h2 id="hotelTitle"></h2>
-        <img id="hotelImage" width="200" height="200">
+        <img id="hotelImage" width="200" height="200" src="">
         <p id="hotelDescription"></p>
 
         <h3 id="roomTypeTitle"></h3>
 
         <h4 id="dateTitle"></h4>
 
-        <img id="roomTypeImage" width="200" height="200">
+        <img id="roomTypeImage" width="200" height="200" src="">
 
         <p id="roomTypeDescription"></p>
 
