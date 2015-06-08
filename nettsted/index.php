@@ -11,7 +11,7 @@ $hotels = $db->getHotels();
 <div id="content">
 
     <!-- Left div -->
-    <div id="rightDiv">
+    <div id="leftDiv">
         <form id="searchForm">
 
             <div class="searchDiv" id="hotelSelectDiv">
@@ -60,7 +60,7 @@ $hotels = $db->getHotels();
     </div>
 
     <!-- Right div -->
-    <div id="leftDiv">
+    <div id="rightDiv">
 
         Antall ledige rom: <span id="numOfAvailableRooms"></span>
 

@@ -68,14 +68,14 @@ nav ul li a:hover {
 	float: left;
 }
 
-#leftDiv {
+#rightDiv {
 	width: 70%;
 	background-color: #ffffff;
 	text-align: left;
 	color: #000000;
 }
 
-#rightDiv {
+#leftDiv {
 	width: 30%;
 	background-color: #ffefdf;
 	text-align: left;
