@@ -18,6 +18,10 @@ modalRoomTypeTitle = $("#modalRoomTypeTitle");
 modalDateTitle = $("#modalDateTitle");
 emailInput = $("#emailInput");
 
+modalPreOrderContent = $("#modalPreOrderContent");
+modalPostOrderContent = $("#modalPostOrderContent");
+modalRefNrTitle = $("#modalRefNrTitle");
+
 $(function() {
     // Resetting search form
     hotelSelect.find("option:first").attr("selected", "selected");
@@ -55,6 +59,7 @@ function openModalWindow() {
 
     // Make the modal window visible
     modalWindow.css("visibility", "visible");
+    modalPostOrderContent.css("visibility", "hidden");
 }
 
 /**
@@ -66,6 +71,8 @@ function closeModalWindow() {
     modalHotelTitle.html("");
     modalRoomTypeTitle.html("");
     modalDateTitle.html("");
+
+    modalRefNrTitle.html("");
 
     modalWindow.css("visibility", "hidden");
 }
@@ -107,9 +114,21 @@ function bookRoom() {
 
         success: function( data ) {
             console.log(data);
+            showPostOrder(data.isSuccess, data.refNr);
         }
     });
+}
 
+function showPostOrder(isSuccess, refNr) {
+    if(! isSuccess) {
+        alert("Bestillingen gikk til helvette!");
+    }
+
+    modalPreOrderContent.css("visibility", "hidden");
+    modalPostOrderContent.css("visibility", "visible");
+
+    // Set ref nr
+    modalRefNrTitle.append(refNr);
 }
 
 /**

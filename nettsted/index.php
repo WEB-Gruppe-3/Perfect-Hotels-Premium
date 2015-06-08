@@ -76,7 +76,7 @@ $hotels = $db->getHotels();
 
         <br>
 
-        <button type="button" onClick="openModalWindow()">Book rom!</button>
+        <button type="button" onClick="openModalWindow()">Bestill!</button>
 
     </div>
 
@@ -87,7 +87,7 @@ $hotels = $db->getHotels();
     <div class="modalWindow">
         <div class="modalWindowContent">
 
-            <div id="preOrderContent">
+            <div id="modalPreOrderContent">
                 <h2>Bestilling</h2>
                 <span id="modalClose" onClick="closeModalWindow()">Lukk!</span> <br><br>
                 Hotell: <span id="modalHotelTitle"></span> <br>
@@ -100,10 +100,10 @@ $hotels = $db->getHotels();
                 </form>
             </div>
 
-            <div id="postOrderContent">
+            <div id="modalPostOrderContent">
                 Takk for din bestilling!
                 <br>
-                Ditt referansenummer er: <span id="refNr"></span>
+                Ditt referansenummer er: <span id="modalRefNrTitle"></span>
                 <br>
                 <a href="../vedlikehold/checkin.php">Sjekk inn her!</a>
             </div>
