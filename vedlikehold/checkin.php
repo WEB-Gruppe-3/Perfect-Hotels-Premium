@@ -64,13 +64,14 @@
                                             }
                                         }
                                     }
-                                    print ("</select></td></tr><br>");
+                                    print ("</select></td></tr>");
 
                                 } else {
                                     $id = $row[3];
                                     $result = $dbApi->getRow("Room", $id);
                                     while ($row = mysqli_fetch_row($result)) {
-                                        echo("<p style='color:red'><strong>Du har allerede booket romid: " . $row[1] . "</strong></p>");
+                                        print ("<tr><td>Bestilling $x</td>");
+                                        echo("<td><strong style='color:red'>Du har allerede booket romid: $row[1]</strong></td>");
                                     }
                                 }
                         }

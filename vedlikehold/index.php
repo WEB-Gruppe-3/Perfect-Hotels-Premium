@@ -139,7 +139,7 @@
                     $nr2++;
                 }       
                 $result = $dbApi->doesRowExist($valgt_table, $data);
-                if($result) {
+                if($result && $valgt_table != "Booking") {
                     echo ("<p style='color:red'><strong>There was already a row in $valgt_table containing this.. </strong></p>");
                 }
                 else {        
