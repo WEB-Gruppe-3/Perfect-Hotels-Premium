@@ -62,15 +62,16 @@
                             
                           </td><input type='hidden' size='2'name='rowID' value='" . $row[0] . "'></form></tr>");
                 }
+
                 print ("<tr><form action='' method='post' id='addForm' name='addForm'><td></td>");
                 $nr=1;
                 for ($x=2;$x<=$antallRader3;$x++) {
-                    if ($column[$nr]=="RoomTypeID" || $column[$nr]=="ImageID" || $column[$nr]=="HotelRoomTypeID" || $column[$nr]=="HotelID"  || $column[$nr]=="CustomerOrderID") {
+                    if ($column[$nr]=="RoomTypeID" || $column[$nr]=="ImageID" || $column[$nr]=="HotelID"  || $column[$nr]=="CustomerOrderID") {
                         $foreigntable= substr($column[$nr], 0, -2);
                         print ("<td><select name=$nr type='input'>");
                         $result = $dbApi->getAllRows("$foreigntable");
                         while($row = mysqli_fetch_row($result)) {
-                            echo("<option value='" . $row[0] . "'>" . $row[0] . "</option>");
+                            echo("<option value=$row[0]>$row[0] - $row[1]</option>");
                         }
                         print ("</select></td>");
                     }
@@ -80,7 +81,38 @@
                         echo("<option value='NULL'>-</option>");
                         $result = $dbApi->getAllRows("$foreigntable");
                         while($row = mysqli_fetch_row($result)) {
-                            echo("<option value='" . $row[0] . "'>" . $row[0] . "</option>");
+                            echo("<option value=$row[0]>$row[0] ($row[1]) - ");
+                            $resultx = $dbApi->getRow("HotelRoomType", $row[2]);
+                            while($rowx = mysqli_fetch_row($resultx)) {
+                                $result2 = $dbApi->getRow("RoomType", $rowx[1]);
+                                while($row2 = mysqli_fetch_row($result2)) {
+                                    echo "$row2[1] ";
+                                }
+                                $result3 = $dbApi->getRow("Hotel", $rowx[2]);
+                                while($row3 = mysqli_fetch_row($result3)) {
+                                    echo "($row3[1])";
+                                }
+                                echo("</option>");
+                            }
+                        }
+                        print ("</select></td>");
+                    }
+                    else if ($column[$nr]=="HotelRoomTypeID") {
+                        $foreigntable= substr($column[$nr], 0, -2);
+                        print ("<td><select name=$nr type='input'>");
+                        $result = $dbApi->getAllRows("$foreigntable");
+                        while($row = mysqli_fetch_row($result)) {
+                            echo("<option value=$row[0]>$row[0] - ");
+
+                            $result2 = $dbApi->getRow("RoomType", $row[1]);
+                            while($row2 = mysqli_fetch_row($result2)) {
+                                echo "$row2[1] ";
+                            }
+                            $result3 = $dbApi->getRow("Hotel", $row[2]);
+                            while($row3 = mysqli_fetch_row($result3)) {
+                                echo "($row3[1])";
+                            }
+                            echo("</option>");
                         }
                         print ("</select></td>");
                     }
@@ -188,7 +220,7 @@
                     $rows=count($column);
                     $nr=0;
                     for ($x=1;$x<=$rows;$x++) {
-                        if ($column[$nr]=="RoomTypeID" || $column[$nr]=="ImageID" || $column[$nr]=="HotelRoomTypeID" || $column[$nr]=="HotelID"  || $column[$nr]=="CustomerOrderID" ) {
+                        if ($column[$nr]=="RoomTypeID" || $column[$nr]=="ImageID" || $column[$nr]=="HotelID"  || $column[$nr]=="CustomerOrderID" ) {
                             $foreigntable= substr($column[$nr], 0, -2);
                             print ("<td><select name=$nr type='input'>");
                             $result2 = $dbApi->getAllRows("$foreigntable");
@@ -197,7 +229,7 @@
                                 if ($row2[0]==$row[$nr]) {
                                     echo("selected");
                                 }
-                                echo(">" . $row2[0] . "</option>");
+                                echo(">$row2[0] - $row2[1]</option>");
                             }
                             print ("</select></td>");
                         }
@@ -207,14 +239,51 @@
                             echo("<option value='NULL'>-</option>");
                             $result2 = $dbApi->getAllRows("$foreigntable");
                             while($row2 = mysqli_fetch_row($result2)) {
-                                echo("<option value='" . $row2[0] . "'");
+                                echo("<option value=$row2[0]");
                                 if ($row2[0]==$row[$nr]) {
-                                    echo("selected");
+                                    echo(" selected");
                                 }
-                                echo(">" . $row2[0] . "</option>");
+                                echo(">$row2[0] ($row2[1]) - ");
+                                $resultx = $dbApi->getRow("HotelRoomType", $row2[2]);
+                                while($rowx = mysqli_fetch_row($resultx)) {
+                                    $result4 = $dbApi->getRow("RoomType", $rowx[1]);
+                                    while($row4 = mysqli_fetch_row($result4)) {
+                                        echo "$row4[1] ";
+                                    }
+                                    $result3 = $dbApi->getRow("Hotel", $rowx[2]);
+                                    while($row3 = mysqli_fetch_row($result3)) {
+                                        echo "($row3[1])";
+                                    }
+                                    echo("</option>");
+                                }
                             }
                             print ("</select></td>");
                         }
+                        else if ($column[$nr]=="HotelRoomTypeID") {
+                            $foreigntable= substr($column[$nr], 0, -2);
+                            print ("<td><select name=$nr type='input'>");
+                            $result2 = $dbApi->getAllRows("$foreigntable");
+                            while($row2 = mysqli_fetch_row($result2)) {
+                                echo("<option value=$row2[0]");
+                                if ($row2[0]==$row[$nr]) {
+                                    echo(" selected");
+                                }
+                                echo(">$row2[0] - ");
+
+                                    $result4 = $dbApi->getRow("RoomType", $row2[1]);
+                                    while($row4 = mysqli_fetch_row($result4)) {
+                                        echo "$row4[1] ";
+                                    }
+                                    $result3 = $dbApi->getRow("Hotel", $row2[2]);
+                                    while($row3 = mysqli_fetch_row($result3)) {
+                                        echo "($row3[1])";
+                                    }
+                                    echo("</option>");
+
+                            }
+                            print ("</select></td>");
+                        }
+
                         else if ($column[$nr]=="ID") {
                             echo("<td>" . $row["$nr"] . "</td>");
                         }
@@ -224,7 +293,7 @@
                         $nr++;
                     }
                     echo ("<td><input type='submit' value='Update' name='updateknapp' id='updateknapp'>
-                            <input type='hidden' name='rowID' value='" . $row[0] . "'>
+                            <input type='hidden' name='rowID' value=$row[0]>
                           </td></form></tr></table><br>
                             
                             <script>function closepopup() {
