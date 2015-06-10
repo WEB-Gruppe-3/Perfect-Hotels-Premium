@@ -62,23 +62,37 @@ $hotels = $db->getHotels();
     <!-- Right div -->
     <div id="rightDiv">
 
-        <h2 id="hotelTitle"></h2>
-        <img id="hotelImage" width="200" height="200" src="">
-        <p id="hotelDescription"></p>
+        <div class="hotelPresentation">
+            <h2 id="hotelTitle">placeholder</h2>
+            <img id="hotelImage" width="600" height="300" src="">
+            <p id="hotelDescription"></p>
+        </div>
 
-        Antall ledige rom: <span id="numOfAvailableRooms"></span>
+        <div class="roomPresentation">
+            <h2 id="roomTypeTitle"></h2>
+
+            <table>
+                <tr>
+                    <td>
+                        <img id="roomTypeImage" width="200" height="200" src="">
+                    </td>
+                    <td><p id="roomTypeDescription">placeholder description</p></td>
+                </tr>
+            </table>
+
+            <h4 id="dateTitle"></h4>
 
 
-        <h3 id="roomTypeTitle"></h3>
 
-        <h4 id="dateTitle"></h4>
 
-        <img id="roomTypeImage" width="200" height="200" src="">
+        </div>
 
-        <p id="roomTypeDescription"></p>
+
+
+
 
         <br>
-
+        Antall ledige rom: <span id="numOfAvailableRooms"></span>
         <button type="button" onClick="showOrderOverlay()">Bestill!</button>
 
     </div>

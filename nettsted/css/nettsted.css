@@ -61,7 +61,7 @@ nav ul li a:hover {
 
 #mainContainer #rightDiv, #leftDiv {
 	height: 100%;
-	min-height: 750px;
+	min-height: 850px;
 	box-sizing: border-box;
 	padding: 20px;
 	color: black;
@@ -173,3 +173,36 @@ nav ul li a:hover {
 	position: relative;
 	top: 20px;
 }
+
+/* -------------------- Result divs -------------------- */
+.hotelPresentation {
+	width: 100%;
+	background-color: #1c94c4;
+	margin-top: -20px;
+}
+
+.hotelPresentation h2 {
+	text-align: center;
+	padding: 0;
+}
+
+.hotelPresentation img, p {
+	position: relative;
+	left: 12%;
+}
+
+.roomPresentation {
+	width: 100%;
+	background-color: #1c94c4;
+	margin: 0 auto;
+}
+
+
+
+
+
+
+
+
+
+
