@@ -3,13 +3,13 @@
 
 -- Image
 INSERT INTO Image(URL, Description) 
-VALUES('http://bildr.no/image/NFY0ZjZr.jpeg', 'Prinsippskisse av forsiden.');
+VALUES('img/hotels/hotel-01.jpg', 'Hotell 1.');
 
 INSERT INTO Image(URL, Description) 
-VALUES('http://bildr.no/image/RGNHOTcv.jpeg', 'Prinsippskisse av bestill siden.');
+VALUES('img/hotels/hotel-02.jpg', 'Hotell 2.');
 
 INSERT INTO Image(URL, Description) 
-VALUES('http://bildr.no/image/eElhQk0w.jpeg', 'Prinsippskisse av sjekk-inn siden.');
+VALUES('img/hotels/hotel-03.jpg', 'Hotell 3.');
 
 -- RoomType
 INSERT INTO RoomType(Name, NumOfBeds, Price, ImageID, Description)

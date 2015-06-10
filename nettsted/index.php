@@ -11,77 +11,88 @@ $hotels = $db->getHotels();
 <div id="content">
 
     <!-- Left div -->
-    <div id="innholdLeft">
+    <div id="leftDiv">
         <form id="searchForm">
 
-            <div id="test1">
+            <div class="searchDiv" id="hotelSelectDiv">
+                <div class="searchTitle">Velg hotell</div>
 
+                <select class="searchInput" id="hotelSelect" onChange='displayAndAnimateRoomTypeSelect(); populateRoomTypeList();'>
+                    <?php // Printing options
+                    foreach($hotels as $hotel) {
+                        $hotelName = $hotel->getName();
+                        $hotelId = $hotel->getId();
+                        print("<option value='$hotelId'>$hotelName</option>\n");
+                    }
+                    ?>
+                </select>
             </div>
 
-            <table>
-                <tr>
-                    <td>Velg hotell:</td>
-                    <td>
-                        <select id="hotelSelect" onChange='populateRoomTypeList()'>
-                            <?php // Printing options
-                            foreach($hotels as $hotel) {
-                                $hotelName = $hotel->getName();
-                                $hotelId = $hotel->getId();
-                                print("<option value='$hotelId'>$hotelName</option>\n");
-                            }
-                            ?>
-                        </select>
-                    </td>
-                </tr>
+            <div class="searchDiv searchDivExtraMargin" id="roomTypeSelectDiv">
+                <div class="searchTitle">Velg type rom</div>
 
-                <tr>
-                    <td>Velg rom type:</td>
-                    <td>
-                        <select id="roomTypeSelect" disabled>
-                            <!-- Populates via JS -->
-                            <option>----------</option>
-                        </select>
-                    </td>
-                </tr>
+                <select class="searchInput" id="roomTypeSelect" onChange='displayAndAnimateDateSelect();' disabled>
+                    <!-- Populates via JS -->
+                </select>
+            </div>
 
-                <tr>
-                    <td>Velg dato:</td>
-                    <td>
-                        <input id="startDateInput" type="text" size="9" readonly> -
-                        <input id="endDateInput" type="text" size="9" readonly>
-                    </td>
-                </tr>
+            <div class="searchDiv searchDivExtraMargin" id="dateSelectDiv">
+                <div class="searchTitle">Velg dato</div>
 
-                <tr>
-                    <td>
-                        <button type="button" onClick="search()">Søk</button>
-                        <button type="reset">Nullstill</button>
-                    </td>
-                </tr>
-            </table>
+                <table class="searchInput">
+                    <tr>
+                        <td>
+                            <input id="startDateInput" type="text" size="9" readonly> -
+                            <input id="endDateInput" type="text" size="9" readonly>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <br>
+            <br>
+
+            <div id="searchButton" class="searchDiv" onClick="search();">
+                <span id="searchButtonText">Søk</span>
+            </div>
         </form>
 
     </div>
 
     <!-- Right div -->
-    <div id="innholdRight">
+    <div id="rightDiv">
 
-        <p>Antall ledige rom: <span id="numOfAvailableRooms"></span></p>
+        <div class="hotelPresentation">
+            <h2 id="hotelTitle">placeholder</h2>
+            <img id="hotelImage" width="600" height="300" src="">
+            <p id="hotelDescription"></p>
+        </div>
 
-        <h2 id="hotelTitle"></h2>
-        <img id="hotelImage" width="200" height="200">
-        <p id="hotelDescription"></p>
+        <div class="roomPresentation">
+            <h2 id="roomTypeTitle"></h2>
 
-        <h3 id="roomTypeTitle"></h3>
+            <table>
+                <tr>
+                    <td>
+                        <img id="roomTypeImage" width="200" height="200" src="">
+                    </td>
+                    <td><p id="roomTypeDescription">placeholder description</p></td>
+                </tr>
+            </table>
 
-        <h4 id="dateTitle"></h4>
+            <h4 id="dateTitle"></h4>
 
-        <img id="roomTypeImage" width="200" height="200">
 
-        <p id="roomTypeDescription"></p>
+
+
+        </div>
+
+
+
+
 
         <br>
-
+        Antall ledige rom: <span id="numOfAvailableRooms"></span>
         <button type="button" onClick="showOrderOverlay()">Bestill!</button>
 
     </div>

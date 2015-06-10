@@ -20,7 +20,7 @@
     $input = array();
     $data = array();?>
 <div id="content">
-    <div id="innholdLeft"> 
+    <div id="rightDiv">
         <form method="post" action="" id="velgtabellknapp" name="velgtabellknapp">
         <h3>Velg tabell</h3>
         <select name='table_name' id='table_list'>
@@ -35,7 +35,7 @@
                 }
         ?>
         </select><input type='submit' value='OK' name='velgtabellknapp' id='velgtabellknapp'></form></div>
-    <div id="innholdRight">
+    <div id="leftDiv">
         <?php
             @$velgtabellknapp=$_POST ["velgtabellknapp"]; 
             if ($velgtabellknapp || $valgt_table) {
