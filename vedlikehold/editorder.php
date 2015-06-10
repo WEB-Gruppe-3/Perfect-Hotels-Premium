@@ -31,60 +31,78 @@ $dbApi = new Database();
                             $refid=$row[0];
                         }
                     }
+
+                    $bookid = array();
+                    $hotelroomtypeid = array();
                     $result = $dbApi->getALLRows("Booking");
                     while($row = mysqli_fetch_row($result)) {
-                        if ($row[5]==$refid AND $row[3]=="0"){
-                            $foo = array( "ID" => "$row[0]", "FromDate" => "$row[1]", "ToDate" => "$row[2]", "RoomID" => "$row[3]", "HotelRoomTypeID" => "$row[4]", "CustomerOrderID" => "$row[5]" );
-                        }
-                        else if ($row[5]==$refid AND $row[3]!="0"){
-                            print ("You have already checked in, Changes can not be made!");
+
+                        if ($row[5] == $refid ) {
+                            $bookid[] = $row[0];
+                            $hotelroomtypeid[] = $row[4];
                         }
                     }
-                    if ($foo) {
-                        $result = $dbApi->getRow("HotelRoomType", $foo[HotelRoomTypeID]);
-                        while($row = mysqli_fetch_row($result)) {
-                            $bar = array( "ID" => "$row[0]", "RoomTypeID" => "$row[1]", "HotelID" => "$row[2]" );
-                        }
-                        $result = $dbApi->getRow("Hotel", $bar[HotelID]);
-                        while($row = mysqli_fetch_row($result)) {
-                            $hotel=$row[1];
-                        }
-                        $result = $dbApi->getRow("RoomType", $bar[RoomTypeID]);
-                        while($row = mysqli_fetch_row($result)) {
-                            $roomtype=$row[1];
-                        }
-                        print ("<table><form method='post' action='' id='editform' name='editform'>");
-                        print ("<tr><td>Hotel</td>");
-                        print ("<td><select name=HotelID type='input'>");
-                        $result = $dbApi->getAllRows("Hotel");
-                        while($row = mysqli_fetch_row($result)) {
-                            if ($row[0]==$bar[HotelID]){
-                                echo("<option value='" . $row[0] . "' selected>" . $row[0] . " - " . $row[1] . " - " . $row[3] . "</option>");
+                    $bookings=count($bookid);
+                    $nr=0;
+                    for ($x=1;$x<=$bookings;$x++) {
+                        $result = $dbApi->getRow("Booking", $bookid[$nr]);
+                        while ($row = mysqli_fetch_row($result)) {
+                            if ($row[3] == "0") {
+                                $foo = array("ID" => "$row[0]", "FromDate" => "$row[1]", "ToDate" => "$row[2]", "RoomID" => "$row[3]", "HotelRoomTypeID" => "$row[4]", "CustomerOrderID" => "$row[5]");
+                                $result = $dbApi->getRow("HotelRoomType", $foo[HotelRoomTypeID]);
+                                while ($row = mysqli_fetch_row($result)) {
+                                    $bar = array("ID" => "$row[0]", "RoomTypeID" => "$row[1]", "HotelID" => "$row[2]");
+                                }
+                                $result = $dbApi->getRow("Hotel", $bar[HotelID]);
+                                while ($row = mysqli_fetch_row($result)) {
+                                    $hotel = $row[1];
+                                }
+                                $result = $dbApi->getRow("RoomType", $bar[RoomTypeID]);
+                                while ($row = mysqli_fetch_row($result)) {
+                                    $roomtype = $row[1];
+                                }
+                                print ("Bestilling nummer $x<br>");
+                                print ("<table><form method='post' action='' id='editform' name='editform'><input type='hidden' name='BookingID' value=$foo[ID]>");
+                                print ("<tr><td>Hotel</td>");
+                                print ("<td><select name=HotelID type='input'>");
+                                $result = $dbApi->getAllRows("Hotel");
+                                while ($row = mysqli_fetch_row($result)) {
+                                    if ($row[0] == $bar[HotelID]) {
+                                        echo("<option value=$row[0] selected>$row[0] - $row[1] - $row[3]</option>");
+                                    } else {
+                                        echo("<option value=$row[0]>$row[0] - $row[1] - $row[3]</option>");
+                                    }
+                                }
+                                print ("</select></td></tr>");
+                                print ("<tr><td>Romtype</td>");
+                                print ("<td><select name=RoomTypeID type='input'>");
+                                $result = $dbApi->getAllRows("RoomType");
+                                while ($row = mysqli_fetch_row($result)) {
+                                    if ($row[0] == $bar[RoomTypeID]) {
+                                        echo("<option value=$row[0] selected>$row[0] - $row[1] - $row[2] Senger - $row[5]</option>");
+                                    } else {
+                                        echo("<option value=$row[0]>$row[0] - $row[1] - $row[2] Senger - $row[5]</option>");
+                                    }
+                                }
+                                print ("</select></td></tr>");
+                                print ("<tr><td>From</td><td><input name='FromDate' value=$foo[FromDate]></td></tr>");
+                                print ("<tr><td>To</td><td><input name='ToDate' value=$foo[ToDate]></td><td><input type='submit' value='Update' name='checkbutton' id='checkbutton'></td></tr>");
+                                print ("</form></table><br>");
                             }
                             else {
-                                echo("<option value='" . $row[0] . "'>" . $row[0] . " - " . $row[1] . " - " . $row[3] . "</option>");
+                                $id = $row[3];
+                                $result = $dbApi->getRow("Room", $id);
+                                while ($row = mysqli_fetch_row($result)) {
+                                    print ("Bestilling nummer $x<br>");
+                                    echo("<p style='color:red'><strong>Du har allerede booket rom $row[1], du kan ikke endre din bestilling.</strong></p>");
+                                }
                             }
-
+                            $nr++;
                         }
-                        print ("</select></td></tr>");
-                        print ("<tr><td>Romtype</td>");
-                        print ("<td><select name=RoomTypeID type='input'>");
-                        $result = $dbApi->getAllRows("RoomType");
-                        while($row = mysqli_fetch_row($result)) {
-                            if ($row[0]==$bar[RoomTypeID]){
-                                echo("<option value='" . $row[0] . "' selected>" . $row[0] . " - " . $row[1] . " - " . $row[2] . " Bed - " . $row[5] . "</option>");
-                            }
-                            else {
-                                echo("<option value='" . $row[0] . "'>" . $row[0] . " - " . $row[1] . " - " . $row[2] . " Bed - " . $row[5] . "</option>");
-                            }
-                        }
-                        print ("</select></td></tr>");
-                        print ("<tr><td>From</td><td><input name='FromDate' value=$foo[FromDate]></td></tr>");
-                        print ("<tr><td>To</td><td><input name='ToDate' value=$foo[ToDate]></td><td><input type='submit' value='Update' name='checkbutton' id='checkbutton'></td></tr>");
-
-                        print ("</form></table><input type='hidden' name='BookingID' value=$foo[ID] form='editform'>");
                     }
-
+                    if ($bookings==0) {
+                        echo("<p style='color:Red'><strong>Du har ingen bestilling som ikke er sjekket inn allerede. </strong></p>");
+                    }
                 }
                 else {
                     echo("<p style='color:Red'><strong>Could not find your Code! </strong></p>");
@@ -97,16 +115,13 @@ $dbApi = new Database();
                 $newfromdate=$_POST ["FromDate"];
                 $newtodate=$_POST ["ToDate"];
                 $bookingid=$_POST ["BookingID"];
-
                 $result = $dbApi->getAllRows("HotelRoomType");
                 while($row = mysqli_fetch_row($result)) {
                     if ($row[1]==$roomtype AND $row[2]==$hotel) {
                         $hotelroomtype=$row[0];
                     }
                 }
-
                 $data = array( "ID" => "$bookingid", "FromDate" => "$newfromdate", "ToDate" => "$newtodate", "HotelRoomTypeID" => "$hotelroomtype" );
-
                 $rooms=0;
                 $result = $dbApi->getALLRows("Room");
                 while($row = mysqli_fetch_row($result)) {
@@ -114,10 +129,8 @@ $dbApi = new Database();
                         $rooms++;
                     }
                 }
-
                 $fromdate = array();
                 $todate = array();
-
                 $result = $dbApi->getALLRows("Booking");
                 while($row = mysqli_fetch_row($result)) {
                     if ($row[4]==$hotelroomtype){
@@ -144,10 +157,8 @@ $dbApi = new Database();
                 }
                 echo "Rooms: $rooms <br>";
                 echo "Occupied rooms; $occupiedrooms <br>";
-
-                $availablerooms = $rooms-$occupiedrooms;;
+                $availablerooms = $rooms-$occupiedrooms;
                 echo "Available Rooms: $availablerooms <br>";
-
                 if ($availablerooms >= 1 ) {
                     $result = $dbApi->updateRow("Booking", $bookingid, $data);
                     if($result) {
@@ -158,7 +169,7 @@ $dbApi = new Database();
                     }
                 }
                 else {
-                    echo ("<br><span style='color:red'><strong>Oh noes! there's no more rooms left, did you remember to check if there was available rooms?</strong></span>");
+                    echo ("<br><span style='color:red'><strong>Oh noes! There's no more available rooms left in this time period: $newfromdate - $newtodate </strong></span>");
                 }
             }
             ?>
