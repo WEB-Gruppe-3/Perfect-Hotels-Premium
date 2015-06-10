@@ -149,7 +149,7 @@ nav ul li a:hover {
 }
 
 #hotelSelectDiv {
-
+	display: none;
 }
 
 #roomTypeSelectDiv {
@@ -158,6 +158,13 @@ nav ul li a:hover {
 
 #dateSelectDiv {
 	display: none;
+}
+
+#dateSelectDiv #dateError {
+	position: relative;
+	left: 45px;
+	top: 30px;
+	color: red;
 }
 
 #searchButton {

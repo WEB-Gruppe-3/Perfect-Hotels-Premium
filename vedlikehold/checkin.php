@@ -19,7 +19,7 @@
             <?php
             @$checkinbutton=$_POST ["checkinbutton"];
             if ($checkinbutton) {
-                @$input = $_POST['search'];
+                @$input = $_POST['showSearchResults'];
                 $column='Reference';
                 $tablename='CustomerOrder';
                 $data[$column] = $input;

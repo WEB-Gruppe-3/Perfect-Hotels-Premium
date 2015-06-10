@@ -17,7 +17,7 @@ $hotels = $db->getHotels();
             <div class="searchDiv" id="hotelSelectDiv">
                 <div class="searchTitle">Velg hotell</div>
 
-                <select class="searchInput" id="hotelSelect" onChange='displayAndAnimateRoomTypeSelect(); populateRoomTypeList();'>
+                <select class="searchInput" id="hotelSelect" onChange='populateRoomTypeList();' required>
                     <?php // Printing options
                     foreach($hotels as $hotel) {
                         $hotelName = $hotel->getName();
@@ -31,7 +31,7 @@ $hotels = $db->getHotels();
             <div class="searchDiv searchDivExtraMargin" id="roomTypeSelectDiv">
                 <div class="searchTitle">Velg type rom</div>
 
-                <select class="searchInput" id="roomTypeSelect" onChange='displayAndAnimateDateSelect();' disabled>
+                <select class="searchInput" id="roomTypeSelect" disabled required>
                     <!-- Populates via JS -->
                 </select>
             </div>
@@ -42,11 +42,12 @@ $hotels = $db->getHotels();
                 <table class="searchInput">
                     <tr>
                         <td>
-                            <input id="startDateInput" type="text" size="9" readonly> -
-                            <input id="endDateInput" type="text" size="9" readonly>
+                            <input id="startDateInput" type="text" size="9" readonly required> -
+                            <input id="endDateInput" type="text" size="9" readonly required>
                         </td>
                     </tr>
                 </table>
+                <span id="dateError"></span>
             </div>
 
             <br>
@@ -64,7 +65,7 @@ $hotels = $db->getHotels();
 
         <div class="hotelPresentation">
             <h2 id="hotelTitle">placeholder</h2>
-            <img id="hotelImage" width="600" height="300" src="">
+            <img id="hotelImage" width="600" height="300" src="img/modal_window_bg.png">
             <p id="hotelDescription"></p>
         </div>
 
@@ -74,7 +75,7 @@ $hotels = $db->getHotels();
             <table>
                 <tr>
                     <td>
-                        <img id="roomTypeImage" width="200" height="200" src="">
+                        <img id="roomTypeImage" width="200" height="200" src="img/modal_window_bg.png">
                     </td>
                     <td><p id="roomTypeDescription">placeholder description</p></td>
                 </tr>
@@ -106,7 +107,7 @@ $hotels = $db->getHotels();
 
             <div id="modalPreOrderContent">
                 <h2>Bestilling</h2>
-                <span id="modalClose" onClick="closeOrderOverlay()">Lukk!</span> <br><br>
+                <span id="modalClose" onClick="closeModalOrderOverlay()">Lukk!</span> <br><br>
                 Hotell: <span id="modalHotelTitle"></span> <br>
                 Romtype: <span id="modalRoomTypeTitle"></span> <br>
                 Dato: <span id="modalDateTitle"></span> <br><br>
@@ -118,7 +119,7 @@ $hotels = $db->getHotels();
             </div>
 
             <div id="modalPostOrderContent">
-                <span id="modalClose" onClick="closeOrderOverlay()">Lukk!</span> <br><br>
+                <span id="modalClose" onClick="closeModalOrderOverlay()">Lukk!</span> <br><br>
                 Takk for din bestilling!
                 <br>
                 Ditt referansenummer er: <span id="modalRefNrTitle"></span>

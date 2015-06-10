@@ -33,12 +33,56 @@ if(isset($_GET["requestedData"])) {
                                     $_GET["endDate"]);
             break;
 
+        case "validateDates":
+            isDatesValid(stringToDate($_GET["startDateString"]), stringToDate($_GET["endDateString"]));
+            break;
+
         default:
             exit("@ Default in switch: Shit went bad!");
             break;
     }
 }
 /* -------------------- SCRIPT END -------------------- */
+
+/**
+ * Checks if the dates come after today, and that the end date is later than the start date.
+ *
+ * @param DateTime $startDate
+ * @param DateTime $endDate
+ * @return boolean Returns true if the dates are valid, false otherwise.
+ */
+function isDatesValid(DateTime $startDate, DateTime $endDate) {
+    $startTS = $startDate->getTimestamp();
+    $endTS = $endDate->getTimestamp();
+    $today = new DateTime();
+    $today->setTime(0, 0, 0);
+    $todayTS = $today->getTimestamp();
+
+    $json = array();
+    $json["isValid"] = true;
+
+    // Is start date before today?
+    if($startTS < $todayTS) {
+        // If so, thats bad.
+        $json["isValid"] = false;
+        $json["message"] = "Startdato må være >= dagens dato";
+    }
+
+    // Is end date before, or on same day as start date?
+    if($endTS <= $startTS) {
+        // If so, thats bad.
+        $json["isValid"] = false;
+        $json["message"] = "Sluttdatoen må være etter startdatoen!";
+    }
+
+    if($json["isValid"] === false) {
+        print(json_encode($json));
+    } else {
+        $json["isValid"] = true;
+        $json["message"] = "";
+        print(json_encode($json));
+    }
+}
 
 /**
  * Add a order and booking, then returns the reference number and success/failure in a JSON
@@ -49,7 +93,9 @@ function addNewOrderAndBooking(Database $dbApi, $email, $hotelID, $roomTypeID, $
 
     // Make DateTimes
     $dt_startDate = DateTime::createFromFormat("d.m.Y", $startDate);
+    $dt_startDate->setTime(0, 0, 0);
     $dt_endDate = DateTime::createFromFormat("d.m.Y", $endDate);
+    $dt_endDate->setTime(0, 0, 0);
 
     // $orderReference, $hotelID, $roomTypeID, DateTime $startDate, DateTime $endDate
     $isSuccess = $dbApi->addBooking($orderReference, $hotelID, $roomTypeID, $dt_startDate, $dt_endDate);
@@ -84,7 +130,7 @@ function printRoomTypes(Database $dbApi, $hotelID) {
 }
 
 /**
- * Prints search-data JSON
+ * Prints showSearchResults-data JSON
  */
 function getSearchJSON(Database $dbApi, $hotelID, $roomTypeID, DateTime $startDate, DateTime $endDate) {
     $searchData = array();
@@ -105,12 +151,12 @@ function getSearchJSON(Database $dbApi, $hotelID, $roomTypeID, DateTime $startDa
         $bookStartTs = $bookStartDate->getTimestamp();
         $bookEndTs = $bookEndDate->getTimestamp();
 
-        // Now, lets find out if this booking collides with the desired search.
+        // Now, lets find out if this booking collides with the desired showSearchResults.
         // To avoid collision, the following must be true:
-        // - The search startDate and endDate must be before the booked startDate,
-        //   OR the search startDate must be after the booked endDate.
+        // - The showSearchResults startDate and endDate must be before the booked startDate,
+        //   OR the showSearchResults startDate must be after the booked endDate.
 
-        // Check if the current booking collides with search parameters.
+        // Check if the current booking collides with showSearchResults parameters.
         if(false === (($searchStartTs < $bookStartTs && $searchEndTs < $bookStartTs) ||
             ($searchStartTs > $bookEndTs)) ) {
             // If so, increment the number of busy bookings.
@@ -122,7 +168,7 @@ function getSearchJSON(Database $dbApi, $hotelID, $roomTypeID, DateTime $startDa
     $rooms = $dbApi->getRooms($hotelID, $roomTypeID);
     $numOfRooms = count($rooms);
 
-    // Add the num of avail rooms to search data.
+    // Add the num of avail rooms to showSearchResults data.
     $numOfAvailableRooms = $numOfRooms - $numOfBusyBookings;
     $searchData["numRooms"] = $numOfAvailableRooms;
 
@@ -148,7 +194,9 @@ function stringToDate($dateString) { // Format: 03.06.2015
 
     // Now looks like this 03-06-2015 (DD-MM-YYYY)
     // Make a DateTime
-    $date = date_create_from_format("d-m-Y", $replace);
+    $date = DateTime::createFromFormat("d-m-Y", $replace);
+
+    $date->setTime(0, 0, 0);
 
     return $date;
 }
