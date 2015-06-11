@@ -51,15 +51,10 @@ $hotels = $db->getHotels();
             </div>
 
             <br>
-            <br>
 
-            <div id="searchButton" onClick="search();" >
-                <span id="searchButtonText">Søk</span>
-            </div>
+            <a class="smallButton" id="newSearchButton">Nytt søk</a>
+            <a class="smallButton" id="searchButton">Søk</a>
 
-            <div id="newSearchButton" onClick="newSearch();">
-                <span id="newSearchButtonText">Nytt søk</span>
-            </div>
         </form>
 
     </div>

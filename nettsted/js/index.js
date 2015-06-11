@@ -13,18 +13,32 @@ endDateInput = $("#endDateInput");
 
 // Content divs
 welcomeDiv = $("#welcome");
-resultDiv = $("#result");
-orderDiv = $("#order");
-orderCompleteDiv = $("#orderComplete");
+searchButton = $("#searchButton");
+newSearchButton = $("#newSearchButton");
 
+resultDiv = $("#result");
 freeRoomsBox = $("#freeRoomsBox");
 freeRoomsBoxNumberElement = $("#numOfAvailableRooms");
 
+orderDiv = $("#order");
 emailInput = $("#emailInput");
 
+orderCompleteDiv = $("#orderComplete");
 refNrElement = $("#refNr");
 
+
+
+/* -------------------- Script start -------------------- */
 $(function() {
+    // Setting onClick listeners
+    searchButton.click(function() {
+        search();
+    });
+
+    newSearchButton.click(function() {
+        newSearch();
+    });
+
     // Resetting showSearchResults form
     toggleSearchInputs(true);
 
@@ -47,8 +61,9 @@ $(function() {
     displayAndAnimateHotelSelect();
     displayAndAnimateRoomTypeSelect();
     displayAndAnimateDateSelect();
-
 });
+/* -------------------- Script end -------------------- */
+
 
 
 /* -------------------- Functions -------------------- */

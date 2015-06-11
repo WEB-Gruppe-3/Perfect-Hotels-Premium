@@ -1,3 +1,16 @@
+/*
+
+Colors
+
+Nav: #007aae
+Nav hover: #0095d4
+
+Searchdivs: #4d7e99
+Buttons: same as nav?
+button hover: same as nav
+
+*/
+
 /* GLOBAL */
 html, body {
 	box-sizing: border-box;
@@ -7,6 +20,8 @@ html, body {
 	font-family: "Open Sans", "Helvetica", sans-serif;
 	color: black;
 }
+
+/* ########################################## Main divs ########################################## */
 
 #mainContainer {
 	display: block;
@@ -30,10 +45,36 @@ html, body {
 	color: white;
 }
 
+#rightDiv, #leftDiv {
+	box-sizing: border-box;
+	float: left;
+	height: 100%;
+	min-height: 850px;
+	padding: 20px;
+	color: black;
+}
+
+#rightDiv {
+	width: 70%;
+	text-align: left;
+}
+
+#leftDiv {
+	width: 30%;
+	background-color: #ffefdf;
+	text-align: left;
+}
+
+#footer {
+	padding: 10px 10px 10px 10px;
+	color: white;
+}
+
+/* ########################################## Navigation ########################################## */
 nav ul li a {
 	color: #ffffff;
 	text-decoration: none;
-	background-color: #01486E;
+	background-color: #007aae;
 	display: block;
 	width: auto;
 	padding: 7px;
@@ -56,34 +97,7 @@ nav li {
 nav ul li a:hover {
 	color: #feffff;
 	text-decoration: none;
-	background-color:#017bbe;
-}
-
-#mainContainer #rightDiv, #leftDiv {
-	height: 100%;
-	min-height: 850px;
-	box-sizing: border-box;
-	padding: 20px;
-	color: black;
-	float: left;
-}
-
-#rightDiv {
-	width: 70%;
-	background-color: #ffffff;
-	text-align: left;
-	color: #000000;
-}
-
-#leftDiv {
-	width: 30%;
-	background-color: #ffefdf;
-	text-align: left;
-}
-
-#footer {
-	padding: 10px 10px 10px 10px;
-	color: white;
+	background-color:#0095d4;
 }
 
 .clearFix {
@@ -132,33 +146,6 @@ nav ul li a:hover {
 
 #dateSelectDiv input[type="text"] {
 	width: 70px;
-}
-
-#searchButton {
-	width: 100px;
-	height: 60px;
-	background-color: #78a3bb;
-	border-radius: 25px;
-	text-align: center;
-	float: right;
-}
-
-#searchButton #searchButtonText{
-	position: relative;
-	top: 20px;
-}
-
-#newSearchButton {
-	width: 100px;
-	height: 60px;
-	background-color: #78a3bb;
-	border-radius: 25px;
-	text-align: center;
-}
-
-#newSearchButton #newSearchButtonText {
-	position: relative;
-	top: 20px;
 }
 
 /* -------------------- Result divs -------------------- */
@@ -291,11 +278,57 @@ nav ul li a:hover {
 	font-size: 150%;
 }
 
+/* ########################################## Buttons ########################################## */
+.smallButton {
+	display:inline-block;
+	padding:9px 23px;
+	
+	color:#ffffff;
+	background-color:#4d7e99;
+	text-decoration:none;
+	border:1px solid #241d13;
+	
+	cursor: pointer;
 
+	/* Unselectable text */
+	-webkit-user-select: none; /* Chrome/Safari */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+}
+.smallButton:hover {
+	background-color: #0095d4;
+}
+.smallButton:active {
+	position:relative;
+	top:2px;
+	left:-1px;
+}
 
+.bigButton {
+	display:inline-block;
+	padding:9px 23px;
 
+	color:#ffffff;
+	background-color:#4d7e99;
+	text-decoration:none;
+	border:1px solid #241d13;
 
+	cursor: pointer;
 
+	/* Unselectable text */
+	-webkit-user-select: none; /* Chrome/Safari */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+}
+.bigButton:hover {
+	background-color: #0095d4;
+}
+.bigButton:active {
+	position:relative;
+	top:2px;
+	left:-1px;
+}
 
-
-
+#searchButton {
+	float: right;
+}
