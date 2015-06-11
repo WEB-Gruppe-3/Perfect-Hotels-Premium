@@ -178,13 +178,11 @@ nav ul li a:hover {
 
 	position: relative;
 	top: -15px;
-
-	border-radius: 25px;
 }
 
 #result #hotelDescription {
 	position: relative;
-	left: 100px;
+	left: 29px;
 	top: -22px;
 }
 
@@ -192,7 +190,6 @@ nav ul li a:hover {
 	width: 600px;
 	height: 180px;
 	background-color: #4d7e99;
-	border-radius: 25px;
 	padding: 10px 0 10px 0;
 
 	margin-left: auto;
@@ -200,7 +197,6 @@ nav ul li a:hover {
 }
 
 .roomPresentation #roomTypeImage {
-	border-radius: 25px;
 	position: relative;
 	left: 10px;
 	top: 4px;
@@ -219,20 +215,19 @@ nav ul li a:hover {
 }
 
 #freeRoomsBox {
-	width: 100px;
-	height: 100px;
+	width: 110px;
+	height: 110px;
 	background-color: #68b187;
-	border-radius: 25px;
-
+	border-radius: 10px;
 	position: relative;
 	left: 483px;
-	top: -260px;
+	top: -290px;
 }
 
 #freeRoomsBoxTitle {
 	position: relative;
-	top: -12px;
-	left: -13px;
+	top: -25px;
+	left: 4px;
 	font-size: 100%;
 }
 
@@ -242,8 +237,8 @@ nav ul li a:hover {
 
 .roomPresentation #numOfAvailableRooms {
 	position: relative;
-	top: 35px;
-	left: 38px;
+	top: 31px;
+	left: 41px;
 	font-size: 300%;
 }
 
@@ -317,6 +312,9 @@ nav ul li a:hover {
 
 #goToOrderButton {
 	float: right;
+	position: relative;
+	left: -30px;
+	top: -20px;
 }
 
 #orderButton {

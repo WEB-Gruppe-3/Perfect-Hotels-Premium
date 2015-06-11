@@ -339,7 +339,7 @@ function showSearchResults() {
     var hotelTitle = hotelSelect.find(":selected").text();
     $("#hotelTitle").text(hotelTitle);
     var roomTypeTitle = roomTypeSelect.find(":selected").text();
-    $("#roomTypeTitle").text(roomTypeTitle);
+    $("#roomTypeTitle").text("Rom: " + roomTypeTitle);
     $("#dateTitle").text(startDate + " - " + endDate);
 
     // Requesting a JSON from server containing:

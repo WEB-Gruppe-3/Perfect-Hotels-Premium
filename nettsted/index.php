@@ -86,7 +86,7 @@ $hotels = $db->getHotels();
 
                 <div id="freeRoomsBox">
                     <span id="numOfAvailableRooms">-</span>
-                    <span id="freeRoomsBoxTitle">Ledige rom</span>
+                    <span id="freeRoomsBoxTitle">Ledig</span>
                     <span id="dateTitle"></span> <!-- Hidden in CSS atm -->
                 </div>
 
