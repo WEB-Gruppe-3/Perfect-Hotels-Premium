@@ -295,10 +295,10 @@
                         }
 
                         else if ($column[$nr]=="FromDate") {
-                            print ("<td><input size='9' name=$nr id='startDateInput' type='text' value='$row[$nr]' readonly required></td>");
+                            print ("<td><input size='9' name=$nr id='editstartDateInput' type='text' value='$row[$nr]' readonly required></td>");
                         }
                         else if ($column[$nr]=="ToDate") {
-                            print ("<td><input size='9' name=$nr id='endDateInput' type='text' value='$row[$nr]' readonly required></td>");
+                            print ("<td><input size='9' name=$nr id='editendDateInput' type='text' value='$row[$nr]' readonly required></td>");
                         }
 
                         else {
@@ -326,6 +326,6 @@
     <script src="../nettsted/js/jquery-ui-1.11.4/jquery-ui.js"></script>
     <script src="../nettsted/js/jquery-ui-1.11.4/datepicker-no.js"></script>
     <link rel="stylesheet" href="../nettsted/js/jquery-ui-1.11.4/jquery-ui.css">
-    <script src="../nettsted/js/index.js"></script>
+    <script src="js/index.js"></script>
 
 <?php require_once("template/end.html") ?>

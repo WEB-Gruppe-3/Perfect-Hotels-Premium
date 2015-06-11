@@ -7,7 +7,7 @@ $dbApi = new Database();
     <!-- Start of content -->
     <div id="content">
         <div id="innholdLeft">
-            <h3>Enter your Reference Code:</h3>
+            <h3>Vennligst fyll inn referanse kode:</h3>
             <form method="post" action="" id="checkinform" name="checkinform">
                 <input name="search" type="search">
                 <input type='submit' value='OK' name='checkinbutton' id='checkinbutton'>
@@ -85,8 +85,8 @@ $dbApi = new Database();
                                     }
                                 }
                                 print ("</select></td></tr>");
-                                print ("<tr><td>From</td><td><input size='9' id='startDateInput' type='text' name='FromDate' value=$foo[FromDate] readonly required></td></tr>");
-                                print ("<tr><td>To</td><td><input size='9' id='endDateInput' type='text' name='ToDate' value=$foo[ToDate] readonly required></td><td><input type='submit' value='Update' name='checkbutton' id='checkbutton'></td></tr>");
+                                print ("<tr><td>From</td><td><input size='9' id='startDateInput$x' type='text' name='FromDate' value=$foo[FromDate] readonly required></td></tr>");
+                                print ("<tr><td>To</td><td><input size='9' id='endDateInput$x' type='text' name='ToDate' value=$foo[ToDate] readonly required></td><td><input type='submit' value='Update' name='checkbutton' id='checkbutton'></td></tr>");
                                 print ("</form></table><br>");
                             }
 
@@ -180,6 +180,6 @@ $dbApi = new Database();
     <script src="../nettsted/js/jquery-ui-1.11.4/jquery-ui.js"></script>
     <script src="../nettsted/js/jquery-ui-1.11.4/datepicker-no.js"></script>
     <link rel="stylesheet" href="../nettsted/js/jquery-ui-1.11.4/jquery-ui.css">
-    <script src="../nettsted/js/index.js"></script>
+    <script src="js/index.js"></script>
     <!-- End of content -->
 <?php require_once("template/end.html") ?>
