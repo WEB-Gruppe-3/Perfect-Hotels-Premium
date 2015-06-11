@@ -6,7 +6,7 @@
 ?>
     <!-- Start of content -->
     <div id="content">
-        <div id="rightDiv">
+        <div id="innholdLeft">
             <h3>Vennligst fyll inn referanse kode:</h3>
             <form method="post" action="" id="checkinform" name="checkinform">
                 <input name="search" type="search">
@@ -15,11 +15,11 @@
             <br>
         </div>
 
-        <div id="leftDiv">
+        <div id="innholdRight">
             <?php
             @$checkinbutton=$_POST ["checkinbutton"];
             if ($checkinbutton) {
-                @$input = $_POST['showSearchResults'];
+                @$input = $_POST['search'];
                 $column='Reference';
                 $tablename='CustomerOrder';
                 $data[$column] = $input;
