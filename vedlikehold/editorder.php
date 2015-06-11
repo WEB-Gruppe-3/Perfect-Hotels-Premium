@@ -85,10 +85,11 @@ $dbApi = new Database();
                                     }
                                 }
                                 print ("</select></td></tr>");
-                                print ("<tr><td>From</td><td><input name='FromDate' value=$foo[FromDate]></td></tr>");
-                                print ("<tr><td>To</td><td><input name='ToDate' value=$foo[ToDate]></td><td><input type='submit' value='Update' name='checkbutton' id='checkbutton'></td></tr>");
+                                print ("<tr><td>From</td><td><input size='9' id='startDateInput' type='text' name='FromDate' value=$foo[FromDate] readonly required></td></tr>");
+                                print ("<tr><td>To</td><td><input size='9' id='endDateInput' type='text' name='ToDate' value=$foo[ToDate] readonly required></td><td><input type='submit' value='Update' name='checkbutton' id='checkbutton'></td></tr>");
                                 print ("</form></table><br>");
                             }
+
                             else {
                                 $id = $row[3];
                                 $result = $dbApi->getRow("Room", $id);
@@ -175,5 +176,10 @@ $dbApi = new Database();
             ?>
         </div>
     </div>
+    <script src="../nettsted/js/jquery-1.11.3.js"></script>
+    <script src="../nettsted/js/jquery-ui-1.11.4/jquery-ui.js"></script>
+    <script src="../nettsted/js/jquery-ui-1.11.4/datepicker-no.js"></script>
+    <link rel="stylesheet" href="../nettsted/js/jquery-ui-1.11.4/jquery-ui.css">
+    <script src="../nettsted/js/index.js"></script>
     <!-- End of content -->
 <?php require_once("template/end.html") ?>
