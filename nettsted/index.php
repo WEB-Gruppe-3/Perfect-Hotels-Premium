@@ -42,8 +42,8 @@ $hotels = $db->getHotels();
                 <table class="searchInput">
                     <tr>
                         <td>
-                            <input id="startDateInput" type="text" size="9" readonly required> -
-                            <input id="endDateInput" type="text" size="9" readonly required>
+                            <input id="startDateInput" type="text" readonly required> &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
+                            <input id="endDateInput" type="text" readonly required>
                         </td>
                     </tr>
                 </table>
@@ -53,7 +53,7 @@ $hotels = $db->getHotels();
             <br>
             <br>
 
-            <div id="searchButton" class="searchDiv" onClick="search();">
+            <div id="searchButton" onClick="search();">
                 <span id="searchButtonText">Søk</span>
             </div>
         </form>
@@ -63,72 +63,79 @@ $hotels = $db->getHotels();
     <!-- Right div -->
     <div id="rightDiv">
 
-        <div class="hotelPresentation">
-            <h2 id="hotelTitle">placeholder</h2>
-            <img id="hotelImage" width="600" height="300" src="img/modal_window_bg.png">
-            <p id="hotelDescription"></p>
+        <!-- Show before search -->
+        <div class="resultDiv" id="welcome">
+            <h2>Velkommen til Perfect Hotels Premium</h2>
+
+            <p>For å finne et hotell, vennligst benytt menyen til venstre.</p>
         </div>
 
-        <div class="roomPresentation">
-            <h2 id="roomTypeTitle"></h2>
+        <!-- Show when search complete -->
+        <div class="resultDiv" id="result">
 
-            <table>
-                <tr>
-                    <td>
-                        <img id="roomTypeImage" width="200" height="200" src="img/modal_window_bg.png">
-                    </td>
-                    <td><p id="roomTypeDescription">placeholder description</p></td>
-                </tr>
-            </table>
+            <div class="hotelPresentation">
+                <h2 id="hotelTitle">HotelTitle</h2>
+                <img id="hotelImage" width="600" height="300" src="img/modal_window_bg.png">
+                <p id="hotelDescription">Hotell beskrivelse...</p>
+            </div>
 
-            <h4 id="dateTitle"></h4>
+            <div class="roomPresentation">
 
+                <img id="roomTypeImage" width="170" height="170" src="img/modal_window_bg.png">
 
+                <h2 id="roomTypeTitle">RoomTitle</h2>
+                <p id="roomTypeDescription">RoomType beskrivelse...</p>
 
+                <div id="freeRoomsBox">
+                    <span id="numOfAvailableRooms">X</span>
+                    <span id="freeRoomsBoxTitle">Ledige rom</span>
+                    <span id="dateTitle"></span> <!-- Hidden in CSS atm -->
+                </div>
 
+            </div>
+
+            <br>
+            <div id="orderButton" onClick="onClickBestill()"><span id="orderButtonText">Gå til bestilling</span></div>
         </div>
 
+        <!-- Show when ordering -->
+        <div class="resultDiv" id="order">
+            <h2>Bestilling</h2>
+            <p>Du er i ferd med å booke et hotellrom.</p>
+            <br>
 
+            <div id="orderDetails">
+                <table>
+                    <tr>
+                        <td>Hotell:</td><td><span id="orderHotelTitle"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Type rom:</td><td><span id="orderRoomTypeTitle"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Tidsperiode:</td><td><span id="orderDateTitle"></span></td>
+                    </tr>
+                </table>
+            </div>
 
+            <form>
+                Epost: <input type="text" id="emailInput">
+                <button type="button" onClick="doOrder()">Bestill!</button>
+            </form>
+        </div>
 
-
-        <br>
-        Antall ledige rom: <span id="numOfAvailableRooms"></span>
-        <button type="button" onClick="showOrderOverlay()">Bestill!</button>
+        <!-- Show when order is complete -->
+        <div class="resultDiv" id="orderComplete">
+            <h2>Takk for din bestilling!</h2>
+            Ditt referansenummer er: <span id="refNr"></span>
+            <br>
+            <a href="../vedlikehold/checkin.php">Sjekk inn her!</a>
+        </div>
 
     </div>
 
     <!-- Clear fix -->
     <div class="clearFix"></div>
-
-    <!-- Modal window -->
-    <div class="modalWindow">
-        <div class="modalWindowContent">
-
-            <div id="modalPreOrderContent">
-                <h2>Bestilling</h2>
-                <span id="modalClose" onClick="closeModalOrderOverlay()">Lukk!</span> <br><br>
-                Hotell: <span id="modalHotelTitle"></span> <br>
-                Romtype: <span id="modalRoomTypeTitle"></span> <br>
-                Dato: <span id="modalDateTitle"></span> <br><br>
-
-                <form>
-                    Epost: <input type="text" id="emailInput">
-                    <button type="button" onClick="doOrder()">Bestill!</button>
-                </form>
-            </div>
-
-            <div id="modalPostOrderContent">
-                <span id="modalClose" onClick="closeModalOrderOverlay()">Lukk!</span> <br><br>
-                Takk for din bestilling!
-                <br>
-                Ditt referansenummer er: <span id="modalRefNrTitle"></span>
-                <br>
-                <a href="../vedlikehold/checkin.php">Sjekk inn her!</a>
-            </div>
-
-        </div>
-    </div>
 
 </div> <!-- End of content -->
 

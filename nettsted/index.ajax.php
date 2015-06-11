@@ -170,7 +170,12 @@ function getSearchJSON(Database $dbApi, $hotelID, $roomTypeID, DateTime $startDa
 
     // Add the num of avail rooms to showSearchResults data.
     $numOfAvailableRooms = $numOfRooms - $numOfBusyBookings;
-    $searchData["numRooms"] = $numOfAvailableRooms;
+
+    if($numOfAvailableRooms < 0) {
+        $searchData["numRooms"] = 0;
+    } else {
+        $searchData["numRooms"] = $numOfAvailableRooms;
+    }
 
     /** Hotel image url and description */
     $hotel = $dbApi->getHotel($hotelID);

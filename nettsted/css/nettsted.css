@@ -15,10 +15,10 @@ html, body {
 }
 
 #header {
-	background: url(../img/top.jpg) no-repeat 0 0;
+	background: url(../img/top_cropped.jpg) no-repeat 0 0;
 	margin: 0;
 	padding: 0;
-	height: 320px;
+	height: 254px;
 	position: relative;
 }
 
@@ -124,6 +124,8 @@ nav ul li a:hover {
 	border-radius: 25px;
 	background-color: #4d7e99;
 	color: white;
+
+	display: none;
 }
 
 .searchDivExtraMargin {
@@ -148,23 +150,15 @@ nav ul li a:hover {
 	width: 200px;
 }
 
-#hotelSelectDiv {
-	display: none;
-}
-
-#roomTypeSelectDiv {
-	display: none;
-}
-
-#dateSelectDiv {
-	display: none;
-}
-
 #dateSelectDiv #dateError {
 	position: relative;
 	left: 45px;
 	top: 30px;
 	color: red;
+}
+
+#dateSelectDiv input[type="text"] {
+	width: 70px;
 }
 
 #searchButton {
@@ -182,28 +176,135 @@ nav ul li a:hover {
 }
 
 /* -------------------- Result divs -------------------- */
-.hotelPresentation {
-	width: 100%;
-	background-color: #1c94c4;
-	margin-top: -20px;
-}
+.resultDiv {
+	width: 800px;
+	min-width: 800px;
+	height: 780px;
+	min-height: 780px;
 
-.hotelPresentation h2 {
-	text-align: center;
-	padding: 0;
-}
-
-.hotelPresentation img, p {
+	/* Fix for div dropping 20px when it has a <h2> in it */
 	position: relative;
-	left: 12%;
+	top: -20px;
+}
+
+#welcome {
+	text-align: center;
+}
+
+#result {
+	display: none;
+}
+
+#result #hotelTitle {
+	text-align: center;
+}
+
+#result #hotelImage {
+	display: block;
+	margin: auto;
+
+	position: relative;
+	top: -15px;
+
+	border-radius: 25px;
+}
+
+#result #hotelDescription {
+	position: relative;
+	left: 100px;
+	top: -22px;
 }
 
 .roomPresentation {
-	width: 100%;
-	background-color: #1c94c4;
-	margin: 0 auto;
+	width: 600px;
+	height: 180px;
+	background-color: #4d7e99;
+	border-radius: 25px;
+	padding: 10px 0 10px 0;
+
+	margin-left: auto;
+	margin-right: auto;
 }
 
+.roomPresentation #roomTypeImage {
+	border-radius: 25px;
+	position: relative;
+	left: 10px;
+	top: 4px;
+}
+
+.roomPresentation #roomTypeTitle {
+	position: relative;
+	top: -190px;
+	left: 190px;
+}
+
+.roomPresentation #roomTypeDescription {
+	position: relative;
+	top: -190px;
+	left: 190px;
+}
+
+#freeRoomsBox {
+	width: 100px;
+	height: 100px;
+	background-color: #68b187;
+	border-radius: 25px;
+
+	position: relative;
+	left: 483px;
+	top: -260px;
+}
+
+#freeRoomsBoxTitle {
+	position: relative;
+	top: -12px;
+	left: -13px;
+	font-size: 100%;
+}
+
+.roomPresentation #dateTitle {
+	display: none;
+}
+
+.roomPresentation #numOfAvailableRooms {
+	position: relative;
+	top: 35px;
+	left: 38px;
+	font-size: 300%;
+}
+
+#orderButton {
+	width: 200px;
+	height: 100px;
+	background-color: #78a3bb;
+	border-radius: 25px;
+	text-align: center;
+
+	position: relative;
+	left: 500px;
+	top: 30px;
+}
+
+#orderButton #orderButtonText{
+	position: relative;
+	top: 35px;
+	font-size: 170%;
+}
+
+#order {
+	background-color: #998461;
+	display: none;
+}
+
+#orderComplete {
+	display: none;
+}
+
+#orderComplete #refNr {
+	background-color: #017bbe;
+	font-size: 150%;
+}
 
 
 

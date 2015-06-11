@@ -234,6 +234,12 @@ function search() {
  * Show search results
  */
 function showSearchResults() {
+    // Show the result div
+    var resultDiv = $("#result");
+    var welcomeDiv = $("#welcome");
+    resultDiv.css("display", "initial");
+    welcomeDiv.css("display", "none");
+
     // Getting the selected values
     var hotelID = hotelSelect.val();
     var roomTypeID = roomTypeSelect.val();
@@ -295,58 +301,51 @@ function showSearchResults() {
             hotelDescElement.html(data.hotelDescription);
             roomTypeImageElement.attr("src", data.roomTypeImageURL);
             roomTypeDescElement.html(data.roomTypeDescription);
-
-            console.log(data);
         }
     });
 }
 
 /**
- * OnClick: Bestill-button
+ * OnClick: "Gå til bestilling"
  */
-function showOrderOverlay() {
-    modalWindow.css("visibility", "visible");
+function onClickBestill() {
+    var resultDiv = $("#result");
+    var orderDiv = $("#order");
 
-    modalPreOrderContent.css("visibility", "visible");
-    modalPostOrderContent.css("visibility", "hidden");
+    // Empty the email field
+    $("#emailInput").empty();
 
-    // Clear email input if there was anything left from previous showing of the window.
-    emailInput.val("");
+    // Enable the order div, and set order details
+    orderDiv.css("display", "initial");
 
-    // Setting showSearchResults values
-    modalHotelTitle.html(hotelSelect.find("option:selected").html());
-    modalRoomTypeTitle.html(roomTypeSelect.find("option:selected").html());
-    modalDateTitle.html(startDateInput.val() + " - " + endDateInput.val());
+    $("#orderHotelTitle").html(hotelSelect.find("option:selected").html());
+    $("#orderRoomTypeTitle").html(roomTypeSelect.find("option:selected").html());
+    $("#orderDateTitle").html(startDateInput.val() + " - " + endDateInput.val());
+
+    // Hide the search result div
+    resultDiv.css("display", "none");
 }
 
 /**
- * OnClick: Modal close
- */
-function closeModalOrderOverlay() {
-    modalPostOrderContent.css("visibility", "hidden");
-    modalPreOrderContent.css("visibility", "hidden");
-    modalWindow.css("visibility", "hidden");
-}
-
-/**
- *
+ * Shows the order complete div
  */
 function showModalPostOrderContent(isSuccess, refNr) {
     if(! isSuccess) {
-        alert("Bestillingen gikk til helvette!");
+        alert("Bestillingen feilet!");
     }
 
-    modalPreOrderContent.css("visibility", "hidden");
-    modalPostOrderContent.css("visibility", "visible");
+    // Showing the order complete div and setting refnr
+    $("#orderComplete").css("display", "initial");
+    $("#refNr").html(refNr);
 
-    // Set ref nr
-    modalRefNrTitle.html(refNr);
+    // Hide the order div
+    $("#order").css("display", "none");
 }
 
 /**
- * OnClick: Order overlay book rooms
+ * OnClick: Bestill
  *
- * Adds a booking to the database, then informs the user of success or failiure!
+ * Adds a booking to the database, then informs the user of success or failure!
  */
 function doOrder() {
     // Getting the selected values
