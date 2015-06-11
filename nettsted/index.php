@@ -47,7 +47,6 @@ $hotels = $db->getHotels();
                         </td>
                     </tr>
                 </table>
-                <span id="dateError"></span>
             </div>
 
             <br>
@@ -129,6 +128,12 @@ $hotels = $db->getHotels();
             Din booking-referanse er: <span id="refNr"></span>
             <br>
             <p>Ta godt vare på referansen, da denne brukes ved innsjekking.</p>
+        </div>
+
+        <!-- Error message div -->
+        <div id="searchDateError">
+            <div id="searchDateErrorTriangle"></div>
+            <div id="searchDateErrorMessage"></div>
         </div>
 
     </div>

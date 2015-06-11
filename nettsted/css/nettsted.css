@@ -67,7 +67,7 @@ html, body {
 
 #footer {
 	padding: 10px 10px 10px 10px;
-	color: white;
+	background-color: #007aae;
 }
 
 /* ########################################## Navigation ########################################## */
@@ -161,7 +161,7 @@ nav ul li a:hover {
 }
 
 #welcome {
-	text-align: center;
+	/*text-align: left;*/
 }
 
 #result {
@@ -331,4 +331,46 @@ nav ul li a:hover {
 
 #searchButton {
 	float: right;
+}
+
+/* ########################################## Error warning div ##########################################*/
+/*
+<div id="searchError">
+        <div id="searchErrorTriangle"></div>
+        <div id="searchErrorMessage"></div>
+    </div>
+*/
+
+#searchDateError {
+	display: none;
+	position: relative;
+	top: -627px;
+	left: -10px;
+
+	opacity: 0.68;
+}
+
+#searchDateErrorTriangle {
+	width: 0;
+	height: 0;
+	border-top: 30px solid transparent;
+	border-right: 50px solid red;
+	border-bottom: 30px solid transparent;
+
+	position: relative;
+	top: 80px;
+	left: -45px;
+}
+
+#searchDateErrorMessage {
+	vertical-align: middle;
+	text-align: center;
+	box-sizing: border-box;
+	width: 300px;
+	height: 100px;
+	background-color: red;
+	border-radius: 12px;
+	padding: 10px;
+
+	word-wrap: break-word;
 }

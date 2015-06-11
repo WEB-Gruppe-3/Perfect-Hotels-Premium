@@ -26,6 +26,8 @@ emailInput = $("#emailInput");
 orderCompleteDiv = $("#orderComplete");
 refNrElement = $("#refNr");
 
+searchDateErrorMessage = $("#searchDateErrorMessage");
+searchDateError = $("#searchDateError");
 
 
 /* -------------------- Script start -------------------- */
@@ -171,6 +173,12 @@ function isInputValid(hotelSelectVal, roomTypeSelectVal, dateStartVal, dateEndVa
     }
 
     // DATE VALIDATION
+    // Check if they are empty
+    if(dateStartVal === "" || dateEndVal === "") {
+        searchDateError.css("display", "inherit");
+        searchDateErrorMessage.html("Both date fields must be filled!");
+    }
+
     // Both dates should follow the pattern: "00.00.0000" (/\d\d.\d\d.\d\d\d\d/)
     var reg = /\d\d.\d\d.\d\d\d\d/;
     var isStartMatch = dateStartVal.match(reg);
@@ -282,7 +290,8 @@ function search() {
         // Upon completion, return the validation array.
         success: function( validation ) {
             if(validation.isValid === true) {
-                $("#dateError").html("");
+                searchDateError.css("display", "none");
+
                 startDateInput.css("background-color", "limegreen");
                 endDateInput.css("background-color", "limegreen");
 
@@ -291,7 +300,8 @@ function search() {
 
                 showSearchResults();
             } else {
-                $("#dateError").html(validation.message);
+                searchDateError.css("display", "inherit");
+                searchDateErrorMessage.html(validation.message);
                 startDateInput.css("background-color", "red");
                 endDateInput.css("background-color", "red");
             }
