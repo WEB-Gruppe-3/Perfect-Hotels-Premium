@@ -42,7 +42,7 @@ $hotels = $db->getHotels();
                 <table class="searchInput">
                     <tr>
                         <td>
-                            <input id="startDateInput" type="text" readonly required> &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
+                            <input id="startDateInput" type="text" readonly required> &nbsp; - &nbsp;
                             <input id="endDateInput" type="text" readonly required>
                         </td>
                     </tr>
