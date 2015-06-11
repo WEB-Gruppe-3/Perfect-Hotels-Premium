@@ -11,22 +11,24 @@ roomTypeSelect = $("#roomTypeSelect");
 startDateInput = $("#startDateInput");
 endDateInput = $("#endDateInput");
 
-// Modal window elements
-modalWindow = $(".modalWindow");
-modalHotelTitle = $("#modalHotelTitle");
-modalRoomTypeTitle = $("#modalRoomTypeTitle");
-modalDateTitle = $("#modalDateTitle");
+// Content divs
+welcomeDiv = $("#welcome");
+resultDiv = $("#result");
+orderDiv = $("#order");
+orderCompleteDiv = $("#orderComplete");
+
+freeRoomsBox = $("#freeRoomsBox");
+freeRoomsBoxNumberElement = $("#numOfAvailableRooms");
+
 emailInput = $("#emailInput");
 
-modalPreOrderContent = $("#modalPreOrderContent");
-modalPostOrderContent = $("#modalPostOrderContent");
-modalRefNrTitle = $("#modalRefNrTitle");
+refNrElement = $("#refNr");
 
 $(function() {
     // Resetting showSearchResults form
-    hotelSelect.find("option:first").attr("selected", "selected");
-    startDateInput.val("");
-    endDateInput.val("");
+    toggleSearchInputs(true);
+
+    resetInputsAndElements();
 
     populateRoomTypeList();
 
@@ -72,6 +74,55 @@ function displayAndAnimateRoomTypeSelect() {
 function displayAndAnimateDateSelect() {
     var dateSelectDiv = $("#dateSelectDiv");
     dateSelectDiv.slideDown(800);
+}
+
+function toggleSearchInputs(doEnable) {
+    if(doEnable) {
+        hotelSelect.removeAttr("disabled");
+        roomTypeSelect.removeAttr("disabled");
+        startDateInput.removeAttr("disabled");
+        endDateInput.removeAttr("disabled");
+    } else {
+        hotelSelect.attr("disabled", "disabled");
+        roomTypeSelect.attr("disabled", "disabled");
+        startDateInput.attr("disabled", "disabled");
+        endDateInput.attr("disabled", "disabled");
+    }
+}
+
+function resetInputsAndElements() {
+    hotelSelect.find("option:first").attr("selected", "selected");
+    startDateInput.val("");
+    endDateInput.val("");
+
+    hotelSelect.css("background-color", "");
+    roomTypeSelect.css("background-color", "");
+    startDateInput.css("background-color", "");
+    endDateInput.css("background-color", "");
+
+    freeRoomsBox.css("background-color", "rgb(104, 177, 135)");
+
+    emailInput.val("");
+
+    refNrElement.html("");
+
+    freeRoomsBoxNumberElement.html("-");
+}
+
+/**
+ * New search
+ */
+function newSearch() {
+    resetInputsAndElements();
+
+    resultDiv.css("display", "none");
+    orderDiv.css("display", "none");
+    orderCompleteDiv.css("display", "none");
+
+    welcomeDiv.css("display", "inherit");
+
+    toggleSearchInputs(true);
+
 }
 
 /**
@@ -217,17 +268,20 @@ function search() {
         success: function( validation ) {
             if(validation.isValid === true) {
                 $("#dateError").html("");
-                $("#startDateInput").css("background-color", "limegreen");
-                $("#endDateInput").css("background-color", "limegreen");
+                startDateInput.css("background-color", "limegreen");
+                endDateInput.css("background-color", "limegreen");
+
+                // Disable inputs so user can't change them during the ordering process
+                toggleSearchInputs(false);
+
                 showSearchResults();
             } else {
                 $("#dateError").html(validation.message);
-                $("#startDateInput").css("background-color", "red");
-                $("#endDateInput").css("background-color", "red");
+                startDateInput.css("background-color", "red");
+                endDateInput.css("background-color", "red");
             }
         }
     });
-
 }
 
 /**
@@ -301,6 +355,11 @@ function showSearchResults() {
             hotelDescElement.html(data.hotelDescription);
             roomTypeImageElement.attr("src", data.roomTypeImageURL);
             roomTypeDescElement.html(data.roomTypeDescription);
+
+            // If the number of avail rooms are < 1, set bg color to red
+            if(data.numRooms < 1) {
+                freeRoomsBox.css("background-color", "rgb(245, 24, 24)");
+            }
         }
     });
 }
@@ -309,11 +368,32 @@ function showSearchResults() {
  * OnClick: "Gå til bestilling"
  */
 function onClickBestill() {
+    // First, check if there are available rooms for ordering. If not, alert the user.
+    var numOfAvailRooms = parseInt($("#numOfAvailableRooms").html());
+    if(numOfAvailRooms < 1) {
+        // No available rooms, we cannot proceed.
+
+        // Animate the num of rooms box to indicate error
+        var freeRoomsBox = $("#freeRoomsBox");
+
+        freeRoomsBox.animate({
+            backgroundColor: "rgb(255, 255, 255)"
+        }, 200).animate({
+            backgroundColor: "rgb(245, 24, 24)"
+        }, 200).animate({
+            backgroundColor: "rgb(255, 255, 255)"
+        }, 200).animate({
+            backgroundColor: "rgb(245, 24, 24)"
+        }, 200);
+
+        return;
+    }
+
     var resultDiv = $("#result");
     var orderDiv = $("#order");
 
     // Empty the email field
-    $("#emailInput").empty();
+    emailInput.empty();
 
     // Enable the order div, and set order details
     orderDiv.css("display", "initial");
@@ -335,11 +415,11 @@ function showModalPostOrderContent(isSuccess, refNr) {
     }
 
     // Showing the order complete div and setting refnr
-    $("#orderComplete").css("display", "initial");
-    $("#refNr").html(refNr);
+    orderCompleteDiv.css("display", "initial");
+    refNrElement.html(refNr);
 
     // Hide the order div
-    $("#order").css("display", "none");
+    orderDiv.css("display", "none");
 }
 
 /**

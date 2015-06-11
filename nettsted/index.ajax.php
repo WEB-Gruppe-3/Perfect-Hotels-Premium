@@ -97,7 +97,6 @@ function addNewOrderAndBooking(Database $dbApi, $email, $hotelID, $roomTypeID, $
     $dt_endDate = DateTime::createFromFormat("d.m.Y", $endDate);
     $dt_endDate->setTime(0, 0, 0);
 
-    // $orderReference, $hotelID, $roomTypeID, DateTime $startDate, DateTime $endDate
     $isSuccess = $dbApi->addBooking($orderReference, $hotelID, $roomTypeID, $dt_startDate, $dt_endDate);
 
     $json = array();

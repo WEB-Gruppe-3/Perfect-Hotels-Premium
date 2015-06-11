@@ -27,8 +27,13 @@ class Database {
      * @return boolean Returns true on success, false otherwise.
      */
     public function addBooking($orderReference, $hotelID, $roomTypeID, DateTime $startDate, DateTime $endDate) {
-        // First, add new order so we can get the orderID from it.
-        $this->addCustomerOrder($orderReference);
+        // Check if the reference already exists
+        if($this->getCustomerOrderID($orderReference) !== -1) {
+            // If so, do nothing.
+        } else {
+            // If not, we need to make a new one before we proceed.
+            $this->addCustomerOrder($orderReference);
+        }
 
         // Now, lets add the booking entry.
         // To do that, we need to know its HotelRoomTypeID & CustomerOrderID.
@@ -59,12 +64,19 @@ class Database {
 
     /**
      * Get a CustomerOrder ID from a reference
+     * @param $reference String The reference of the order.
+     * @return Integer Returns the ID on success, or -1 on failure.
      */
     public function getCustomerOrderID($reference) {
         $query ="SELECT ID FROM CustomerOrder WHERE Reference = '$reference'";
         $result = mysqli_query($this->dbConnector->getDBLink(), $query);
-        $row = mysqli_fetch_assoc($result);
-        return $row["ID"];
+
+        if($result->num_rows === 0) {
+            return -1;
+        } else {
+            $row = mysqli_fetch_assoc($result);
+            return $row["ID"];
+        }
     }
 
     /**
@@ -76,8 +88,6 @@ class Database {
         $row = mysqli_fetch_assoc($result);
         return $row["ID"];
     }
-
-
 
     /**
      * Get bookings for a hotel and a room type.

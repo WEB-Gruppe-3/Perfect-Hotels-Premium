@@ -53,8 +53,12 @@ $hotels = $db->getHotels();
             <br>
             <br>
 
-            <div id="searchButton" onClick="search();">
+            <div id="searchButton" onClick="search();" >
                 <span id="searchButtonText">Søk</span>
+            </div>
+
+            <div id="newSearchButton" onClick="newSearch();">
+                <span id="newSearchButtonText">Nytt søk</span>
             </div>
         </form>
 
@@ -87,7 +91,7 @@ $hotels = $db->getHotels();
                 <p id="roomTypeDescription">RoomType beskrivelse...</p>
 
                 <div id="freeRoomsBox">
-                    <span id="numOfAvailableRooms">X</span>
+                    <span id="numOfAvailableRooms">-</span>
                     <span id="freeRoomsBoxTitle">Ledige rom</span>
                     <span id="dateTitle"></span> <!-- Hidden in CSS atm -->
                 </div>
@@ -102,7 +106,6 @@ $hotels = $db->getHotels();
         <div class="resultDiv" id="order">
             <h2>Bestilling</h2>
             <p>Du er i ferd med å booke et hotellrom.</p>
-            <br>
 
             <div id="orderDetails">
                 <table>
@@ -118,18 +121,19 @@ $hotels = $db->getHotels();
                 </table>
             </div>
 
-            <form>
-                Epost: <input type="text" id="emailInput">
-                <button type="button" onClick="doOrder()">Bestill!</button>
-            </form>
+            <br>
+            Epost: <input type="text" id="emailInput">
+            <br>
+            <div id="orderButton" onClick="doOrder()"><span id="orderButtonText">Bestill</span></div>
+
         </div>
 
         <!-- Show when order is complete -->
         <div class="resultDiv" id="orderComplete">
             <h2>Takk for din bestilling!</h2>
-            Ditt referansenummer er: <span id="refNr"></span>
+            Din booking-referanse er: <span id="refNr"></span>
             <br>
-            <a href="../vedlikehold/checkin.php">Sjekk inn her!</a>
+            <p>Ta godt vare på referansen, da denne brukes ved innsjekking.</p>
         </div>
 
     </div>

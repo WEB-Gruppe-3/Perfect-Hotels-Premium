@@ -175,6 +175,19 @@ nav ul li a:hover {
 	top: 20px;
 }
 
+#newSearchButton {
+	width: 100px;
+	height: 60px;
+	background-color: #78a3bb;
+	border-radius: 25px;
+	text-align: center;
+}
+
+#newSearchButton #newSearchButtonText {
+	position: relative;
+	top: 20px;
+}
+
 /* -------------------- Result divs -------------------- */
 .resultDiv {
 	width: 800px;
@@ -293,7 +306,6 @@ nav ul li a:hover {
 }
 
 #order {
-	background-color: #998461;
 	display: none;
 }
 
