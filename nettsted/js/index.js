@@ -17,11 +17,13 @@ searchButton = $("#searchButton");
 newSearchButton = $("#newSearchButton");
 
 resultDiv = $("#result");
+goToOrderButton = $("#goToOrderButton");
 freeRoomsBox = $("#freeRoomsBox");
 freeRoomsBoxNumberElement = $("#numOfAvailableRooms");
 
 orderDiv = $("#order");
 emailInput = $("#emailInput");
+orderButton = $("#orderButton");
 
 orderCompleteDiv = $("#orderComplete");
 refNrElement = $("#refNr");
@@ -39,6 +41,14 @@ $(function() {
 
     newSearchButton.click(function() {
         newSearch();
+    });
+
+    goToOrderButton.click(function() {
+        onClickBestill();
+    });
+
+    orderButton.click(function() {
+        doOrder();
     });
 
     // Resetting showSearchResults form

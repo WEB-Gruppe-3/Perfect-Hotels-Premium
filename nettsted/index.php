@@ -93,7 +93,7 @@ $hotels = $db->getHotels();
             </div>
 
             <br>
-            <div id="orderButton" onClick="onClickBestill()"><span id="orderButtonText">Gå til bestilling</span></div>
+            <a class="bigButton" id="goToOrderButton">Gå til bestilling</a>
         </div>
 
         <!-- Show when ordering -->
@@ -118,7 +118,7 @@ $hotels = $db->getHotels();
             <br>
             Epost: <input type="text" id="emailInput">
             <br>
-            <div id="orderButton" onClick="doOrder()"><span id="orderButtonText">Bestill</span></div>
+            <div class="bigButton" id="orderButton">Bestill</div>
 
         </div>
 

@@ -247,24 +247,6 @@ nav ul li a:hover {
 	font-size: 300%;
 }
 
-#orderButton {
-	width: 200px;
-	height: 100px;
-	background-color: #78a3bb;
-	border-radius: 25px;
-	text-align: center;
-
-	position: relative;
-	left: 500px;
-	top: 30px;
-}
-
-#orderButton #orderButtonText{
-	position: relative;
-	top: 35px;
-	font-size: 170%;
-}
-
 #order {
 	display: none;
 }
@@ -274,7 +256,7 @@ nav ul li a:hover {
 }
 
 #orderComplete #refNr {
-	background-color: #017bbe;
+	background-color: #d1cfc3;
 	font-size: 150%;
 }
 
@@ -333,13 +315,16 @@ nav ul li a:hover {
 	float: right;
 }
 
+#goToOrderButton {
+	float: right;
+}
+
+#orderButton {
+	float: right;
+}
+
 /* ########################################## Error warning div ##########################################*/
-/*
-<div id="searchError">
-        <div id="searchErrorTriangle"></div>
-        <div id="searchErrorMessage"></div>
-    </div>
-*/
+
 
 #searchDateError {
 	display: none;
