@@ -27,7 +27,7 @@
 
     <nav>
         <ul>
-          <li><a href="../nettsted/login.php">Hjem</a></li>
+          <li><a href="../nettsted/index.php">Hjem</a></li>
           <li><a href="index.php">Vedlikehold</a></li>
           <li><a href="../nettsted/checkin.php">Sjekk inn</a></li>
           <li><a href="../nettsted/editorder.php">Endre bestilling</a></li>
