@@ -1,7 +1,5 @@
 <?php require_once("template/start.html");
-    require_once("../nettsted/php/classes/DBConnector.php");
-    require_once("../nettsted/php/classes/Database.php");
-    $dbCon = new DBConnector();
+    require_once("php/classes/Database.php");
     $dbApi = new Database();
 ?>
     <!-- Start of content -->

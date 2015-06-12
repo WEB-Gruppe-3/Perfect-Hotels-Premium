@@ -1,7 +1,5 @@
 <?php require_once("template/start.html");
-require_once("../nettsted/php/classes/DBConnector.php");
 require_once("../nettsted/php/classes/Database.php");
-$dbCon = new DBConnector();
 $dbApi = new Database();
 ?>
     <!-- Start of content -->
@@ -176,10 +174,10 @@ $dbApi = new Database();
             ?>
         </div>
     </div>
-    <script src="../nettsted/js/jquery-1.11.3.js"></script>
-    <script src="../nettsted/js/jquery-ui-1.11.4/jquery-ui.js"></script>
-    <script src="../nettsted/js/jquery-ui-1.11.4/datepicker-no.js"></script>
-    <link rel="stylesheet" href="../nettsted/js/jquery-ui-1.11.4/jquery-ui.css">
-    <script src="js/index.js"></script>
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/jquery-ui-1.11.4/jquery-ui.js"></script>
+    <script src="js/jquery-ui-1.11.4/datepicker-no.js"></script>
+    <link rel="stylesheet" href="js/jquery-ui-1.11.4/jquery-ui.css">
+    <script src="js/editorder.js"></script>
     <!-- End of content -->
 <?php require_once("template/end.html") ?>
