@@ -7,6 +7,7 @@ require_once("RoomType.php");
 require_once("Room.php");
 require_once("Hotel.php");
 require_once("Booking.php");
+require_once("MaintenanceUser.php");
 
 /**
  * This class represents the database API.
@@ -19,6 +20,28 @@ class Database {
     public function __construct() {
         $this->dbConnector = new DBConnector();
         $this->dbName = Conf::$DB_NAME;
+    }
+
+    /**
+     * Get an array of approved user that can log-in to the maintenance page.
+     * @return Array Returns an array of MaintenanceUser objects.
+     */
+    public function getApprovedMaintenanceUsers() {
+        $query = "SELECT * FROM MaintenanceUser";
+        $result = mysqli_query($this->dbConnector->getDBLink(), $query);
+
+        // Exit and print error if there are no users found
+        if($result->num_rows < 1) {
+            exit("ERROR from getApprovedMaintenanceUsers()! No MaintenanceUsers found in database.");
+        }
+
+        // Make and return an array of MaintenanceUser's
+        $users = array();
+        while($row = mysqli_fetch_assoc($result)) {
+            $users[] = new MaintenanceUser($row["ID"], $row["UserName"], $row["Password"]);
+        }
+
+        return $users;
     }
 
     /**
