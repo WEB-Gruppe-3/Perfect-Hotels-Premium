@@ -107,6 +107,7 @@ function requestLogout() {
 
         success: function( json ) {
            console.log(json);
+            location.href = "../nettsted/index.php"
         }
     });
 }
