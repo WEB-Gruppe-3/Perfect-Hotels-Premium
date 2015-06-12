@@ -39,6 +39,14 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         // If not, show error message.
         echo("Feil brukernavn og/eller passord!");
     }
+} else {
+    // If there is no form data, we should send the user to the maintenance page if he is already logged in
+    if(isset($_SESSION["loggedin"])) {
+        if($_SESSION["loggedin"] === 1) {
+            header("Location: index.php");
+            exit;
+        }
+    }
 }
 ?>
 
