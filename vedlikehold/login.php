@@ -17,20 +17,18 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     $dbApi = new Database();
     $admins = $dbApi->getApprovedMaintenanceUsers();
 
-    $isValidUserFound = false;
     foreach($admins as $user) {
         // Check if we find a corresponding entry
         if( $_POST["username"] === $user->getUsername() &&
             $_POST["password"] === $user->getPassword()) {
-
-            // If we find a valid user, set the boolean and break this loop.
-            $isValidUserFound = true;
+            // If we find a valid user, set the username in session and break out of this loop.
+            $_SESSION["username"] = $user->getUsername();
             break;
         }
     }
 
     // Check if we found a valid user
-    if($isValidUserFound) {
+    if(isset($_SESSION["username"])) {
         // If so, set session as logged in, and redirect the user.
         $_SESSION['loggedin'] = 1;
         header("Location: index.php");

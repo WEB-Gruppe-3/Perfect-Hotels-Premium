@@ -4,6 +4,8 @@
 <head>
     <title>Perfect Hotel Premium</title>
     <link rel="stylesheet" type="text/css" media="screen" href="css/vedlikehold.css" />
+
+    <meta charset="UTF-8">
 </head>
 
 <body>
@@ -11,7 +13,16 @@
 <div id="container">
 
     <div id="pageHeader">
-        <h1 style="position:absolute; left: 475px; top: 28px; height: 51px; padding-top: 20px;"><span>Perfect Hotel Premiums</span></h1>
+        <h1>Perfect Hotel Premiums</h1>
+
+        <!-- Logged in message -->
+        <span id="loginMessage">
+            Logget inn som: <?php print($_SESSION["username"]); ?>
+        </span>
+
+        <!-- Log-out button -->
+        <a class="smallButton" id="logOutButton">Logg ut</a>
+
     </div>
 
     <nav>

@@ -8,7 +8,7 @@
         exit;
     }
 
-    require_once("template/start.html");
+    require_once("template/start.php");
     require_once("../nettsted/php/classes/DBConnector.php");
     require_once("../nettsted/php/classes/Database.php");
 
@@ -27,6 +27,7 @@
     $column = array();
     $input = array();
     $data = array();?>
+
 <div id="content">
     <div id="innholdLeft">
         <form method="post" action="" id="velgtabellknapp" name="velgtabellknapp">
@@ -328,7 +329,13 @@
                           <input type='button' value='Exit' onclick='closepopup()'>");
                 }        
             }       
-        ?> </div>
+        ?>
+    </div>
+
+    <!-- Hidden element with session id -->
+    <form id="hiddenFormSessionID" hidden><?php print(session_id()) ?></form>
+
+</div> <!-- Content end -->
 
     <script src="../nettsted/js/jquery-1.11.3.js"></script>
     <script src="../nettsted/js/jquery-ui-1.11.4/jquery-ui.js"></script>

@@ -56,6 +56,15 @@ nav ul li a:hover {
 	position: relative;
 }
 
+#pageHeader h1 {
+	position:absolute;
+	left: 475px;
+	top: 28px;
+	height: 51px;
+	padding-top: 20px;
+	color: white;
+}
+
 #container {
 	display: block;
 	margin: 0 auto;
@@ -122,4 +131,52 @@ select[type="input"] {
 
 table {
 	width: 100%;
+}
+
+/* Login message */
+#loginMessage {
+	box-sizing: border-box;
+
+	display: inline-block;
+	width: 190px;
+	background-color: limegreen;
+	opacity: 0.67;
+	padding: 5px 15px;
+	text-align: center;
+
+	position: relative;
+	top: 8px;
+	left: 920px;
+}
+
+/* Log ut button */
+.smallButton {
+	box-sizing: border-box;
+	display: inline-block;
+	padding: 5px 15px;
+
+	color: #FFFFFF;
+	background-color: #4c412f;
+	text-decoration:none;
+
+	cursor: pointer;
+
+	/* Unselectable text */
+	-webkit-user-select: none; /* Chrome/Safari */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+}
+.smallButton:hover {
+	background-color: #AA9A7F;
+}
+.smallButton:active {
+	position:relative;
+	top:2px;
+	left:-1px;
+}
+
+#logOutButton {
+	position: relative;
+	top: 8px;
+	left: 930px;
 }

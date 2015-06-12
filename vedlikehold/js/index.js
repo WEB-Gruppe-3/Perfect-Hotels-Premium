@@ -1,6 +1,8 @@
 /**
- * JS Stuff for index.php
+ * JS Stuff for vedlikehold/index.php
  */
+
+/* ################## SCRIPT START ################## */
 
 startDateInput = $("#startDateInput");
 startDateInput1 = $("#startDateInput1");
@@ -30,6 +32,11 @@ editstartDateInput = $("#editstartDateInput");
 editendDateInput = $("#editendDateInput");
 
 $(function() {
+
+    // Setting onClick @ #logOutButton
+    $("#logOutButton").click(function() {
+        requestLogout()
+    });
 
     // Setting and configuring date picker
     startDateInput.datepicker();
@@ -66,3 +73,40 @@ $(function() {
     );
 
 });
+
+/* ################## SCRIPT END ################## */
+
+/* ################## Request functions ################## */
+/**
+ *  OnClick: logOutButton
+ *  Request a log-out
+ */
+function requestLogout() {
+    // Find the sessionID
+    var sessionID = $("#hiddenFormSessionID").html();
+
+    $.ajax({
+        url: "index.ajax.php",
+
+        data: {
+            request: "logOut",
+            sessionID: sessionID
+        },
+
+        type: "GET",
+
+        // Expected return data
+        dataType : "json",
+
+        error: function( xhr, status, errorThrown ) {
+            console.log("Error from showSearchResults()");
+            console.log( "Error: " + errorThrown );
+            console.log( "Status: " + status );
+            console.dir( xhr );
+        },
+
+        success: function( json ) {
+           console.log(json);
+        }
+    });
+}
