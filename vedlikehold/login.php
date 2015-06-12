@@ -2,11 +2,41 @@
 session_start();
 ?>
 
-<form action="" method="post">
-    Username: <input type="text" name="username" />
-    Password: <input type="password" name="password" />
-    <input type="submit" />
-</form>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login vedlikehold</title>
+        <meta charset="UTF8">
+        <link rel="stylesheet" type="text/css" href="css/login.css">
+        <!-- Google font: Open Sans -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    </head>
+
+    <body>
+
+        <div id="container">
+            <h1>Login vedlikehold</h1>
+
+            <div id="errorMessage">
+
+            </div>
+
+            <form action="" method="post" id="loginForm">
+                <table>
+                    <tr><td><input type="text" name="username"></td></tr>
+                    <tr><td><input type="password" name="password"></td></tr>
+                    <tr><td><button type="submit">Log in</button></td></tr>
+                </table>
+            </form>
+
+
+
+        </div>
+
+    </body>
+</html>
+
+
 
 <?php
 require_once("../nettsted/php/classes/Database.php");

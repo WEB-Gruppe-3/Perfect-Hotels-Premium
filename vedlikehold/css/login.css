@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: "Open Sans", sans-serif;
+}
+
+#container {
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+form {
+    background-color: #0095d4;
+    padding: 40px 0 40px 0;
+}
+
+table {
+    width: 100%;
+}
+
+input {
+    width: 300px;
+    height: 40px;
+    margin: 5px 0 5px 0;
+
+    text-align: center;
+    font-size: 150%;
+}
+
+button {
+    width: 300px;
+    height: 40px;
+}
+
+#errorMessage {
+    height: 40px;
+    background-color: red;
+    opacity: 0.60;
+    border-radius: 13px;
+
+    margin: 30px auto;
+}
