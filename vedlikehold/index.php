@@ -1,5 +1,13 @@
 <?php
     session_start();
+
+    // Check if we're logged in
+    if ($_SESSION['loggedin'] != 1) {
+        // If not, send user back to login page.
+        header("Location: login.php");
+        exit;
+    }
+
     require_once("template/start.html");
     require_once("../nettsted/php/classes/DBConnector.php");
     require_once("../nettsted/php/classes/Database.php");
