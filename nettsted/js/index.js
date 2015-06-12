@@ -29,7 +29,6 @@ orderCompleteDiv = $("#orderComplete");
 refNrElement = $("#refNr");
 
 searchDateErrorMessage = $("#searchDateErrorMessage");
-searchDateError = $("#searchDateError");
 
 
 /* -------------------- Script start -------------------- */
@@ -134,6 +133,8 @@ function resetInputsAndElements() {
     refNrElement.html("");
 
     freeRoomsBoxNumberElement.html("-");
+
+    searchDateErrorMessage.css("display", "none");
 }
 
 /**
@@ -186,7 +187,7 @@ function isInputValid(hotelSelectVal, roomTypeSelectVal, dateStartVal, dateEndVa
     // Check if they are empty
     if(dateStartVal === "" || dateEndVal === "") {
         searchDateErrorMessage.css("display", "block");
-        searchDateErrorMessage.html("Both date fields must be filled!");
+        searchDateErrorMessage.html("Begge datofeltene må fylles ut!");
     }
 
     // Both dates should follow the pattern: "00.00.0000" (/\d\d.\d\d.\d\d\d\d/)
@@ -300,7 +301,7 @@ function search() {
         // Upon completion, return the validation array.
         success: function( validation ) {
             if(validation.isValid === true) {
-                searchDateError.css("display", "none");
+                searchDateErrorMessage.css("display", "none");
 
                 startDateInput.css("background-color", "limegreen");
                 endDateInput.css("background-color", "limegreen");
@@ -310,8 +311,8 @@ function search() {
 
                 showSearchResults();
             } else {
-                searchDateError.css("display", "inherit");
                 searchDateErrorMessage.html(validation.message);
+                searchDateErrorMessage.css("display", "block");
                 startDateInput.css("background-color", "red");
                 endDateInput.css("background-color", "red");
             }

@@ -58,7 +58,6 @@ $hotels = $db->getHotels();
         <!-- Error message div -->
         <div id="searchDateErrorMessage"></div>
 
-
     </div>
 
     <!-- Right div -->
@@ -94,7 +93,7 @@ $hotels = $db->getHotels();
                 </div>
 
             </div>
-
+            <br>
             <br>
             <a class="bigButton" id="goToOrderButton">Gå til bestilling</a>
         </div>
