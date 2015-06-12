@@ -116,6 +116,12 @@
                         }
                         print ("</select></td>");
                     }
+                    else if ($column[$nr]=="FromDate") {
+                        print ("<td><input size='9' name=$nr id='startDateInput' type='text' readonly required></td>");
+                    }
+                    else if ($column[$nr]=="ToDate") {
+                        print ("<td><input size='9' name=$nr id='endDateInput' type='text' readonly required></td>");
+                    }
                     else {
                         print ("<td><input size='1' name=$nr type='input'></td>");
                     }
@@ -287,6 +293,14 @@
                         else if ($column[$nr]=="ID") {
                             echo("<td>" . $row["$nr"] . "</td>");
                         }
+
+                        else if ($column[$nr]=="FromDate") {
+                            print ("<td><input size='9' name=$nr id='editstartDateInput' type='text' value='$row[$nr]' readonly required></td>");
+                        }
+                        else if ($column[$nr]=="ToDate") {
+                            print ("<td><input size='9' name=$nr id='editendDateInput' type='text' value='$row[$nr]' readonly required></td>");
+                        }
+
                         else {
                             echo ("<td><input type='text' type='text' name='$nr' value='" . $row["$nr"] . "'></td>");
                         }
@@ -307,4 +321,11 @@
                 }        
             }       
         ?> </div>
+
+    <script src="../nettsted/js/jquery-1.11.3.js"></script>
+    <script src="../nettsted/js/jquery-ui-1.11.4/jquery-ui.js"></script>
+    <script src="../nettsted/js/jquery-ui-1.11.4/datepicker-no.js"></script>
+    <link rel="stylesheet" href="../nettsted/js/jquery-ui-1.11.4/jquery-ui.css">
+    <script src="js/index.js"></script>
+
 <?php require_once("template/end.html") ?>
