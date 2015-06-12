@@ -53,8 +53,11 @@ $hotels = $db->getHotels();
 
             <a class="smallButton" id="newSearchButton">Nytt søk</a>
             <a class="smallButton" id="searchButton">Søk</a>
-
         </form>
+
+        <!-- Error message div -->
+        <div id="searchDateErrorMessage"></div>
+
 
     </div>
 
@@ -128,12 +131,6 @@ $hotels = $db->getHotels();
             Din booking-referanse er: <span id="refNr"></span>
             <br>
             <p>Ta godt vare på referansen, da denne brukes ved innsjekking.</p>
-        </div>
-
-        <!-- Error message div -->
-        <div id="searchDateError">
-            <div id="searchDateErrorTriangle"></div>
-            <div id="searchDateErrorMessage"></div>
         </div>
 
     </div>

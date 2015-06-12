@@ -235,7 +235,7 @@ nav ul li a:hover {
 
 .roomPresentation #numOfAvailableRooms {
 	position: relative;
-	top: 31px;
+	top: 38px;
 	left: 41px;
 	font-size: 300%;
 }
@@ -320,38 +320,22 @@ nav ul li a:hover {
 }
 
 /* ########################################## Error warning div ##########################################*/
-
-
-#searchDateError {
-	display: none;
-	position: relative;
-	top: -627px;
-	left: -10px;
-
-	opacity: 0.68;
-}
-
-#searchDateErrorTriangle {
-	width: 0;
-	height: 0;
-	border-top: 30px solid transparent;
-	border-right: 50px solid red;
-	border-bottom: 30px solid transparent;
-
-	position: relative;
-	top: 80px;
-	left: -45px;
-}
-
 #searchDateErrorMessage {
 	vertical-align: middle;
 	text-align: center;
 	box-sizing: border-box;
-	width: 300px;
+	width: 210px;
 	height: 100px;
 	background-color: red;
 	border-radius: 12px;
 	padding: 10px;
 
 	word-wrap: break-word;
+
+	display: none;
+	position: relative;
+	top: 20px;
+	left: 25px;
+
+	opacity: 0.76;
 }

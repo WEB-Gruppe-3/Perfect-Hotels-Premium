@@ -185,7 +185,7 @@ function isInputValid(hotelSelectVal, roomTypeSelectVal, dateStartVal, dateEndVa
     // DATE VALIDATION
     // Check if they are empty
     if(dateStartVal === "" || dateEndVal === "") {
-        searchDateError.css("display", "inherit");
+        searchDateErrorMessage.css("display", "block");
         searchDateErrorMessage.html("Both date fields must be filled!");
     }
 
