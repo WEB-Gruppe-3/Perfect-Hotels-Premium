@@ -1,5 +1,4 @@
-html, body
-{
+html, body {
 	color: black;
 	font: 11px/16px "trebuchet ms", arial, helvetica, sans;
 	background: #ababab;
@@ -7,8 +6,7 @@ html, body
 	padding: 0;
 }
 
-p
-{
+p {
 	font: 11px/16px "trebuchet ms", arial, helvetica, sans;
 	text-align: justify;
 	letter-spacing: 1px;
@@ -17,8 +15,12 @@ p
 	color:#000000;
 }
 
-nav ul li a
-{
+h3 {
+	margin: 0;
+	padding: 0;
+}
+
+nav ul li a {
 	color: #ffffff;
 	text-decoration: none;
 	background-color: #4c412f;
@@ -40,80 +42,48 @@ nav li {
     float: left;
 }
 
-nav ul li a:hover
-{
+nav ul li a:hover {
 	color: #feffff;
 	text-decoration: none;
 	background-color:#998461;
 }
 
+#pageHeader {
+	background: url(../img/top.jpg) no-repeat 0 0;
+	margin: 0;
+	padding: 0;
+	height: 320px;
+	position: relative;
+}
 
-
-#container
-{
+#container {
 	display: block;
 	margin: 0 auto;
 	padding: 0;
 	position: relative;
 	width: 1200px;
 	background-color: #ffffff;
-	
-	
 }
 
+#innholdRight {
+	background-color: #ffffff;
 
+	text-align: left;
+	padding: 20px 20px 20px 20px;
+}
 
-#footer 
-{
+#innholdLeft {
+	width: 400px;
+	background-color: #ffffff;
+	text-align: left;
+	height: 70px;
+	padding: 20px;
+}
+
+#footer {
 	padding: 10px 10px 10px 10px;
-	background-color:4c412f;
-
-	
-	
+	background-color: #4c412f;
 }
-
-
-#pageHeader
-{
-	background: url(../img/top.jpg) no-repeat 0 0;
-	margin: 0;
-	padding: 0;
-	height: 320px;
-	position: relative;
-	
-	
-	
-}
-h3
-{
-	margin: 0;
-	padding: 0;
-}
-
-h1, h2 { }
-
-
-#innholdRight
-{
-background-color: #ffffff;
-
-text-align: left;
-padding: 20px 20px 20px 20px;
-}
-
-
-
-#innholdLeft
-{
-
-
-width: 400px;
-background-color: #ffffff;
-text-align: left;
-height: 70px;
-padding: 20px;
-}
-
 
 #overlaypopup {
     visibility: hidden;
@@ -126,38 +96,30 @@ padding: 20px;
     z-index: 1003;
     background-color:#111;
     opacity: 0.65;
-	
 }
 
 #popup {
 	position: absolute;
 	visibility: hidden;
 	top: 50%;
-
-    
-
     background-color: #5D9494;
     border: 1px solid #000;
     padding: 15px;
     text-align: center;
-       z-index: 1004;
+	z-index: 1004;
 	vertical-align: middle;
-	
-    
-
 }
 
 input[type="input"] {
         resize: horizontal;
         min-width: 90%;
-    }
+}
+
 select[type="input"] {
         resize: horizontal;
         min-width: 90%;
-    }
-
+}
 
 table {
 	width: 100%;
 }
-
