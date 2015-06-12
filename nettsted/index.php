@@ -74,20 +74,20 @@ $hotels = $db->getHotels();
         <div class="resultDiv" id="result">
 
             <div class="hotelPresentation">
-                <h2 id="hotelTitle">HotelTitle</h2>
-                <img id="hotelImage" width="600" height="300" src="img/modal_window_bg.png">
+                <h2 id="hotelTitle"></h2>
+                <img id="hotelImage" width="600" height="300" src="">
                 <p id="hotelDescription">Hotell beskrivelse...</p>
             </div>
 
             <div class="roomPresentation">
 
-                <img id="roomTypeImage" width="170" height="170" src="img/modal_window_bg.png">
+                <img id="roomTypeImage" width="170" height="170" src="">
 
-                <h2 id="roomTypeTitle">RoomTitle</h2>
-                <p id="roomTypeDescription">RoomType beskrivelse...</p>
+                <h2 id="roomTypeTitle"></h2>
+                <p id="roomTypeDescription"></p>
 
                 <div id="freeRoomsBox">
-                    <span id="numOfAvailableRooms">-</span>
+                    <span id="numOfAvailableRooms"></span>
                     <span id="freeRoomsBoxTitle">Ledig</span>
                     <span id="dateTitle"></span> <!-- Hidden in CSS atm -->
                 </div>
@@ -117,10 +117,12 @@ $hotels = $db->getHotels();
                 </table>
             </div>
 
+            <p>Vennligst tast inn din epost for å få en bestillingsreferanse</p>
+
             <br>
             Epost: <input type="text" id="emailInput">
             <br>
-            <div class="bigButton" id="orderButton">Bestill</div>
+            <div class="bigButton" id="orderButton">Fullfør</div>
 
         </div>
 
