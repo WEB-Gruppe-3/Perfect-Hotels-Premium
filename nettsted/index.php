@@ -94,10 +94,7 @@ $hotels = $db->getHotels();
                     <span id="dateTitle"></span> <!-- Hidden in CSS atm -->
                 </div>
             </div>
-            <br>
-            <br>
             <a class="bigButton" id="goToOrderButton">Gå til bestilling</a>
-
         </div>
 
         <!-- Show when ordering -->
@@ -127,7 +124,6 @@ $hotels = $db->getHotels();
             <span id="invalidEmailError"></span>
             <br>
             <div class="bigButton" id="orderButton">Fullfør</div>
-
         </div>
 
         <!-- Show when order is complete -->

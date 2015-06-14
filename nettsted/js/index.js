@@ -109,13 +109,13 @@ function toggleSearchInputs(doEnable) {
         roomTypeSelect.removeAttr("disabled");
         startDateInput.removeAttr("disabled");
         endDateInput.removeAttr("disabled");
-        searchButton.css("display", "inherit");
+        searchButton.show();
     } else {
         hotelSelect.attr("disabled", "disabled");
         roomTypeSelect.attr("disabled", "disabled");
         startDateInput.attr("disabled", "disabled");
         endDateInput.attr("disabled", "disabled");
-        searchButton.css("display", "none");
+        searchButton.hide();
     }
 }
 
@@ -137,10 +137,10 @@ function resetInputsAndElements() {
 
     freeRoomsBoxNumberElement.html("-");
 
-    searchDateErrorMessage.css("display", "none");
+    searchDateErrorMessage.hide();
 
     emailErrorMessage.html("");
-    emailErrorMessage.css("display", "none");
+    emailErrorMessage.hide();
 }
 
 /**
@@ -149,11 +149,11 @@ function resetInputsAndElements() {
 function newSearch() {
     resetInputsAndElements();
 
-    resultDiv.css("display", "none");
-    orderDiv.css("display", "none");
-    orderCompleteDiv.css("display", "none");
+    resultDiv.hide();
+    orderDiv.hide();
+    orderCompleteDiv.hide();
 
-    welcomeDiv.css("display", "inherit");
+    welcomeDiv.show();
 
     toggleSearchInputs(true);
 
@@ -192,7 +192,7 @@ function isInputValid(hotelSelectVal, roomTypeSelectVal, dateStartVal, dateEndVa
     // DATE VALIDATION
     // Check if they are empty
     if(dateStartVal === "" || dateEndVal === "") {
-        searchDateErrorMessage.css("display", "block");
+        searchDateErrorMessage.show();
         searchDateErrorMessage.html("Begge datofeltene må fylles ut!");
     }
 
@@ -307,7 +307,7 @@ function search() {
         // Upon completion, return the validation array.
         success: function( validation ) {
             if(validation.isValid === true) {
-                searchDateErrorMessage.css("display", "none");
+                searchDateErrorMessage.hide();
 
                 startDateInput.css("background-color", "limegreen");
                 endDateInput.css("background-color", "limegreen");
@@ -318,7 +318,7 @@ function search() {
                 showSearchResults();
             } else {
                 searchDateErrorMessage.html(validation.message);
-                searchDateErrorMessage.css("display", "block");
+                searchDateErrorMessage.show();
                 startDateInput.css("background-color", "red");
                 endDateInput.css("background-color", "red");
             }
@@ -333,8 +333,8 @@ function showSearchResults() {
     // Show the result div
     var resultDiv = $("#result");
     var welcomeDiv = $("#welcome");
-    resultDiv.css("display", "initial");
-    welcomeDiv.css("display", "none");
+    resultDiv.show();
+    welcomeDiv.hide();
 
     // Getting the selected values
     var hotelID = hotelSelect.val();
@@ -444,14 +444,14 @@ function onClickBestill() {
     emailInput.empty();
 
     // Enable the order div, and set order details
-    orderDiv.css("display", "initial");
+    orderDiv.show();
 
     $("#orderHotelTitle").html(hotelSelect.find("option:selected").html());
     $("#orderRoomTypeTitle").html(roomTypeSelect.find("option:selected").html());
     $("#orderDateTitle").html(startDateInput.val() + " - " + endDateInput.val());
 
     // Hide the search result div
-    resultDiv.css("display", "none");
+    resultDiv.hide();
 }
 
 /**
@@ -459,11 +459,11 @@ function onClickBestill() {
  */
 function showModalPostOrderContent(refNr) {
     // Showing the order complete div and setting refnr
-    orderCompleteDiv.css("display", "initial");
+    orderCompleteDiv.show();
     refNrElement.html(refNr);
 
     // Hide the order div
-    orderDiv.css("display", "none");
+    orderDiv.hide();
 }
 
 /**
@@ -474,7 +474,7 @@ function showModalPostOrderContent(refNr) {
 function doOrder() {
     // Check that the input is not empty or contain a single space
     if(emailInput.val() === "" || emailInput.val() === " ") {
-        emailErrorMessage.css("display", "inherit");
+        emailErrorMessage.show();
         emailErrorMessage.html("Feltet kan ikke være tomt!");
     }
 
@@ -514,7 +514,7 @@ function doOrder() {
             }
             else if(data.isSuccess === false && data.message.length > 0) {
                 // If isSuccess is false and the message is > 0, the email was unvalid.
-                emailErrorMessage.css("display", "inherit");
+                emailErrorMessage.show();
                 emailErrorMessage.html(data.message);
             }
             else {

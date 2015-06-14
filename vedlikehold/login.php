@@ -9,7 +9,7 @@ session_start();
         <meta charset="UTF8">
         <link rel="stylesheet" type="text/css" href="css/login.css">
         <!-- Google font: Open Sans -->
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     </head>
 
     <body>

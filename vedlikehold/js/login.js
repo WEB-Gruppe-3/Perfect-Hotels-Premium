@@ -43,7 +43,7 @@ submitButton.click(function(event) {
         event.preventDefault();
         var error = $("#emptyInputErrorMessage");
         error.html("Både brukernavn og passord må fylles ut!");
-        error.css("display", "inherit");
+        error.show();
     }
 
 });
