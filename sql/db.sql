@@ -1,9 +1,101 @@
+-- ######################## CREATE ########################
+-- Eksamen i IS-WEB1000 Vår 2015, Gruppe 3.
+-- Tabellstruktur for Perfect Hotels Premium
+
+-- Image
+CREATE TABLE IF NOT EXISTS Image (
+  ID INT NOT NULL AUTO_INCREMENT,
+  URL VARCHAR(300) NOT NULL,
+  Description VARCHAR(300),
+
+  PRIMARY KEY(ID)
+);
+
+-- RoomType
+CREATE TABLE IF NOT EXISTS RoomType (
+  ID INT NOT NULL AUTO_INCREMENT,
+  Name VARCHAR(45) NOT NULL,
+  NumOfBeds INT NOT NULL,
+  Price INT NOT NULL,
+  ImageID INT NOT NULL,
+  Description VARCHAR(500) NOT NULL,
+
+  PRIMARY KEY(ID),
+  FOREIGN KEY(ImageID) REFERENCES Image(ID)
+);
+
+-- Hotel
+CREATE TABLE IF NOT EXISTS Hotel (
+  ID INT NOT NULL AUTO_INCREMENT,
+  Name VARCHAR(45) NOT NULL,
+  ImageID INT NOT NULL,
+  Description VARCHAR(500) NOT NULL,
+
+  PRIMARY KEY(ID),
+  FOREIGN KEY(ImageID) REFERENCES Image(ID)
+);
+
+-- HotelRoomType
+CREATE TABLE IF NOT EXISTS HotelRoomType (
+  ID INT NOT NULL AUTO_INCREMENT,
+  RoomTypeID INT NOT NULL,
+  HotelID INT NOT NULL,
+
+  PRIMARY KEY(ID),
+  FOREIGN KEY(RoomTypeID) REFERENCES RoomType(ID),
+  FOREIGN KEY(HotelID) REFERENCES Hotel(ID)
+);
+
+-- Room
+CREATE TABLE IF NOT EXISTS Room (
+  ID INT NOT NULL AUTO_INCREMENT,
+  RoomNumber INT NOT NULL,
+  HotelRoomTypeID INT NOT NULL,
+
+  PRIMARY KEY(ID),
+  FOREIGN KEY(HotelRoomTypeID) REFERENCES HotelRoomType(ID)
+);
+
+-- CustomerOrder
+CREATE TABLE IF NOT EXISTS CustomerOrder (
+  ID INT NOT NULL AUTO_INCREMENT,
+  Reference VARCHAR(100) NOT NULL,
+
+  PRIMARY KEY(ID)
+);
+
+-- Booking
+CREATE TABLE IF NOT EXISTS Booking (
+  ID INT NOT NULL AUTO_INCREMENT,
+  FromDate DATE NOT NULL,
+  ToDate DATE NOT NULL,
+  RoomID INT DEFAULT '0',
+  HotelRoomTypeID INT NOT NULL,
+  CustomerOrderID INT NOT NULL,
+
+  PRIMARY KEY(ID),
+  FOREIGN KEY(HotelRoomTypeID) REFERENCES HotelRoomType(ID),
+  FOREIGN KEY(CustomerOrderID) REFERENCES CustomerOrder(ID)
+);
+
+-- MaintenanceUser
+CREATE TABLE IF NOT EXISTS MaintenanceUser (
+  ID INT NOT NULL AUTO_INCREMENT,
+  UserName VARCHAR(45) NOT NULL,
+  Password VARCHAR(45) NOT NULL,
+
+  PRIMARY KEY(ID)
+);
+
+
+
+-- ######################## INSERT ########################
 -- Eksamen i IS-WEB1000 V�r 2015, Gruppe 3.
 -- Dummy data for Perfect Hotels Premium
 
 -- Image
 -- Inserting hotel images
-INSERT INTO Image(URL, Description) 
+INSERT INTO Image(URL, Description)
 VALUES('img/hotels/hotel_miramas.jpg', 'Bilde av Hotel Miramas.');
 
 INSERT INTO Image(URL, Description)
@@ -46,7 +138,7 @@ VALUES('Executive Suite', '4', '8400', '9', 'Beskrivelse av romtype Executive Su
 
 -- Hotel
 INSERT INTO Hotel(Name, ImageID, Description)
-VALUES('Hotel Miramas', '1', 'Beskrivelse av Hotel Miramas');
+VALUES('Hotel Miramas', '1', 'Hotel Miramas ligger vakkert plassert ved sydhavets solfyllte kyst. Gjestene kan forvendte servering av nydelig sydhavsmat og god vin. Kort gangavstand til både strand og nærliggende tettsted.');
 
 INSERT INTO Hotel(Name, ImageID, Description)
 VALUES('Kings Lagoon Resort', '2', 'Beskrivelse av Kings Lagoon Resort');
