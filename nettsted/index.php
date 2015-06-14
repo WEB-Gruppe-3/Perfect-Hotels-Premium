@@ -80,22 +80,25 @@ $hotels = $db->getHotels();
             </div>
 
             <div class="roomPresentation">
-
                 <img id="roomTypeImage" width="170" height="170" src="">
 
                 <h2 id="roomTypeTitle"></h2>
                 <p id="roomTypeDescription"></p>
+
+                <span id="roomTypePriceTitle">Pris:</span> <span id="roomTypePrice"></span>
+                <span id="roomTypeNumOfBedsTitle">Senger:</span> <span id="roomTypeNumOfBeds"></span>
 
                 <div id="freeRoomsBox">
                     <span id="numOfAvailableRooms"></span>
                     <span id="freeRoomsBoxTitle">Ledig</span>
                     <span id="dateTitle"></span> <!-- Hidden in CSS atm -->
                 </div>
-
             </div>
             <br>
             <br>
             <a class="bigButton" id="goToOrderButton">Gå til bestilling</a>
+
+
         </div>
 
         <!-- Show when ordering -->

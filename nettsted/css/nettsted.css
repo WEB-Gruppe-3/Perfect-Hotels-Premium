@@ -182,6 +182,7 @@ nav ul li a:hover {
 	position: relative;
 	left: 29px;
 	top: -22px;
+	width: 600px;
 }
 
 .roomPresentation {
@@ -208,21 +209,50 @@ nav ul li a:hover {
 
 .roomPresentation #roomTypeDescription {
 	position: relative;
-	top: -190px;
+	top: -200px;
 	left: 190px;
+	width: 280px;
 }
 
-#freeRoomsBox {
+.roomPresentation #roomTypePriceTitle{
+	position: absolute;
+	top: 642px;
+	left: 220px;
+}
+
+.roomPresentation #roomTypePrice {
+	color: #F1CF73;
+	font-size: 130%;
+	position: absolute;
+	top: 640px;
+	left: 260px;
+}
+
+.roomPresentation #roomTypeNumOfBedsTitle {
+	position: absolute;
+	top: 642px;
+	left: 424px;
+}
+
+.roomPresentation #roomTypeNumOfBeds {
+	position: absolute;
+	top: 640px;
+	left: 484px;
+	font-size: 130%;
+	color: #F1CF73;
+}
+
+.roomPresentation #freeRoomsBox {
 	width: 110px;
 	height: 110px;
 	background-color: #68b187;
 	border-radius: 10px;
-	position: relative;
-	left: 483px;
-	top: -290px;
+	position: absolute;
+	left: 510px;
+	top: 505px;
 }
 
-#freeRoomsBoxTitle {
+.roomPresentation #freeRoomsBoxTitle {
 	position: relative;
 	top: -25px;
 	left: 4px;
@@ -233,7 +263,7 @@ nav ul li a:hover {
 	display: none;
 }
 
-.roomPresentation #numOfAvailableRooms {
+#numOfAvailableRooms {
 	position: relative;
 	top: 38px;
 	left: 41px;
