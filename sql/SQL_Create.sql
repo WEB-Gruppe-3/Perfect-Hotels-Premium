@@ -85,12 +85,3 @@ CREATE TABLE IF NOT EXISTS MaintenanceUser (
 	
 	PRIMARY KEY(ID)
 );
-
--- Test table for development
-CREATE TABLE IF NOT EXISTS Test (
-	ID INT NOT NULL AUTO_INCREMENT,
-	Col1 TEXT,
-	Col2 TEXT,
-
-	PRIMARY KEY (ID)
-);

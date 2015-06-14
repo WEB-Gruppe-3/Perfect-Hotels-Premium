@@ -127,7 +127,7 @@ INSERT INTO HotelRoomType(RoomTypeID, HotelID)
 VALUES('4', '5');
 
 -- Room
--- Adding 5 rooms per HotelRoomTypeID
+-- Adding 5 rooms per HotelRoomTypeID (there are 20 hotellroomtypeIDs in total)
 -- HotelRoomType ID 1
 INSERT INTO Room(RoomNumber, HotelRoomTypeID)
 VALUES('101', '1');
@@ -208,6 +208,245 @@ VALUES('104', '5');
 INSERT INTO Room(RoomNumber, HotelRoomTypeID)
 VALUES('105', '5');
 
+-- HotelRoomType ID 6
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('101', '6');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('102', '6');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('103', '6');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('104', '6');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('105', '6');
+
+-- HotelRoomType ID 7
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('101', '7');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('102', '7');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('103', '7');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('104', '7');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('105', '7');
+
+-- HotelRoomType ID 8
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('101', '8');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('102', '8');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('103', '8');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('104', '8');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('105', '8');
+
+-- HotelRoomType ID 9
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('101', '9');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('102', '9');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('103', '9');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('104', '9');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('105', '9');
+
+-- HotelRoomType ID 10
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('101', '10');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('102', '10');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('103', '10');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('104', '10');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('105', '10');
+
+-- HotelRoomType ID 11
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('101', '11');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('102', '11');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('103', '11');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('104', '11');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('105', '11');
+
+-- HotelRoomType ID 12
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('101', '12');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('102', '12');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('103', '12');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('104', '12');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('105', '12');
+
+-- HotelRoomType ID 13
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('101', '13');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('102', '13');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('103', '13');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('104', '13');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('105', '13');
+
+-- HotelRoomType ID 14
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('101', '14');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('102', '14');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('103', '14');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('104', '14');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('105', '14');
+
+-- HotelRoomType ID 15
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('101', '15');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('102', '15');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('103', '15');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('104', '15');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('105', '15');
+
+-- HotelRoomType ID 16
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('101', '16');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('102', '16');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('103', '16');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('104', '16');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('105', '16');
+
+-- HotelRoomType ID 17
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('101', '17');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('102', '17');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('103', '17');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('104', '17');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('105', '17');
+
+-- HotelRoomType ID 18
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('101', '18');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('102', '18');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('103', '18');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('104', '18');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('105', '18');
+
+-- HotelRoomType ID 19
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('101', '19');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('102', '19');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('103', '19');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('104', '19');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('105', '19');
+
+-- HotelRoomType ID 20
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('101', '20');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('102', '20');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('103', '20');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('104', '20');
+
+INSERT INTO Room(RoomNumber, HotelRoomTypeID)
+VALUES('105', '20');
 
 -- CustomerOrder
 -- Should not insert orders
