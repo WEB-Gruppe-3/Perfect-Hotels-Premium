@@ -79,10 +79,21 @@
                 } elseif ($column[$nr]=="ToDate") {
                     print ("<td><input size='9' name=$column[$nr] id='endDateInput' type='input' value='" . @$inputa[$nr]. "' readonly required></td>");
                 } else {
-                    print ("<td><input size='1' name='$column[$nr]' type='input' value='" . @$inputa[$nr] . "' required></td>");
+                    print ("<td><input size='1' name='$column[$nr]' type='input' value='" . @$inputa[$nr] . "' ></td>");
                 }
                 $nr++;
             }
             print ("<td><input type='submit' value='Add' name='addknapp' id='addknapp'></td></form><tr></table>");
-
+            echo "<div id='feedback'>";
+            if (isset($errorMsg) && $errorMsg && @$_POST['addknapp']) {
+                echo "<p style='color: red;'>";
+                echo htmlspecialchars(@$errorMsg);
+                echo "</p>";
+            }
+            if (isset($successMsg) && $successMsg && @$_POST['addknapp'] || @$_POST['deleteknapp']) {
+                echo "<p style='color: green;'>";
+                echo htmlspecialchars(@$successMsg);
+                echo "</p>";
+            }
+            echo "</div>";
             ?>

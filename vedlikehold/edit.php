@@ -6,6 +6,7 @@ if ($editknapp || $updateknapp) {
     echo("document.getElementById('popup').style.visibility = 'visible';");
     echo("document.getElementById('overlaypopup').style.visibility = 'visible';");
     echo("</script>");*/
+    echo "<p id='editheadline'>Edit View</p>";
     print("<table><tr>");
     $nr = 0;
     for ($x = 1; $x <= $rows; $x++) {
@@ -27,8 +28,11 @@ if ($editknapp || $updateknapp) {
                 $result2 = $dbApi->getAllRows("$foreigntable");
                 while ($row2 = mysqli_fetch_row($result2)) {
                     echo("<option value='$row2[0]'");
-                    if ($row2[0] == $row[$nr]) {
+                    if ($row2[0] == @$inputu[$nr]) {
                         echo("selected");
+                    }
+                    if ($row2[0] == $row[$nr] && !@$inputu[$nr]) {
+                        echo(" selected");
                     }
                     echo(">$row2[0] - $row2[1]</option>");
                 }
@@ -40,7 +44,10 @@ if ($editknapp || $updateknapp) {
                 $result2 = $dbApi->getAllRows("$foreigntable");
                 while ($row2 = mysqli_fetch_row($result2)) {
                     echo("<option value=$row2[0]");
-                    if ($row2[0] == $row[$nr]) {
+                    if ($row2[0] == @$inputu[$nr]) {
+                        echo(" selected");
+                    }
+                    if ($row2[0] == $row[$nr] && !@$inputu[$nr]) {
                         echo(" selected");
                     }
                     echo(">$row2[0] ($row2[1]) - ");
@@ -64,7 +71,10 @@ if ($editknapp || $updateknapp) {
                 $result2 = $dbApi->getAllRows("$foreigntable");
                 while ($row2 = mysqli_fetch_row($result2)) {
                     echo("<option value=$row2[0]");
-                    if ($row2[0] == $row[$nr]) {
+                    if ($row2[0] == @$inputu[$nr]) {
+                        echo(" selected");
+                    }
+                    if ($row2[0] == $row[$nr] && !@$inputu[$nr]) {
                         echo(" selected");
                     }
                     echo(">$row2[0] - ");
@@ -84,18 +94,42 @@ if ($editknapp || $updateknapp) {
             } else if ($column[$nr] == "ID") {
                 echo("<td>$row[$nr]</td>");
             } else if ($column[$nr] == "FromDate") {
-                print ("<td><input size='9' name=$column[$nr] id='editstartDateInput' type='text' value='$row[$nr]' readonly required></td>");
+                if (!@$inputu[$nr]){
+                    $fromdate=$row[$nr];
+                } else {
+                    $fromdate=$inputu[$nr];
+                }
+                print ("<td><input size='9' name=$column[$nr] id='editstartDateInput' type='text' value='$fromdate' readonly required></td>");
             } else if ($column[$nr] == "ToDate") {
-                print ("<td><input size='9' name=$column[$nr] id='editendDateInput' type='text' value='$row[$nr]' readonly required></td>");
+                if (!@$inputu[$nr]){
+                    $todate=$row[$nr];
+                } else {
+                    $todate=$inputu[$nr];
+                }
+                print ("<td><input size='9' name=$column[$nr] id='editendDateInput' type='text' value='$todate' readonly required></td>");
             } else {
-                echo("<td><input type='text' type='text' name=$column[$nr] value='$row[$nr]' required></td>");
+                if (!@$inputu[$nr]){
+                    $foo=$row[$nr];
+                } else {
+                    $foo=$inputu[$nr];
+                }
+                echo("<td><input type='text' type='text' name=$column[$nr] value='$foo' required></td>");
             }
             $nr++;
         }
         echo("<td><input type='submit' value='Update' name='updateknapp' id='updateknapp'><input type='submit' value='Cancel' name='cancelknapp' id='cancelknapp'><input type='hidden' name='rowID' value=$row[0]></td></form></tr></table>");
     }
+    echo "<div id='feedback'>";
     if (isset($errorMsg) && $errorMsg && $updateknapp) {
-        echo "<p style=\"color: red;\">*", htmlspecialchars($errorMsg), "</p>\n\n";
+        echo "<p style='color: red;'>";
+        echo htmlspecialchars($errorMsg);
+        echo "</p>";
     }
+    if (isset($successMsg) && $successMsg && $updateknapp) {
+        echo "<p style='color: green;'>";
+        echo htmlspecialchars($successMsg);
+        echo "</p>";
+    }
+    echo "</div>";
 }
 

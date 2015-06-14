@@ -149,32 +149,28 @@ if (@$_POST['addknapp']) {
 if (@$_POST['updateknapp']) {
     $errorMsg = validate($column, $input);
     if (!$errorMsg) {
-        echo ("<script type='text/javascript'>");
-        echo ("document.getElementById('popup').style.visibility = 'hidden';");
-        echo ("document.getElementById('overlaypopup').style.visibility = 'hidden';");
-        echo ("</script>");
         unset($input);
-    $nr="1";
-    $nr2="0";
-    for ($x=2;$x<=$rows;$x++) {
-        $data[$column[$nr]] = $_POST[$column[$nr]];
-        $nr++;
-        $nr2++;
-    }
+        $nr="1";
+        $nr2="0";
+        for ($x=2;$x<=$rows;$x++) {
+            $data[$column[$nr]] = $_POST[$column[$nr]];
+            $nr++;
+            $nr2++;
+        }
     //print_r($data);
-    $result = $dbApi->doesRowExist($valgt_table, $data);
-    if($result && $valgt_table != "booking") {
-        $errorMsg =  ("There was already a row in $valgt_table containing this..");
-    }
-    else {
-        $result2 = $dbApi->updateRow($valgt_table, $id, $data);
-        if($result2) {
-            $successMsg = ("Successfully updated row in table $valgt_table!");
+        $result = $dbApi->doesRowExist($valgt_table, $data);
+        if($result && $valgt_table != "booking") {
+            $errorMsg =  ("There was already a row in $valgt_table containing this..");
         }
         else {
-            $errorMsg =  ("Updating of row into table $valgt_table FAILED!");
+            $result2 = $dbApi->updateRow($valgt_table, $id, $data);
+            if($result2) {
+                $successMsg = ("Successfully updated row in table $valgt_table!");
+            }
+            else {
+                $errorMsg =  ("Updating of row into table $valgt_table FAILED!");
+            }
         }
-    }
 
     }
 }
@@ -212,12 +208,6 @@ if (@$_POST['deleteknapp']) {
         </div>
         <div id="innholdRight"><?php if($valgt_table){require_once("list.php");}?></div>
         <div id="popup"><?php require_once("edit.php") ?></div>
-        <?PHP
-        if(isset($errorMsg) && $errorMsg && @$_POST['addknapp']) {
-            echo "<div style='color:red'>",htmlspecialchars(@$errorMsg),"</div>\n\n";
-            echo "<div style='color:green'>",htmlspecialchars(@$successMsg),"</div>\n\n";
-        }
-        ?>
     </div> <!-- Content end -->
     <!-- Hidden element with session id -->
     <form id="hiddenFormSessionID" hidden><?php print(session_id()) ?></form>

@@ -78,7 +78,7 @@ nav ul li a:hover {
 	background-color: #ffffff;
 
 	text-align: left;
-	padding: 20px 20px 20px 20px;
+	padding: 20px 20px 0 20px;
 }
 
 #innholdLeft {
@@ -176,4 +176,17 @@ table {
 	position: relative;
 	top: 8px;
 	left: 930px;
+}
+
+#editheadline {
+    font: 18px/16px "trebuchet ms", arial, helvetica, sans;
+    text-align: center;
+    letter-spacing: 1px;
+    margin: 0 0 0;
+    padding: 10px 0 5px 0;
+    color:#000000;
+}
+
+#feedback {
+    height: 2em;
 }
