@@ -13,7 +13,7 @@
 <div id="container">
 
     <div id="pageHeader">
-        <h1>Perfect Hotel Premiums</h1>
+        <h1>Vedlikeholdsapplikasjon</h1>
 
         <!-- Logged in message -->
         <span id="loginMessage">

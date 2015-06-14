@@ -23,7 +23,7 @@ h3 {
 nav ul li a {
 	color: #ffffff;
 	text-decoration: none;
-	background-color: #4c412f;
+	background-color: #2e4d66;
 	display: block;
 	width: 280px;
 	padding: 10px;
@@ -45,7 +45,7 @@ nav li {
 nav ul li a:hover {
 	color: #feffff;
 	text-decoration: none;
-	background-color:#998461;
+	background-color:#548cb8;
 }
 
 #pageHeader {
@@ -62,7 +62,7 @@ nav ul li a:hover {
 	top: 28px;
 	height: 51px;
 	padding-top: 20px;
-	color: white;
+	color: #2e4d66;
 }
 
 #container {
@@ -91,7 +91,7 @@ nav ul li a:hover {
 
 #footer {
 	padding: 10px 10px 10px 10px;
-	background-color: #4c412f;
+	background-color: #2e4d66;
 }
 
 #overlaypopup {
@@ -156,7 +156,7 @@ table {
 	padding: 5px 15px;
 
 	color: #FFFFFF;
-	background-color: #4c412f;
+	background-color: #2e4d66;
 	text-decoration:none;
 
 	cursor: pointer;
@@ -167,7 +167,7 @@ table {
 	-ms-user-select: none; /* IE10+ */
 }
 .smallButton:hover {
-	background-color: #AA9A7F;
+	background-color: #548cb8;
 }
 .smallButton:active {
 	position:relative;
@@ -180,3 +180,6 @@ table {
 	top: 8px;
 	left: 930px;
 }
+/* Farge annenhver linje i tabeller */
+tr:nth-child(even) {background: #fff}
+tr:nth-child(odd) {background: #ccc}
