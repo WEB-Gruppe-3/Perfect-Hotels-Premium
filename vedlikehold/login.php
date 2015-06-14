@@ -19,8 +19,8 @@ session_start();
 
             <form action="" method="post" id="loginForm">
                 <table>
-                    <tr><td><input type="text" name="username" required></td></tr>
-                    <tr><td><input type="password" name="password" required></td></tr>
+                    <tr><td><input id="usernameInput" type="text" name="username" required></td></tr>
+                    <tr><td><input id="passwordInput" type="password" name="password" required></td></tr>
                     <tr><td><button type="submit">Log in</button></td></tr>
                 </table>
             </form>
@@ -67,5 +67,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
         </div>
 
+        <script src="../nettsted/js/jquery-1.11.3.js"></script>
+        <script src="js/login.js"></script>
     </body>
 </html>
