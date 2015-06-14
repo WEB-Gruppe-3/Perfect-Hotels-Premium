@@ -125,32 +125,32 @@ VALUES('img/rooms/executive_suite.jpg', 'Bilde av romtypen Executive Suite.');
 
 -- RoomType
 INSERT INTO RoomType(Name, NumOfBeds, Price, ImageID, Description)
-VALUES('Standard', '2', '950', '6', 'Beskrivelse av Standard goes here.');
+VALUES('Standard', '2', '950', '6', 'Et standard hotellrom med de nødvendige fasiliteter som dusj, telefon og to enkle senger. Om ønskelig kan minibaren fylles ved bestilling.');
 
 INSERT INTO RoomType(Name, NumOfBeds, Price, ImageID, Description)
-VALUES('Family', '4', '1940', '7', 'Beskrivelse av Family goes here.');
+VALUES('Family', '4', '1940', '7', 'Et større hotellrom mer flere senger enn man finner i vårt Standardrom. Tiltenkt en familie på 2 voksne og 2 barn. TV inkludert.');
 
 INSERT INTO RoomType(Name, NumOfBeds, Price, ImageID, Description)
-VALUES('Deluxe', '4', '4400', '8', 'Beskrivelse av romtype Deluxe goes here.');
+VALUES('Deluxe', '4', '4400', '8', 'Et rom av premium kvalitet. Her kan du forvente vakre omgivelser og det ypperste av fasiliteter som widescreen-TV og Queensize seng.');
 
 INSERT INTO RoomType(Name, NumOfBeds, Price, ImageID, Description)
-VALUES('Executive Suite', '4', '8400', '9', 'Beskrivelse av romtype Executive Suite goes here.');
+VALUES('Executive Suite', '4', '8400', '9', 'Våre suiter er av ypperste kvalitet. Forvent personlig concierge-service, KING-sized senger, walk-in dusj og byens beste utsikt!');
 
 -- Hotel
 INSERT INTO Hotel(Name, ImageID, Description)
-VALUES('Hotel Miramas', '1', 'Hotel Miramas ligger vakkert plassert ved sydhavets solfyllte kyst. Gjestene kan forvendte servering av nydelig sydhavsmat og god vin. Kort gangavstand til både strand og nærliggende tettsted.');
+VALUES('Hotel Miramas', '1', 'Hotel Miramas ligger vakkert plassert ved sydhavets solfyllte kyst. Gjestene kan forvendte servering av nydelig sydhavsmat og god vin. Sydhavsfrokost serveres hver morgen med påfølgende frokostbrennvin. Kort gangavstand til både strand og nærliggende tettsted. Gjestene oppfordres til å nyte nærliggende natur.');
 
 INSERT INTO Hotel(Name, ImageID, Description)
-VALUES('Kings Lagoon Resort', '2', 'Beskrivelse av Kings Lagoon Resort');
+VALUES('Kings Lagoon Resort', '2', 'King Lagoon Resort kan friste med upåklagelig beliggenhet ved en av Frankrikets godt skjulte laguner. Hotellet oppfyller de celebre krav til privatliv i være utallige lysthus. Service av ypperste kvalitet kan forventes. Muligheter for leie av båt. Fiske- og golfturer arrangeres på ukentlig basis.');
 
 INSERT INTO Hotel(Name, ImageID, Description)
-VALUES('Luxury Coast Resort', '3', 'Beskrivelse av Luxury Coast Resort.');
+VALUES('Luxury Coast Resort', '3', 'Et moderne hotell etablert i 2013. Hotellets utforming preges av vakre detaljer og moderne minimalisme. Topp moderne fasiliteter inkludert svømmebaseng, tennis- og golfbaner, 42 barer og en kinosal. Hotellet stiller med gratis transport til nærmeste by via buss, taxi, helikopter eller ubåt.  ');
 
 INSERT INTO Hotel(Name, ImageID, Description)
-VALUES('Palacio Del Mar', '4', 'Beskrivelse av Palacio Del Mar.');
+VALUES('Palacio Del Mar', '4', 'Palacio Del Mar ble etablert i 1990 av Franz H. Fritzenschnatz og bærer preg av tidsperioden. Hotellet kan friste med innrøykede, pastellfargede vegg-til-vegg tepper som står i kontrast til hotellets neon-opplyste sementfargede sovjetisk-brutalist-inspirerte fasade. Muligheter for å prute på prisen.');
 
 INSERT INTO Hotel(Name, ImageID, Description)
-VALUES('Royal Park Hotel', '5', 'Beskrivelse av Royal Park Hotel.');
+VALUES('Royal Park Hotel', '5', 'Royal Park Hotell leverer en lukseriøs one-of-a-kind opplevelse. Hotellet stiller med varm mottagelse, full concierge tjeneste og en forståelse av personlig service. Royal Park er lokalisert ved den Franske rivieraen og tilbyr båtplass for de som ankommer via vannveien. Helikopter og privat-jet står til din disposisjon.');
 
 -- HotelRoomType
 -- Hotell ID 1

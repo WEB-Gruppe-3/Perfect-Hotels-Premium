@@ -378,12 +378,16 @@ function showSearchResults() {
 
         // On completion, set data from JSON
         success: function( data ) {
+            console.log(data);
+
             // Finding elements
             var numRoomsElement = $("#numOfAvailableRooms");
             var hotelImageElement = $("#hotelImage");
             var hotelDescElement = $("#hotelDescription");
             var roomTypeImageElement = $("#roomTypeImage");
             var roomTypeDescElement = $("#roomTypeDescription");
+            var roomTypePriceElement = $("#roomTypePrice");
+            var roomTypeNumOfBedsElement = $("#roomTypeNumOfBeds");
 
             // Setting element values
             numRoomsElement.html(data.numRooms);
@@ -391,6 +395,8 @@ function showSearchResults() {
             hotelDescElement.html(data.hotelDescription);
             roomTypeImageElement.attr("src", data.roomTypeImageURL);
             roomTypeDescElement.html(data.roomTypeDescription);
+            roomTypePriceElement.html(data.roomTypePrice + ",-");
+            roomTypeNumOfBedsElement.html(data.roomTypeNumOfBeds);
 
             // If the number of avail rooms are < 1, set bg color to red
             if(data.numRooms < 1) {

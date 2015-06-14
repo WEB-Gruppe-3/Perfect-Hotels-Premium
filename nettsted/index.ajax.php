@@ -181,10 +181,12 @@ function getSearchJSON(Database $dbApi, $hotelID, $roomTypeID, DateTime $startDa
     $searchData["hotelImageURL"] = $hotel->getImageURL();
     $searchData["hotelDescription"] = $hotel->getDescription();
 
-    /** Room type image url and description */
+    /** Room type image url, description, price and number of beds */
     $roomType = $dbApi->getRoomType($roomTypeID, $hotelID);
     $searchData["roomTypeImageURL"] = $roomType->getImageURL();
     $searchData["roomTypeDescription"] = $roomType->getDescription();
+    $searchData["roomTypePrice"] = $roomType->getPrice();
+    $searchData["roomTypeNumOfBeds"] = $roomType->getNumOfBeds();
 
     print(json_encode($searchData));
 }
