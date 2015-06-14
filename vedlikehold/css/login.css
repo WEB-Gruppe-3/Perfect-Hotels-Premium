@@ -40,11 +40,15 @@ button {
     height: 40px;
 }
 
-#errorMessage {
+.errorMessage {
     height: 40px;
     background-color: red;
     opacity: 0.60;
     border-radius: 13px;
 
     margin: 30px auto;
+}
+
+#emptyInputErrorMessage {
+    display: none;
 }
