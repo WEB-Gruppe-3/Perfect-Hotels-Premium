@@ -87,16 +87,23 @@ if ($editknapp) {
             } else if ($column[$nr] == "ToDate") {
                 print ("<td><input size='9' name=$column[$nr] id='editendDateInput' type='text' value='$row[$nr]' readonly required></td>");
             } else {
-                echo("<td><input type='text' type='text' name=$column[$nr] value='$row[$nr]'></td>");
+                echo("<td><input type='text' type='text' name=$column[$nr] value='$row[$nr]' required></td>");
             }
             $nr++;
         }
         echo("<td><input type='submit' value='Update' name='updateknapp' id='updateknapp'>
                             <input type='hidden' name='rowID' value=$row[0]>
-                          </td></form></tr></table><br>");
+                          </td></form></tr></table><br><script>function closepopup() {
+                                document.getElementById('popup').style.visibility = 'hidden';
+                                document.getElementById('overlaypopup').style.visibility = 'hidden';
+                            }
+                            </script>
+
+
+                          <input type='button' value='Exit' onclick='closepopup()'>");
     }
     if (isset($errorMsg) && $errorMsg) {
         echo "<p style=\"color: red;\">*", htmlspecialchars($errorMsg), "</p>\n\n";
     }
 }
-?>
+

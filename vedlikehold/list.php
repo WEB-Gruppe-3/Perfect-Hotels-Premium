@@ -79,7 +79,7 @@
                 } elseif ($column[$nr]=="ToDate") {
                     print ("<td><input size='9' name=$column[$nr] id='endDateInput' type='text' value='$input[$nr]' readonly required></td>");
                 } else {
-                    print ("<td><input size='1' name='$column[$nr]' type='input' value='$input[$nr]'></td>");
+                    print ("<td><input size='1' name='$column[$nr]' type='input' value='$input[$nr]' required></td>");
                 }
                 $nr++;
             }
