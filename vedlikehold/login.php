@@ -17,10 +17,6 @@ session_start();
         <div id="container">
             <h1>Login vedlikehold</h1>
 
-            <div id="errorMessage">
-
-            </div>
-
             <form action="" method="post" id="loginForm">
                 <table>
                     <tr><td><input type="text" name="username" required></td></tr>
@@ -28,15 +24,6 @@ session_start();
                     <tr><td><button type="submit">Log in</button></td></tr>
                 </table>
             </form>
-
-
-
-        </div>
-
-    </body>
-</html>
-
-
 
 <?php
 require_once("../nettsted/php/classes/Database.php");
@@ -65,7 +52,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         exit;
     } else {
         // If not, show error message.
-        echo("Feil brukernavn og/eller passord!");
+        echo("<div id='errorMessage'>Feil brukernavn og/eller passord!</div>");
     }
 } else {
     // If there is no form data, we should send the user to the maintenance page if he is already logged in
@@ -78,3 +65,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 }
 ?>
 
+        </div>
+
+    </body>
+</html>
