@@ -17,7 +17,7 @@
 
     @$valgt_table=$_POST ["table_name"];
     if (!$valgt_table) {
-        $valgt_table=$_SESSION["table_name"];
+        @$valgt_table=$_SESSION["table_name"];
     }
     // store session data
     $_SESSION["table_name"] = "$valgt_table";
@@ -36,13 +36,13 @@ if ($valgt_table) {
     $rows = count($column);
     $nr=0;
     for ($x=1;$x<=$rows;$x++) {
-        $input[] = $_POST[$column[$nr]];
+        $input[] = @$_POST[$column[$nr]];
         $nr++;
     }
 }
 
 function validate($column, $input) {
-    if($column[1]=='FromDate') {
+    if(@$column[1]=='FromDate') {
         if (!$input[1]) {
             $errorMsg = "You have to pick a FromDate";
             return $errorMsg;
@@ -55,7 +55,7 @@ function validate($column, $input) {
             }
         }
     }
-    if($column[2]=='ToDate') {
+    if(@$column[2]=='ToDate') {
         if (!$input[2]) {
             $errorMsg = "You have to pick a ToDate";
             return $errorMsg;
@@ -67,46 +67,46 @@ function validate($column, $input) {
             }
         }
     }
-    if($column[1]=='Reference' && !$input[1]) {
+    if(@$column[1]=='Reference' && !$input[1]) {
         $errorMsg = "Insert a valid Reference code";
         return $errorMsg;
     }
-    if($column[1]=='Name' && !$input[1]) {
+    if(@$column[1]=='Name' && !$input[1]) {
         $errorMsg = "Insert a valid Name";
         return $errorMsg;
     }
-    if($column[3]=='Description' && !$input[3] || $column[2]=='Description' && !$input[2] || $column[5]=='Description' && !$input[5]) {
+    if(@$column[3]=='Description' && !$input[3] || @$column[2]=='Description' && !$input[2] || @$column[5]=='Description' && !$input[5]) {
         $errorMsg = "Insert a valid Description";
         return $errorMsg;
     }
-    if($column[1]=='URL' && !$input[1]) {
+    if(@$column[1]=='URL' && !$input[1]) {
         $errorMsg = "Insert a valid URL";
         return $errorMsg;
     }
-    if($column[1]=='UserName' && !$input[1]) {
+    if(@$column[1]=='UserName' && !$input[1]) {
         $errorMsg = "Insert a valid UserName";
         return $errorMsg;
     }
-    if($column[2]=='Password' && !$input[2]) {
+    if(@$column[2]=='Password' && !$input[2]) {
         $errorMsg = "Insert a valid Password";
         return $errorMsg;
     }
-    if($column[1]=='RoomNumber' && !$input[1]) {
+    if(@$column[1]=='RoomNumber' && !$input[1]) {
         $errorMsg = "Insert a valid RoomNumber";
         return $errorMsg;
     }
-    if($column[2]=='NumOfBeds' && !$input[2]) {
+    if(@$column[2]=='NumOfBeds' && !$input[2]) {
         $errorMsg = "Insert a valid number of beds";
         return $errorMsg;
     }
-    if($column[3]=='Price' && !$input[3]) {
+    if(@$column[3]=='Price' && !$input[3]) {
         $errorMsg = "Insert a valid Price";
         return $errorMsg;
     }
 }
 
 
-if ($_POST['addknapp']) {
+if (@$_POST['addknapp']) {
     $errorMsg = validate($column, $input);
     if (!$errorMsg) {
         unset($input);
@@ -132,7 +132,7 @@ if ($_POST['addknapp']) {
     }
 }
 
-if ($_POST['updateknapp']) {
+if (@$_POST['updateknapp']) {
     $errorMsg = validate($column, $input);
     if (!$errorMsg) {
         echo ("<script type='text/javascript'>");
@@ -166,7 +166,7 @@ if ($_POST['updateknapp']) {
 }
 
 
-if ($_POST['deleteknapp']) {
+if (@$_POST['deleteknapp']) {
     $result = $dbApi->deleteRow($valgt_table, $id);
     if($result) {
         $successMsg = ("Successfully deleted row in table $valgt_table!");
@@ -200,8 +200,8 @@ if ($_POST['deleteknapp']) {
         <div id="popup"><?php require_once("edit.php") ?></div>
         <?PHP
         if(isset($errorMsg) && $errorMsg) {
-            echo "<div style='color:red'>",htmlspecialchars($errorMsg),"</div>\n\n";
-            echo "<div style='color:green'>",htmlspecialchars($successMsg),"</div>\n\n";
+            echo "<div style='color:red'>",htmlspecialchars(@$errorMsg),"</div>\n\n";
+            echo "<div style='color:green'>",htmlspecialchars(@$successMsg),"</div>\n\n";
         }
         ?>
     </div> <!-- Content end -->

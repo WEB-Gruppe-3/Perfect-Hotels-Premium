@@ -34,7 +34,7 @@
                     while($row = mysqli_fetch_row($result)) {
                         if ($column[$nr]=="RoomID") {
                             echo("<option value=$row[0]");
-                            if ($row[0]==$input[$nr]) {
+                            if ($row[0]==@$input[$nr]) {
                                 echo(" selected");
                             }
                             echo(">$row[0] ($row[1]) - ");
@@ -52,7 +52,7 @@
                             }
                         } else if ($column[$nr]=="HotelRoomTypeID") {
                             echo("<option value=$row[0]");
-                            if ($row[0]==$input[$nr]) {
+                            if ($row[0]==@$input[$nr]) {
                                 echo(" selected");
                             }
                             echo(">$row[0] - ");
@@ -67,7 +67,7 @@
                             echo("</option>");
                         } else {
                             echo("<option value=$row[0]");
-                            if ($row[0]==$input[$nr]) {
+                            if ($row[0]==@$input[$nr]) {
                                 echo(" selected");
                             }
                             echo(">$row[0] - $row[1]</option>");
@@ -75,11 +75,11 @@
                     }
                     print ("</select></td>");
                 } elseif ($column[$nr]=="FromDate") {
-                    print ("<td><input size='9' name=$column[$nr] id='startDateInput' type='text' value='$input[$nr]' readonly required></td>");
+                    print ("<td><input size='9' name=$column[$nr] id='startDateInput' type='text' value='" . @$input[$nr] . "' readonly required></td>");
                 } elseif ($column[$nr]=="ToDate") {
-                    print ("<td><input size='9' name=$column[$nr] id='endDateInput' type='text' value='$input[$nr]' readonly required></td>");
+                    print ("<td><input size='9' name=$column[$nr] id='endDateInput' type='text' value='" . @$input[$nr]. "' readonly required></td>");
                 } else {
-                    print ("<td><input size='1' name='$column[$nr]' type='input' value='$input[$nr]' required></td>");
+                    print ("<td><input size='1' name='$column[$nr]' type='input' value='" . @$input[$nr] . "' required></td>");
                 }
                 $nr++;
             }
