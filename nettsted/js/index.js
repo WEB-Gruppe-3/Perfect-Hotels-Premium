@@ -23,6 +23,7 @@ freeRoomsBoxNumberElement = $("#numOfAvailableRooms");
 
 orderDiv = $("#order");
 emailInput = $("#emailInput");
+emailErrorMessage = $("#invalidEmailError");
 orderButton = $("#orderButton");
 
 orderCompleteDiv = $("#orderComplete");
@@ -108,11 +109,13 @@ function toggleSearchInputs(doEnable) {
         roomTypeSelect.removeAttr("disabled");
         startDateInput.removeAttr("disabled");
         endDateInput.removeAttr("disabled");
+        searchButton.css("display", "inherit");
     } else {
         hotelSelect.attr("disabled", "disabled");
         roomTypeSelect.attr("disabled", "disabled");
         startDateInput.attr("disabled", "disabled");
         endDateInput.attr("disabled", "disabled");
+        searchButton.css("display", "none");
     }
 }
 
@@ -135,6 +138,9 @@ function resetInputsAndElements() {
     freeRoomsBoxNumberElement.html("-");
 
     searchDateErrorMessage.css("display", "none");
+
+    emailErrorMessage.html("");
+    emailErrorMessage.css("display", "none");
 }
 
 /**
@@ -451,11 +457,7 @@ function onClickBestill() {
 /**
  * Shows the order complete div
  */
-function showModalPostOrderContent(isSuccess, refNr) {
-    if(! isSuccess) {
-        alert("Bestillingen feilet!");
-    }
-
+function showModalPostOrderContent(refNr) {
     // Showing the order complete div and setting refnr
     orderCompleteDiv.css("display", "initial");
     refNrElement.html(refNr);
@@ -470,6 +472,12 @@ function showModalPostOrderContent(isSuccess, refNr) {
  * Adds a booking to the database, then informs the user of success or failure!
  */
 function doOrder() {
+    // Check that the input is not empty or contain a single space
+    if(emailInput.val() === "" || emailInput.val() === " ") {
+        emailErrorMessage.css("display", "inherit");
+        emailErrorMessage.html("Feltet kan ikke være tomt!");
+    }
+
     // Getting the selected values
     var hotelID = hotelSelect.val();
     var roomTypeID = roomTypeSelect.val();
@@ -500,8 +508,19 @@ function doOrder() {
         dataType : "json",
 
         success: function( data ) {
-            console.log(data);
-            showModalPostOrderContent(data.isSuccess, data.refNr);
+
+            if(data.isSuccess) {
+                showModalPostOrderContent(data.refNr);
+            }
+            else if(data.isSuccess === false && data.message.length > 0) {
+                // If isSuccess is false and the message is > 0, the email was unvalid.
+                emailErrorMessage.css("display", "inherit");
+                emailErrorMessage.html(data.message);
+            }
+            else {
+                alert("Bestillingen feilet!");
+            }
+
         }
     });
 }

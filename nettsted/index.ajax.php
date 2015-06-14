@@ -85,23 +85,42 @@ function isDatesValid(DateTime $startDate, DateTime $endDate) {
 }
 
 /**
+ * Validates an email
+ */
+function isEmailValid($emailString) {
+    if(filter_var($emailString, FILTER_VALIDATE_EMAIL) === false) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+/**
  * Add a order and booking, then returns the reference number and success/failure in a JSON
  */
 function addNewOrderAndBooking(Database $dbApi, $email, $hotelID, $roomTypeID, $startDate, $endDate) {
-    // Compute reference
-    $orderReference = md5($email);
-
-    // Make DateTimes
-    $dt_startDate = DateTime::createFromFormat("d.m.Y", $startDate);
-    $dt_startDate->setTime(0, 0, 0);
-    $dt_endDate = DateTime::createFromFormat("d.m.Y", $endDate);
-    $dt_endDate->setTime(0, 0, 0);
-
-    $isSuccess = $dbApi->addBooking($orderReference, $hotelID, $roomTypeID, $dt_startDate, $dt_endDate);
-
     $json = array();
-    $json["isSuccess"] = $isSuccess;
-    $json["refNr"] = $orderReference;
+
+    // Check if the email is valid
+    if(isEmailValid($email)) {
+        // Compute reference
+        $orderReference = md5($email);
+
+        // Make DateTimes
+        $dt_startDate = DateTime::createFromFormat("d.m.Y", $startDate);
+        $dt_startDate->setTime(0, 0, 0);
+        $dt_endDate = DateTime::createFromFormat("d.m.Y", $endDate);
+        $dt_endDate->setTime(0, 0, 0);
+
+        $isSuccess = $dbApi->addBooking($orderReference, $hotelID, $roomTypeID, $dt_startDate, $dt_endDate);
+
+        $json["isSuccess"] = $isSuccess;
+        $json["refNr"] = $orderReference;
+        $json["message"] = "";
+    } else {
+        $json["isSuccess"] = false;
+        $json["message"] = "Vennligst tast inn en gyldig epost.";
+    }
 
     print(json_encode($json));
 }

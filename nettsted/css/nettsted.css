@@ -274,6 +274,12 @@ nav ul li a:hover {
 	display: none;
 }
 
+#invalidEmailError {
+	color: red;
+	display: none;
+	font-size: 130%;
+}
+
 #orderComplete {
 	display: none;
 }

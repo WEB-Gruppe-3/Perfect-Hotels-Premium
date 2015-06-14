@@ -98,7 +98,6 @@ $hotels = $db->getHotels();
             <br>
             <a class="bigButton" id="goToOrderButton">Gå til bestilling</a>
 
-
         </div>
 
         <!-- Show when ordering -->
@@ -123,7 +122,9 @@ $hotels = $db->getHotels();
             <p>Vennligst tast inn din epost for å få en bestillingsreferanse</p>
 
             <br>
-            Epost: <input type="text" id="emailInput">
+            Epost: <input type="text" id="emailInput" required>
+            <br>
+            <span id="invalidEmailError"></span>
             <br>
             <div class="bigButton" id="orderButton">Fullfør</div>
 
