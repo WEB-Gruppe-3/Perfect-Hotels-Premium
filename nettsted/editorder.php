@@ -5,7 +5,7 @@ $dbApi = new Database();
     <!-- Start of content -->
     <div id="content">
         <div id="innholdLeft">
-            <h3>Vennligst fyll inn referanse kode:</h3>
+            <h3>Vennligst fyll inn referanse kode for å endre din bestilling:</h3>
             <form method="post" action="" id="checkinform" name="checkinform">
                 <input name="search" type="search">
                 <input type='submit' value='OK' name='checkinbutton' id='checkinbutton'>
@@ -47,15 +47,15 @@ $dbApi = new Database();
                         while ($row = mysqli_fetch_row($result)) {
                             if ($row[3] == "0") {
                                 $foo = array("ID" => "$row[0]", "FromDate" => "$row[1]", "ToDate" => "$row[2]", "RoomID" => "$row[3]", "HotelRoomTypeID" => "$row[4]", "CustomerOrderID" => "$row[5]");
-                                $result = $dbApi->getRow("HotelRoomType", $foo[HotelRoomTypeID]);
+                                $result = $dbApi->getRow("HotelRoomType", @$foo[HotelRoomTypeID]);
                                 while ($row = mysqli_fetch_row($result)) {
                                     $bar = array("ID" => "$row[0]", "RoomTypeID" => "$row[1]", "HotelID" => "$row[2]");
                                 }
-                                $result = $dbApi->getRow("Hotel", $bar[HotelID]);
+                                $result = $dbApi->getRow("Hotel", @$bar[HotelID]);
                                 while ($row = mysqli_fetch_row($result)) {
                                     $hotel = $row[1];
                                 }
-                                $result = $dbApi->getRow("RoomType", $bar[RoomTypeID]);
+                                $result = $dbApi->getRow("RoomType", @$bar[RoomTypeID]);
                                 while ($row = mysqli_fetch_row($result)) {
                                     $roomtype = $row[1];
                                 }
@@ -130,11 +130,13 @@ $dbApi = new Database();
                 }
                 $fromdate = array();
                 $todate = array();
+                $newbookingid = array();
                 $result = $dbApi->getALLRows("Booking");
                 while($row = mysqli_fetch_row($result)) {
                     if ($row[4]==$hotelroomtype){
                         $fromdate[]=$row[1];
                         $todate[]=$row[2];
+                        $newbookingid[]=$row[0];
                     }
                 }
                 $rows=count($fromdate);
@@ -142,14 +144,14 @@ $dbApi = new Database();
                 $nr=0;
                 for ($x=1;$x<=$rows;$x++) {
                     if ($newfromdate <= $fromdate[$nr] && $newtodate <= $fromdate[$nr] || $newfromdate >= $todate[$nr]) {
-                        if ($newfromdate == $fromdate[$nr] && $newtodate == $todate[$nr] ) {
+                        if ($newfromdate == $fromdate[$nr] && $newtodate == $todate[$nr] && $bookingid != $newbookingid[$nr] ) {
                             $occupiedrooms++;
                         }
                         else {
-                            $freerooms++;
+                            @$freerooms++;
                         }
                     }
-                    else {
+                    elseif ($bookingid != $newbookingid[$nr]) {
                         $occupiedrooms++;
                     }
                     $nr++;
@@ -158,6 +160,8 @@ $dbApi = new Database();
                 echo "Occupied rooms; $occupiedrooms <br>";
                 $availablerooms = $rooms-$occupiedrooms;
                 echo "Available Rooms: $availablerooms <br>";
+                echo "Bookingid: $bookingid <br>";
+                print_r($newbookingid);
                 if ($availablerooms >= 1 ) {
                     $result = $dbApi->updateRow("Booking", $bookingid, $data);
                     if($result) {
