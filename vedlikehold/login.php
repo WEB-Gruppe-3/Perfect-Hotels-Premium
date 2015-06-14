@@ -23,8 +23,8 @@ session_start();
 
             <form action="" method="post" id="loginForm">
                 <table>
-                    <tr><td><input type="text" name="username"></td></tr>
-                    <tr><td><input type="password" name="password"></td></tr>
+                    <tr><td><input type="text" name="username" required></td></tr>
+                    <tr><td><input type="password" name="password" required></td></tr>
                     <tr><td><button type="submit">Log in</button></td></tr>
                 </table>
             </form>
