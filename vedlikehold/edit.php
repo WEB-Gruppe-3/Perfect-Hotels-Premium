@@ -1,11 +1,12 @@
 <?php
 @$editknapp=$_POST ["editknapp"];
-if ($editknapp) {
-    echo("<script type='text/javascript'>");
+@$updateknapp=$_POST ["updateknapp"];
+if ($editknapp || $updateknapp) {
+    /*echo("<script type='text/javascript'>");
     echo("document.getElementById('popup').style.visibility = 'visible';");
     echo("document.getElementById('overlaypopup').style.visibility = 'visible';");
-    echo("</script>");
-    print("<h3>Edit View</h3><br><table><tr>");
+    echo("</script>");*/
+    print("<table><tr>");
     $nr = 0;
     for ($x = 1; $x <= $rows; $x++) {
         echo("<th>$column[$nr]</th>");
@@ -91,18 +92,9 @@ if ($editknapp) {
             }
             $nr++;
         }
-        echo("<td><input type='submit' value='Update' name='updateknapp' id='updateknapp'>
-                            <input type='hidden' name='rowID' value=$row[0]>
-                          </td></form></tr></table><br><script>function closepopup() {
-                                document.getElementById('popup').style.visibility = 'hidden';
-                                document.getElementById('overlaypopup').style.visibility = 'hidden';
-                            }
-                            </script>
-
-
-                          <input type='button' value='Exit' onclick='closepopup()'>");
+        echo("<td><input type='submit' value='Update' name='updateknapp' id='updateknapp'><input type='submit' value='Cancel' name='cancelknapp' id='cancelknapp'><input type='hidden' name='rowID' value=$row[0]></td></form></tr></table>");
     }
-    if (isset($errorMsg) && $errorMsg) {
+    if (isset($errorMsg) && $errorMsg && $updateknapp) {
         echo "<p style=\"color: red;\">*", htmlspecialchars($errorMsg), "</p>\n\n";
     }
 }

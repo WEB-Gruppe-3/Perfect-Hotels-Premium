@@ -2,7 +2,7 @@
     session_start();
 
     // Check if we're logged in
-    if ($_SESSION['loggedin'] != 1) {
+    if (@$_SESSION['loggedin'] != 1) {
         // If not, send user back to login page.
         header("Location: login.php");
         exit;
@@ -25,6 +25,8 @@
     @$id = $_POST['rowID'];
     $column = array();
     $input = array();
+    $inputa = array();
+    $inputu = array();
     $data = array();
 
 
@@ -34,11 +36,23 @@ if ($valgt_table) {
         $column[] = $row[0];
     }
     $rows = count($column);
-    $nr=0;
-    for ($x=1;$x<=$rows;$x++) {
-        $input[] = @$_POST[$column[$nr]];
-        $nr++;
+    if (@$_POST['addknapp']) {
+        $nr=0;
+        for ($x=1;$x<=$rows;$x++) {
+            $inputa[] = @$_POST[$column[$nr]];
+            $input[] = @$_POST[$column[$nr]];
+            $nr++;
+        }
     }
+    if (@$_POST['updateknapp']) {
+        $nr=0;
+        for ($x=1;$x<=$rows;$x++) {
+            $inputu[] = @$_POST[$column[$nr]];
+            $input[] = @$_POST[$column[$nr]];
+            $nr++;
+        }
+    }
+
 }
 
 function validate($column, $input) {
@@ -116,7 +130,7 @@ if (@$_POST['addknapp']) {
             $nr++;
         }
         $result = $dbApi->doesRowExist($valgt_table, $data);
-        if($result && $valgt_table != "Booking") {
+        if($result && $valgt_table != "booking") {
             $errorMsg = ("There was already a row containing this..");
         }
         else {
@@ -149,7 +163,7 @@ if (@$_POST['updateknapp']) {
     }
     //print_r($data);
     $result = $dbApi->doesRowExist($valgt_table, $data);
-    if($result && $valgt_table != "Booking") {
+    if($result && $valgt_table != "booking") {
         $errorMsg =  ("There was already a row in $valgt_table containing this..");
     }
     else {
@@ -192,14 +206,14 @@ if (@$_POST['deleteknapp']) {
                         echo(">" . $row[0] . "</option>");
                     }
                     ?>
-                </select><input type='submit' value='OK' name='velgtabellknapp' id='velgtabellknapp' onclick="list()">
+                </select><input type='submit' value='OK' name='velgtabellknapp' id='velgtabellknapp'">
             </form>
 
         </div>
         <div id="innholdRight"><?php if($valgt_table){require_once("list.php");}?></div>
         <div id="popup"><?php require_once("edit.php") ?></div>
         <?PHP
-        if(isset($errorMsg) && $errorMsg) {
+        if(isset($errorMsg) && $errorMsg && @$_POST['addknapp']) {
             echo "<div style='color:red'>",htmlspecialchars(@$errorMsg),"</div>\n\n";
             echo "<div style='color:green'>",htmlspecialchars(@$successMsg),"</div>\n\n";
         }
