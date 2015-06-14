@@ -59,8 +59,8 @@ $(function() {
     populateRoomTypeList();
 
     // Setting and configuring date picker
-    startDateInput.datepicker();
-    endDateInput.datepicker();
+    startDateInput.datepicker({ minDate: 0 });
+    endDateInput.datepicker({ minDate: 0 });
 
     $.datepicker.setDefaults(
         $.extend(

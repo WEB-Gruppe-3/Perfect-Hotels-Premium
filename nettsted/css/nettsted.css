@@ -49,15 +49,15 @@ html, body {
 #rightDiv {
 	width: 70%;
 	text-align: left;
-	background-color: white;
+	background-color: #FFFCF6;
 	height: 100%;
 }
 
 #leftDiv {
 	width: 30%;
-	height: 100%
+	height: 100%;
 	text-align: left;
-	background-color: #ffefdf;;
+	background-color: #FFCDA8;
 }
 
 #footer {
@@ -104,7 +104,7 @@ nav ul li a:hover {
 .searchDiv {
 	width: 100%;
 	height: 100px;
-	background-color: #4d7e99;
+	background-color: #007aae; /*#4d7e99*/
 	color: white;
 
 	display: none;
@@ -136,7 +136,7 @@ nav ul li a:hover {
 	position: relative;
 	left: 45px;
 	top: 30px;
-	color: red;
+	color: #FF3100;
 }
 
 #dateSelectDiv input[type="text"] {
@@ -184,7 +184,7 @@ nav ul li a:hover {
 .roomPresentation {
 	width: 600px;
 	height: 180px;
-	background-color: #4d7e99;
+	background-color: #A5B8C1;
 	padding: 10px 0 10px 0;
 
 	margin-left: auto;
@@ -243,7 +243,7 @@ nav ul li a:hover {
 .roomPresentation #freeRoomsBox {
 	width: 110px;
 	height: 110px;
-	background-color: #68b187;
+	background-color: #A0CC81;
 	border-radius: 10px;
 	position: absolute;
 	left: 510px;
@@ -273,7 +273,7 @@ nav ul li a:hover {
 }
 
 #invalidEmailError {
-	color: red;
+	color: #FF3100;
 	display: none;
 	font-size: 130%;
 }
@@ -359,7 +359,7 @@ nav ul li a:hover {
 	text-align: center;
 	box-sizing: border-box;
 	width: 210px;
-	background-color: red;
+	background-color: #FF3100;
 	border-radius: 12px;
 	padding: 10px;
 
