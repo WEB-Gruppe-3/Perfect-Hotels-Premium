@@ -20,8 +20,8 @@ if(isset($_GET["requestedData"])) {
             getSearchJSON($dbApi,
                           $_GET["hotelID"],
                           $_GET["roomTypeID"],
-                          stringToDate($_GET["startDate"]),
-                          stringToDate($_GET["endDate"]));
+                          $dbApi->stringToDate($_GET["startDate"]),
+                          $dbApi->stringToDate($_GET["endDate"]));
             break;
 
         case "addBook":
@@ -34,7 +34,7 @@ if(isset($_GET["requestedData"])) {
             break;
 
         case "validateDates":
-            isDatesValid(stringToDate($_GET["startDateString"]), stringToDate($_GET["endDateString"]));
+            isDatesValid($dbApi->stringToDate($_GET["startDateString"]), $dbApi->stringToDate($_GET["endDateString"]));
             break;
 
         default:
@@ -174,20 +174,4 @@ function getSearchJSON(Database $dbApi, $hotelID, $roomTypeID, DateTime $startDa
     $searchData["roomTypeNumOfBeds"] = $roomType->getNumOfBeds();
 
     print(json_encode($searchData));
-}
-
-/**
- * Helper function to convert string dates from JS to DateTime
- */
-function stringToDate($dateString) { // Format: 03.06.2015
-    // Replace . with -
-    $replace = str_replace(".", "-", $dateString);
-
-    // Now looks like this 03-06-2015 (DD-MM-YYYY)
-    // Make a DateTime
-    $date = DateTime::createFromFormat("d-m-Y", $replace);
-
-    $date->setTime(0, 0, 0);
-
-    return $date;
 }

@@ -516,4 +516,18 @@ class Database {
 
         return $numOfAvailableRooms;
     }
+
+    /**
+     * Helper function to convert string dates from JS to DateTime
+     */
+    function stringToDate($dateString) { // Format: 03.06.2015
+        // Replace . with -
+        $replace = str_replace(".", "-", $dateString);
+
+        // Now looks like this 03-06-2015 (DD-MM-YYYY)
+        // Make a DateTime
+        $date = DateTime::createFromFormat("d-m-Y", $replace);
+
+        return $date;
+    }
 }
