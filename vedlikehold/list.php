@@ -1,6 +1,7 @@
 <table>
     <tr>
         <?php $nr=0; for ($x=1;$x<=$rows;$x++) { echo("<th>$column[$nr]</th>"); $nr++; } ?>
+        <th>Verktøy</th>
     </tr>
     <?php
     $result = $dbApi->getAllRows("$valgt_table");
