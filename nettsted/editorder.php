@@ -4,14 +4,7 @@ $dbApi = new Database();
 
 
 
-@$button=$_POST ["button"];
-if ($button) {
-    $bookid=$_POST ["BookingID"];
-    $endrebutton="Endre";
-    echo $endrebutton;
-    echo $bookid;
 
-}
 
 function checkrooms($data) {
     $dbApi = new Database();
@@ -249,10 +242,8 @@ function checkrooms($data) {
                         print ("</select></td></tr>");
                         print ("<tr><td>From</td><td><input size='9' id='startDateInput' type='text' name='FromDate' value=$foo[FromDate] readonly required></td></tr>");
                         print ("<tr><td>To</td><td><input size='9' id='endDateInput' type='text' name='ToDate' value=$foo[ToDate] readonly required></td>");
-                        print ("<td><input type='submit' value='Update' name='checkbutton' id='checkbutton'></td>");
                         print ("<td><input type='button' value='Sjekk' name='sjekkButton' id='sjekkButton'></td></tr>");
-                        print ("</form></table><br>");
-                        print("<span id='sjekkAvailRoomsMsg'></span>");
+                        print ("<tr><td></td><td id='sjekkAvailRoomsMsg'></td><td><input type='submit' value='Update' name='checkbutton' id='checkbutton'></td></tr></form></table><br>");
                     } else {
                         $id = $row[3];
                         $result = $dbApi->getRow("Room", $id);

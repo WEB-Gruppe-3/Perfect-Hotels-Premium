@@ -6,8 +6,3 @@ select option {
     max-width: 820px;
 }
 
-#sjekkAvailRoomsMsg {
-    position: absolute;
-    top: 484px;
-    left: 287px;
-}
