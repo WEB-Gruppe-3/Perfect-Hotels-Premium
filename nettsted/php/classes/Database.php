@@ -476,6 +476,9 @@ class Database {
      * @return int Returns the number of available rooms (can be a negative number)
      */
     public function getNumOfAvailableRooms($hotelID, $roomTypeID, DateTime $startDate, DateTime $endDate) {
+        $startDate->setTime(0, 0, 0);
+        $endDate->setTime(0, 0, 0);
+
         /** Number of available rooms */
         $searchStartTs = $startDate->getTimestamp();
         $searchEndTs = $endDate->getTimestamp();
