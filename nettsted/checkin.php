@@ -67,7 +67,7 @@
                                             echo ("<tr><td>Romtype: $row4[1]</td></tr>");
                                         }
                                     }
-                                    echo("<tr><td>Fra-Til: $fromdate[$nr] - $todate[$nr]<input name='ID' type='text' value='$bookid[$nr]'></td><td><input type='submit' value='Sjekk inn' name='roombutton' id='roombutton'></td></tr>");
+                                    echo("<tr><td>Fra-Til: $fromdate[$nr] - $todate[$nr]<input name='ID' type='hidden' value='$bookid[$nr]'></td><td><input type='submit' value='Sjekk inn' name='roombutton' id='roombutton'></td></tr>");
                                     echo "</form>";
 
                                 } else {
