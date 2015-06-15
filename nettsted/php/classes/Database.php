@@ -63,6 +63,10 @@ class Database {
         $customerOrderID = $this->getCustomerOrderID($orderReference);
         $hotelRoomTypeID = $this->getHotelRoomTypeID($hotelID, $roomTypeID);
 
+        // Setting time to 00:00:00
+        $startDate->setTime(0, 0, 0);
+        $endDate->setTime(0, 0, 0);
+
         // Formatting the dates
         $sqlStartDate = $startDate->format("Y-m-d");
         $sqlEndDate = $endDate->format("Y-m-d");
@@ -134,7 +138,9 @@ class Database {
         while($row = mysqli_fetch_assoc($result)) {
             $id = intval($row["ID"]);
             $startDate = new DateTime($row["FromDate"]);
+            $startDate->setTime(0, 0, 0);
             $endDate = new DateTime($row["ToDate"]);
+            $endDate->setTime(0, 0, 0);
             $roomID = $row["RoomID"];
 
             array_push($bookings, new Booking($id, $startDate, $endDate, $roomID));
