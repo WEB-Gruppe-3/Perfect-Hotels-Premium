@@ -76,7 +76,7 @@ $hotels = $db->getHotels();
             <div class="hotelPresentation">
                 <h2 id="hotelTitle"></h2>
                 <img id="hotelImage" width="600" height="300" src="">
-                <p id="hotelDescription">Hotell beskrivelse...</p>
+                <p id="hotelDescription"></p>
             </div>
 
             <div class="roomPresentation">
