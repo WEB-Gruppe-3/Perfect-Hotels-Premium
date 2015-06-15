@@ -175,8 +175,7 @@ function getSearchJSON(Database $dbApi, $hotelID, $roomTypeID, DateTime $startDa
         //   OR the showSearchResults startDate must be after the booked endDate.
 
         // Check if the current booking collides with showSearchResults parameters.
-        if(false === (($searchStartTs < $bookStartTs && $searchEndTs < $bookStartTs) ||
-            ($searchStartTs > $bookEndTs)) ) {
+        if( $searchEndTs > $bookStartTs && $searchStartTs < $bookEndTs ) {
             // If so, increment the number of busy bookings.
             $numOfBusyBookings++;
         }
