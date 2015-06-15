@@ -1,6 +1,108 @@
 <?php require_once("template/start.html");
 require_once("../nettsted/php/classes/Database.php");
 $dbApi = new Database();
+
+function checkrooms($data) {
+    $dbApi = new Database();
+    //checking how many rooms there are of that type
+    $rooms=0;
+    $result = $dbApi->getALLRows("Room");
+    while($row = mysqli_fetch_row($result)) {
+        if ($row[2]==$data["HotelRoomTypeID"]){
+            $rooms++;
+        }
+    }
+    //getting data from all bookings with same HotelRoomTypeID, except for the one we are trying to edit.
+    $fromdate = array();
+    $todate = array();
+    $bookingid = array();
+    $result = $dbApi->getALLRows("Booking");
+    while($row = mysqli_fetch_row($result)) {
+        if ($row[0] != $data["ID"] && $row[4] == $data["HotelRoomTypeID"]) {
+            $bookingid[]=$row[0];
+            $fromdate[]=$row[1];
+            $todate[]=$row[2];
+        }
+    }
+    // Tar bort bookinger som er før eller etter gitt tidsramme
+    $validbookings = array();
+    $validfromdate = array();
+    $validtodate = array();
+    $rows=count($fromdate);
+    $nr=0;
+    for ($x=1;$x<=$rows;$x++) {
+        if ($data["FromDate"] >= $todate[$nr] || $data["ToDate"] <= $fromdate[$nr]) {
+            echo "$bookingid[$nr]<br>";
+        } else {
+            $validbookings[]=$bookingid[$nr];
+            $validfromdate[]=$fromdate[$nr];
+            $validtodate[]=$todate[$nr];
+        }
+        $nr++;
+    }
+    //Fikser slik at hvis en rad slutter før en annen begynner blir den sett på som en oppføring.
+
+    $rows=count($validbookings);
+    $doublerooms=array();
+    $nr=0;
+    for ($x=1;$x<=$rows;$x++) {
+        $nr2=0;
+        for ($y = 1; $y <= $rows; $y++) {
+            if ($validbookings[$nr2] == $validbookings[$nr2] ) {
+                echo "$nr : $nr2 Booking id:$validbookings[$nr2] $validfromdate[$nr] == $validtodate[$nr2]<br>";
+                if ($validfromdate[$nr] == $validtodate[$nr2]){
+                    $doublerooms[]=$bookingid[$nr2];
+                    //echo "" . $fromdate[$nr] . " From<br>";
+                    //echo "" . $todate[$nr2] . " To<br>";
+                    //echo "" . $bookingid[$nr2] . " To<br>";
+                }
+            }
+            $nr2++;
+        }
+        $nr++;
+        echo "<br>";
+    }
+
+    $clean=array();
+    $rows=count($doublerooms);
+    $nr=0;
+    for ($x=1;$x<=$rows;$x++) {
+        if (!in_array($doublerooms[$nr], $clean)) {
+            $clean[] = $doublerooms[$nr];
+        }
+        $nr++;
+    }
+
+
+    $cleaned = count($clean);
+    $validbooking = count($validbookings);
+
+
+    echo "Total rooms: $rooms <br>";
+    echo "Valid booking: $validbooking <br>";
+    echo "cleaned: $cleaned <br>";
+
+    echo "<br> validbookings";
+    print_r($validbookings);
+    echo "<br>";
+    print_r($doublerooms);
+    echo "<br>";
+    print_r($clean);
+    echo "<br>";
+    print_r($bookingid);
+    echo "<br>";
+    print_r($fromdate);
+    echo "<br>";
+    print_r($todate);
+    echo "<br>";
+    print_r($data);
+
+    $availablerooms = $rooms - ($validbooking-$cleaned);
+    echo "Available rooms: $availablerooms <br>";
+
+    return $availablerooms;
+}
+
 ?>
     <!-- Start of content -->
     <div id="content">
@@ -121,47 +223,7 @@ $dbApi = new Database();
                     }
                 }
                 $data = array( "ID" => "$bookingid", "FromDate" => "$newfromdate", "ToDate" => "$newtodate", "HotelRoomTypeID" => "$hotelroomtype" );
-                $rooms=0;
-                $result = $dbApi->getALLRows("Room");
-                while($row = mysqli_fetch_row($result)) {
-                    if ($row[2]==$hotelroomtype){
-                        $rooms++;
-                    }
-                }
-                $fromdate = array();
-                $todate = array();
-                $newbookingid = array();
-                $result = $dbApi->getALLRows("Booking");
-                while($row = mysqli_fetch_row($result)) {
-                    if ($row[4]==$hotelroomtype){
-                        $fromdate[]=$row[1];
-                        $todate[]=$row[2];
-                        $newbookingid[]=$row[0];
-                    }
-                }
-                $rows=count($fromdate);
-                $occupiedrooms=0;
-                $nr=0;
-                for ($x=1;$x<=$rows;$x++) {
-                    if ($newfromdate <= $fromdate[$nr] && $newtodate <= $fromdate[$nr] || $newfromdate >= $todate[$nr]) {
-                        if ($newfromdate == $fromdate[$nr] && $newtodate == $todate[$nr] && $bookingid != $newbookingid[$nr] ) {
-                            $occupiedrooms++;
-                        }
-                        else {
-                            @$freerooms++;
-                        }
-                    }
-                    elseif ($bookingid != $newbookingid[$nr]) {
-                        $occupiedrooms++;
-                    }
-                    $nr++;
-                }
-                echo "Rooms: $rooms <br>";
-                echo "Occupied rooms; $occupiedrooms <br>";
-                $availablerooms = $rooms-$occupiedrooms;
-                echo "Available Rooms: $availablerooms <br>";
-                echo "Bookingid: $bookingid <br>";
-                print_r($newbookingid);
+                $availablerooms = checkrooms($data);
                 if ($availablerooms >= 1 ) {
                     $result = $dbApi->updateRow("Booking", $bookingid, $data);
                     if($result) {
