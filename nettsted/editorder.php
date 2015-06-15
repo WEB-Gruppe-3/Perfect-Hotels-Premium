@@ -62,7 +62,7 @@ $dbApi = new Database();
                                 print ("Bestilling nummer $x<br>");
                                 print ("<table><form method='post' action='' id='editform' name='editform'><input type='hidden' name='BookingID' value=$foo[ID]>");
                                 print ("<tr><td>Hotel</td>");
-                                print ("<td><select name=HotelID type='input'>");
+                                print ("<td><select name='HotelID' type='input'>");
                                 $result = $dbApi->getAllRows("Hotel");
                                 while ($row = mysqli_fetch_row($result)) {
                                     if ($row[0] == $bar[HotelID]) {
@@ -73,7 +73,7 @@ $dbApi = new Database();
                                 }
                                 print ("</select></td></tr>");
                                 print ("<tr><td>Romtype</td>");
-                                print ("<td><select name=RoomTypeID type='input'>");
+                                print ("<td><select name='RoomTypeID' type='input'>");
                                 $result = $dbApi->getAllRows("RoomType");
                                 while ($row = mysqli_fetch_row($result)) {
                                     if ($row[0] == $bar[RoomTypeID]) {
@@ -183,5 +183,7 @@ $dbApi = new Database();
     <script src="js/jquery-ui-1.11.4/datepicker-no.js"></script>
     <link rel="stylesheet" href="js/jquery-ui-1.11.4/jquery-ui.css">
     <script src="js/editorder.js"></script>
+
+    <link rel="stylesheet" href="css/editorder.css">
     <!-- End of content -->
 <?php require_once("template/end.html") ?>
