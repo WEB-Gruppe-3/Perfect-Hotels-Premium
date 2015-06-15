@@ -60,7 +60,7 @@ $(function() {
 
     // Setting and configuring date picker
     startDateInput.datepicker({ minDate: 0 });
-    endDateInput.datepicker({ minDate: 0 });
+    endDateInput.datepicker({ minDate: 1 });
 
     $.datepicker.setDefaults(
         $.extend(
