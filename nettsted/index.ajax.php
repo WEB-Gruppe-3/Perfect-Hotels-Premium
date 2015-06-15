@@ -153,40 +153,7 @@ function printRoomTypes(Database $dbApi, $hotelID) {
 function getSearchJSON(Database $dbApi, $hotelID, $roomTypeID, DateTime $startDate, DateTime $endDate) {
     $searchData = array();
 
-    /** Number of available rooms */
-    $searchStartTs = $startDate->getTimestamp();
-    $searchEndTs = $endDate->getTimestamp();
-
-    // Get all non-expired bookings
-    $bookings = $dbApi->getActiveBookings($hotelID, $roomTypeID);
-
-    // Count how many bookings already exists in that timeframe.
-    $numOfBusyBookings = 0;
-    foreach($bookings as $book) {
-        $bookStartDate = $book->getStartDate();
-        $bookEndDate = $book->getEndDate();
-
-        $bookStartTs = $bookStartDate->getTimestamp();
-        $bookEndTs = $bookEndDate->getTimestamp();
-
-        // Now, lets find out if this booking collides with the desired showSearchResults.
-        // To avoid collision, the following must be true:
-        // - The showSearchResults startDate and endDate must be before the booked startDate,
-        //   OR the showSearchResults startDate must be after the booked endDate.
-
-        // Check if the current booking collides with showSearchResults parameters.
-        if( $searchEndTs > $bookStartTs && $searchStartTs < $bookEndTs ) {
-            // If so, increment the number of busy bookings.
-            $numOfBusyBookings++;
-        }
-    }
-
-    // Get the total number of rooms for this hotel's roomtype.
-    $rooms = $dbApi->getRooms($hotelID, $roomTypeID);
-    $numOfRooms = count($rooms);
-
-    // Add the num of avail rooms to showSearchResults data.
-    $numOfAvailableRooms = $numOfRooms - $numOfBusyBookings;
+    $numOfAvailableRooms = $dbApi->getNumOfAvailableRooms($hotelID, $roomTypeID, $startDate, $endDate);
 
     if($numOfAvailableRooms < 0) {
         $searchData["numRooms"] = 0;
