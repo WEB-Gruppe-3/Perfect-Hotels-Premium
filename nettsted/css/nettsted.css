@@ -3,6 +3,7 @@ html, body {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+	background:#dfeeff;
 
 	font-family: "Open Sans", "Helvetica", sans-serif;
 	color: black;
@@ -62,7 +63,7 @@ html, body {
 
 #footer {
 	padding: 10px 10px 10px 10px;
-	background-color: #54788c;
+	background-color: #d7d0c6;
 }
 
 /* ########################################## Navigation ########################################## */
