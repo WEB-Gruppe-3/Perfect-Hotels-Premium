@@ -2,6 +2,8 @@
  * JS Stuff for index.php
  */
 
+/* ########################### SCRIPT START ########################### */
+
 startDateInput = $("#startDateInput");
 startDateInput1 = $("#startDateInput1");
 startDateInput2 = $("#startDateInput2");
@@ -30,7 +32,6 @@ editstartDateInput = $("#editstartDateInput");
 editendDateInput = $("#editendDateInput");
 
 $(function() {
-
     // Setting and configuring date picker
     startDateInput.datepicker({ minDate: 0 });
     startDateInput1.datepicker({ minDate: 0 });
@@ -65,4 +66,71 @@ $(function() {
         )
     );
 
+    // Setting onClick @ sjekk button
+    var sjekkButton = $("#sjekkButton");
+
+    sjekkButton.click(function(event) {
+        event.preventDefault();
+        requestNumberOfAvailableRooms()
+    });
+
 });
+/* ########################### SCRIPT END ########################### */
+
+
+
+/* ########################### AJAX REQUESTS START ########################### */
+function requestNumberOfAvailableRooms() {
+    // Get the fucking dataz
+    var hotelID = $("[name = 'HotelID']").val();
+    var roomTypeID = $("[name = 'RoomTypeID']").val();
+    var startDate = $("#startDateInput").val(); // format: yyyy-mm-dd
+    var endDate = $("#endDateInput").val();
+
+    $.ajax({
+        // The URL for the request
+        url: "editorder.ajax.php",
+
+        // The data to send (will be converted to a query string)
+        data: {
+            requestedData: "getNumAvailRooms",
+            hotelID: hotelID,
+            roomTypeID: roomTypeID,
+            startDate: startDate,
+            endDate: endDate
+        },
+
+        // Whether this is a POST or GET request
+        type: "GET",
+
+        // The type of data we expect back
+        dataType : "json",
+
+        // Code to run if the request fails; the raw request and
+        // status codes are passed to the function
+        error: function( xhr, status, errorThrown ) {
+            console.log("Error from requestNumberOfAvailableRooms() in editorder.js");
+            console.log( "Error: " + errorThrown );
+            console.log( "Status: " + status );
+            console.dir( xhr );
+        },
+
+        // On completion, set data from JSON
+        success: function( json ) {
+            var htmlElementMsg = $("#sjekkAvailRoomsMsg");
+            var msg = "";
+
+            if(json.numRooms > 0) {
+                htmlElementMsg.css("background-color", "green");
+                msg = "Det finnes ledige rom i denne perioden :)"
+            } else {
+                htmlElementMsg.css("background-color", "red");
+                msg = "Det ikke finnes ledige rom i denne perioden :("
+            }
+
+            htmlElementMsg.html(msg);
+        }
+    });
+}
+
+/* ########################### AJAX REQUESTS END ########################### */
