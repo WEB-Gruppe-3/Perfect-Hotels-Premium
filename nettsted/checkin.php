@@ -79,7 +79,7 @@
                                     $result = $dbApi->getRow("Room", $id);
                                     while ($row = mysqli_fetch_row($result)) {
                                         print ("<tr><td><strong>Bestilling $x: </strong></td></tr>");
-                                        echo("<tr><td><strong style='color:red'>Du har allerede sjekket inn på romid: $row[1]</strong></td></tr>");
+                                        echo("<tr><td><strong style='color:red'>Du har allerede sjekket inn på rom: $row[1]</strong></td></tr>");
                                     }
                                 }
                         }
@@ -141,7 +141,7 @@
                         $result = $dbApi->getRow("Room", $id);
                         while ($row = mysqli_fetch_row($result)) {
                             print ("<tr><td>Bestilling $x</td></tr>");
-                            echo("<tr><td><strong style='color:red'>Du har allerede sjekket inn på romid: $row[1]</strong></td></tr>");
+                            echo("<tr><td><strong style='color:red'>Du har allerede sjekket inn på rom: $row[1]</strong></td></tr>");
                         }
                     }
                 }

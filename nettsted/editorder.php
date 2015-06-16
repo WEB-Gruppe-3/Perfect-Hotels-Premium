@@ -185,7 +185,7 @@ function checkrooms($data) {
                                 $result = $dbApi->getRow("Room", $id);
                                 while ($row = mysqli_fetch_row($result)) {
                                     print ("<tr><td><strong>Bestilling $x: </strong></td></tr>");
-                                    echo("<tr><td><strong style='color:red'>Du har allerede booket romid: $row[1]</strong></td></tr>");
+                                    echo("<tr><td><strong style='color:red'>Du har allerede sjekket inn på rom: $row[1]</strong></td></tr>");
                                 }
                             }
                         }
