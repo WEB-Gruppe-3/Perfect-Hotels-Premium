@@ -39,32 +39,32 @@ $(function() {
     });
 
     // Setting and configuring date picker
-    startDateInput.datepicker();
-    startDateInput1.datepicker();
-    startDateInput2.datepicker();
-    startDateInput3.datepicker();
-    startDateInput4.datepicker();
-    startDateInput5.datepicker();
-    startDateInput6.datepicker();
-    startDateInput7.datepicker();
-    startDateInput8.datepicker();
-    startDateInput9.datepicker();
-    startDateInput10.datepicker();
+    startDateInput.datepicker({ minDate: 0 });
+    startDateInput1.datepicker({ minDate: 0 });
+    startDateInput2.datepicker({ minDate: 0 });
+    startDateInput3.datepicker({ minDate: 0 });
+    startDateInput4.datepicker({ minDate: 0 });
+    startDateInput5.datepicker({ minDate: 0 });
+    startDateInput6.datepicker({ minDate: 0 });
+    startDateInput7.datepicker({ minDate: 0 });
+    startDateInput8.datepicker({ minDate: 0 });
+    startDateInput9.datepicker({ minDate: 0 });
+    startDateInput10.datepicker({ minDate: 0 });
 
-    endDateInput.datepicker();
-    endDateInput1.datepicker();
-    endDateInput2.datepicker();
-    endDateInput3.datepicker();
-    endDateInput4.datepicker();
-    endDateInput5.datepicker();
-    endDateInput6.datepicker();
-    endDateInput7.datepicker();
-    endDateInput8.datepicker();
-    endDateInput9.datepicker();
-    endDateInput10.datepicker();
+    endDateInput.datepicker({ minDate: 1 });
+    endDateInput1.datepicker({ minDate: 1 });
+    endDateInput2.datepicker({ minDate: 1 });
+    endDateInput3.datepicker({ minDate: 1 });
+    endDateInput4.datepicker({ minDate: 1 });
+    endDateInput5.datepicker({ minDate: 1 });
+    endDateInput6.datepicker({ minDate: 1 });
+    endDateInput7.datepicker({ minDate: 1 });
+    endDateInput8.datepicker({ minDate: 1 });
+    endDateInput9.datepicker({ minDate: 1 });
+    endDateInput10.datepicker({ minDate: 1 });
 
-    editstartDateInput.datepicker();
-    editendDateInput.datepicker();
+    editstartDateInput.datepicker({ minDate: 0 });
+    editendDateInput.datepicker({ minDate: 1 });
 
     $.datepicker.setDefaults(
         $.extend(
