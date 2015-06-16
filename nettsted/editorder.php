@@ -3,7 +3,12 @@ require_once("../nettsted/php/classes/Database.php");
 $dbApi = new Database();
 
 
-
+function valid($data) {
+    if ($data["FromDate"] >= $data["ToDate"]){
+        $valid = "Fra dato er etter Til dato, det går jo ikke";
+    }
+    return @$valid;
+}
 
 
 function checkrooms($data) {
@@ -273,8 +278,9 @@ function checkrooms($data) {
                     }
                 }
                 $data = array( "ID" => "$bookingid", "FromDate" => "$newfromdate", "ToDate" => "$newtodate", "HotelRoomTypeID" => "$hotelroomtype" );
+                $valid = valid($data);
                 $availablerooms = checkrooms($data);
-                if ($availablerooms >= 1 ) {
+                if ($availablerooms >= 1 && !$valid) {
                     $result = $dbApi->updateRow("Booking", $bookingid, $data);
                     if($result) {
                         echo("<p style='color:green'><strong>Din booking er nå endret.</strong></p>");
@@ -282,6 +288,9 @@ function checkrooms($data) {
                     else {
                         echo ("<br><span style='color:red'><strong>Oh noes! it FAILED!</strong></span>");
                     }
+                }
+                else if (isset($valid)) {
+                    echo ("<br><span style='color:red'><strong>$valid: $newfromdate - $newtodate </strong></span>");
                 }
                 else {
                     echo ("<br><span style='color:red'><strong>Oh nei! Det finnes ikke flere ledige rom i perioden: $newfromdate - $newtodate </strong></span>");
