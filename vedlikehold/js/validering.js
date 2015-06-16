@@ -43,6 +43,34 @@ $(function() {
             case "booking":
                 validateInputsBooking(addDiv, addForm);
                 break;
+
+            case "customerorder":
+                validateInputsCustomerOrder(addDiv, addForm);
+                break;
+
+            case "hotel":
+                validateInputsHotel(addDiv, addForm);
+                break;
+
+            case "hotelroomtype":
+                validateInputsHotelRoomType(addDiv, addForm);
+                break;
+
+            case "image":
+                validateInputsImage(addDiv, addForm);
+                break;
+
+            case "maintenanceuser":
+                validateInputsMaintenanceUser(addDiv, addForm);
+                break;
+
+            case "room":
+                validateInputsRoom(addDiv, addForm);
+                break;
+
+            case "roomtype":
+                validateInputsRoomType(addDiv, addForm);
+                break;
         }
     };
 
@@ -55,6 +83,34 @@ $(function() {
         switch(selectedTable) {
             case "booking":
                 validateInputsBooking(editDiv, editForm);
+                break;
+
+            case "customerorder":
+                validateInputsCustomerOrder(editDiv, editForm);
+                break;
+
+            case "hotel":
+                validateInputsHotel(editDiv, editForm);
+                break;
+
+            case "hotelroomtype":
+                validateInputsHotelRoomType(editDiv, editForm);
+                break;
+
+            case "image":
+                validateInputsImage(editDiv, editForm);
+                break;
+
+            case "maintenanceuser":
+                validateInputsMaintenanceUser(editDiv, editForm);
+                break;
+
+            case "room":
+                validateInputsRoom(editDiv, editForm);
+                break;
+
+            case "roomtype":
+                validateInputsRoomType(editDiv, editForm);
                 break;
         }
     };
@@ -105,21 +161,10 @@ $(function() {
             startDateInput = container.find("#editstartDateInput");
             endDateInput = container.find("#editendDateInput");
 
-            // Adding knapp-data to $_POST because it wont do it otherwise.
-            var input = $("<input>")
-                .attr("type", "hidden")
-                .attr("name", "updateknapp").val("Update");
-            form.append($(input));
         }
         else {
             startDateInput = container.find("#startDateInput");
             endDateInput = container.find("#endDateInput");
-
-            // Adding knapp-data to $_POST because it wont do it otherwise.
-            var input = $("<input>")
-                .attr("type", "hidden")
-                .attr("name", "addknapp").val("Add");
-            form.append($(input));
         }
 
         // Values
@@ -168,11 +213,11 @@ $(function() {
 
         // IF ALL INPUTS ARE VALID HERE, DO FINAL DATE CHECK.
         if(isDatesValid && isRoomValid) {
-            validateInputsBookingAjaxCheckDates(startDateString, endDateString);
+            validateInputsBookingAjaxCheckDates(startDateString, endDateString, form, startDateInput, endDateInput);
         }
     }
 
-    function validateInputsBookingAjaxCheckDates(startDateString, endDateString) {
+    function validateInputsBookingAjaxCheckDates(startDateString, endDateString, form, customStartDateInput, customEndDateInput) {
         $.ajax({
             url: "index.ajax.php",
 
@@ -198,15 +243,12 @@ $(function() {
                 console.log("Ajax date check. isValid = " + data.isValid +" Msg = "+ data.message);
 
                 if(data.isValid) {
-                    console.log("DATES ARE VALID!");
                     // If the dates are valid, submit the form.
-                    addForm.submit();
+                    submitForm(form);
                 } else {
-                    console.log("INVALID DATES");
-
                     showError(data.message);
-                    startDateInput.css("background-color", "red");
-                    endDateInput.css("background-color", "red");
+                    customStartDateInput.css("background-color", badColor);
+                    customEndDateInput.css("background-color", badColor);
                 }
             }
         });
@@ -215,27 +257,72 @@ $(function() {
     /**
      * Table: CustomerOrder
      */
-    function validateInputsCustomerOrder(container) {
+    function validateInputsCustomerOrder(container, form) {
         var referenceInput = container.find("[name=Reference]");
+
+        var referenceValue = referenceInput.val();
+
+        // Check if the string is 32 characters long
+        if(referenceValue.length != 32) {
+            referenceInput.css("background-color", badColor);
+            showError("Referansen må være nøyaktig 32 bokstaver!")
+        } else {
+            referenceInput.css("background-color", goodColor);
+            submitForm(form);
+        }
     }
 
     /**
      * Table: Hotel
      */
-    function validateInputsHotel(container) {
+    function validateInputsHotel(container, form) {
         var nameInput = container.find("[name=Name]");
         var descriptionInput = container.find("[name=Description]");
+
+        var isNameValid = false;
+        var isDescriptValid = false;
+
+        // Name should be max 45 chars
+        if(nameInput.val().length > 45 || nameInput.val() == "") {
+            nameInput.css("background-color", badColor);
+            showError("Navnet må være mellom 1 og 45 bokstaver!")
+        }
+        else {
+            nameInput.css("background-color", goodColor);
+            isNameValid = true;
+        }
+
+        // Description should be max 500 chars
+        if(descriptionInput.val().length > 500 || descriptionInput.val() == "") {
+            descriptionInput.css("background-color", badColor);
+            showError("Beskrivelsen må være mellom 1 og 500 bokstaver!")
+        } else {
+            descriptionInput.css("background-color", goodColor);
+            isDescriptValid = true;
+        }
+
+        if(isNameValid && isDescriptValid) {
+            console.log("hotel is valid");
+            submitForm(form);
+        }
     }
 
     /**
      * Table: HotelRoomType
      */
-    // Needs no validation
+    function validateInputsHotelRoomType(container, form) {
+        var roomTypeIdInput = $("[name=RoomTypeID]");
+        var hotelIdInput = $("[name=HotelID]");
+
+
+
+    }
+
 
     /**
      * Table: Image
      */
-    function validateInputsImage(container) {
+    function validateInputsImage(container, form) {
         var urlInpur = container.find("[name=URL]");
         var descriptionInput = container.find("[name=Description]");
     }
@@ -243,7 +330,7 @@ $(function() {
     /**
      * Table: MaintenanceUser
      */
-    function validateInputsMaintenanceUser(container) {
+    function validateInputsMaintenanceUser(container, form) {
         var usernameInput = container.find("[name=UserName]");
         var passwordInput = container.find("[name=Password]");
     }
@@ -251,20 +338,38 @@ $(function() {
     /**
      * Table: Room
      */
-    function validateInputsRoom(container) {
+    function validateInputsRoom(container, form) {
         var roomNumberInput = container.find("[name=RoomNumber]");
     }
 
     /**
      * Table: RoomType
      */
-    function validateInputsRoomType(container) {
+    function validateInputsRoomType(container, form) {
         var nameInput = container.find("[name=Name]");
         var numBedsInput = container.find(["name=NumOfBeds"]);
         var priceInput = container.find("[name=Price]");
         var descriptionInput = container.find("[name=Description]");
     }
 
+    /**
+     * Adds a button to the form, then submits it
+     */
+    function submitForm(form) {
+        var input = $("<input>").attr("type", "hidden");
+
+        switch(form.attr("id")) {
+            case "addForm":
+                input.attr("name", "addknapp").val("Add");
+                break;
+
+            case "EditForm":
+                input.attr("name", "updateknapp").val("Update");
+                break;
+        }
+        form.append(input);
+        form.submit();
+    }
 
 
 }); // End $
