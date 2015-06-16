@@ -206,8 +206,9 @@ if (@$_POST['deleteknapp']) {
             </form>
 
         </div>
-        <div id="innholdRight"><?php if($valgt_table){require_once("list.php");}?></div>
         <div id="popup"><?php require_once("edit.php") ?></div>
+        <div id="innholdRight"><?php if($valgt_table){require_once("list.php");}?></div>
+
     </div> <!-- Content end -->
     <!-- Hidden element with session id -->
     <form id="hiddenFormSessionID" hidden><?php print(session_id()) ?></form>

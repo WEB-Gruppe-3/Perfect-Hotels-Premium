@@ -164,7 +164,7 @@ function checkrooms($data) {
                             if ($row[3] == "0") {
                                 echo("<table>");
                                 echo("<form method='post' action='' id='roomform' name='roomform'><input name='Bookings' type='hidden' value='$bookings'>");
-                                echo("<tr><td><strong>Bestilling $x: </strong></td></tr>");
+                                echo("<tr><td><strong>Bestilling $x: </strong><input name='Bestilling' type='hidden' value='$x'></td></tr>");
                                 $result2 = $dbApi->getRow("hotelroomtype", $hotelroomtypeid[$nr]);
                                 while ($row2 = mysqli_fetch_row($result2)) {
                                     $result3 = $dbApi->getRow("hotel", $row2[2]);
@@ -176,7 +176,7 @@ function checkrooms($data) {
                                         echo ("<tr><td>Romtype: $row4[1]</td></tr>");
                                     }
                                 }
-                                echo("<tr><td>Fra-Til: $fromdate[$nr] - $todate[$nr]<input name='ID' type='hidden' value='$bookid[$nr]'></td><td><input type='submit' value='Endre' name='endrebutton' id='endrebutton'><input type='submit' value='Slett' name='deleteknapp' id='deleteknapp'></td></tr>");
+                                echo("<tr><td>Fra-Til: $fromdate[$nr] - $todate[$nr]<input name='ID' type='hidden' value='$bookid[$nr]'></td><td><input type='submit' value='Endre' name='endrebutton' id='endrebutton'><input type='submit' value='Slett' name='deleteknapp' id='deleteknapp' onclick=\"return confirm('Er du sikker på du vil slette bestillingen?')\"></td></tr>");
                                 echo "</form>";
 
                             } else {
@@ -201,6 +201,7 @@ function checkrooms($data) {
             @$endrebutton=$_POST ["endrebutton"];
             if ($endrebutton) {
                 $bookid=$_POST ["ID"];
+                $bestilling=$_POST ["Bestilling"];
                 $result = $dbApi->getRow("Booking", $bookid);
                 while ($row = mysqli_fetch_row($result)) {
                     if ($row[3] == "0") {
@@ -218,7 +219,7 @@ function checkrooms($data) {
                         while ($row = mysqli_fetch_row($result)) {
                             $roomtype = $row[1];
                         }
-                        print ("Bestilling nummer $bookid<br>");
+                        print ("Bestilling nummer $bestilling<br>");
                         print ("<table><form method='post' action='' id='editform' name='editform'><input type='hidden' name='BookingID' value=$foo[ID]>");
                         print ("<tr><td>Hotel</td>");
                         print ("<td><select name=HotelID type='input'>");
@@ -245,7 +246,7 @@ function checkrooms($data) {
                         print ("<tr><td>From</td><td><input size='9' id='startDateInput' type='text' name='FromDate' value=$foo[FromDate] readonly required></td></tr>");
                         print ("<tr><td>To</td><td><input size='9' id='endDateInput' type='text' name='ToDate' value=$foo[ToDate] readonly required></td>");
                         print ("<td><input type='button' value='Sjekk' name='sjekkButton' id='sjekkButton'></td></tr>");
-                        print ("<tr><td></td><td id='sjekkAvailRoomsMsg'></td><td><input type='submit' value='Oppdater' name='checkbutton' id='checkbutton'></td></tr></form></table><br>");
+                        print ("<tr><td></td><td id='sjekkAvailRoomsMsg'></td><td><input type='submit' value='Oppdater' name='checkbutton' id='checkbutton' onclick=\"return confirm('Er du sikker på du vil endre bestillingen?')\"></td></tr></form></table><br>");
                     } else {
                         $id = $row[3];
                         $result = $dbApi->getRow("Room", $id);

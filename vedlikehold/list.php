@@ -1,3 +1,4 @@
+<p id='Tableheadline'>List View</p>
 <table>
     <tr>
         <?php $nr=0; for ($x=1;$x<=$rows;$x++) { echo("<th>$column[$nr]</th>"); $nr++; } ?>
@@ -14,7 +15,7 @@
             $nr++;
         }
         echo ("<td><input type='submit' value='Edit' name='editknapp' id='editknapp' onclick='edit()'>
-                            <input type='submit' value='Delete' name='deleteknapp' id='deleteknapp'>
+                            <input type='submit' value='Delete' name='deleteknapp' id='deleteknapp' onclick=\"return confirm('Er du sikker på du vil slette denne raden?')\">
                           </td><input type='hidden' size='2'name='rowID' value='$row[0]'></form></tr>");
     }
     ?>

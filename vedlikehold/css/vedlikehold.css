@@ -179,6 +179,15 @@ table {
     color:#000000;
 }
 
+#Tableheadline {
+    font: 18px/16px "trebuchet ms", arial, helvetica, sans;
+    text-align: center;
+    letter-spacing: 1px;
+    margin: 0 0 0;
+    padding: 10px 0 5px 0;
+    color:#000000;
+}
+
 #feedback {
     height: 2em;
 }
