@@ -58,7 +58,7 @@
                                 if ($row[3] == "0") {
                                     echo("<table>");
                                     echo("<form method='post' action='' id='roomform' name='roomform'><input name='Bookings' type='hidden' value='$bookings'>");
-                                    echo("<tr><td><strong>Bestilling $x: </strong></td></tr>");
+                                    echo("<tr><td><strong>Bestilling $x: </strong><input name='Bestilling' type='hidden' value='$x'></td></tr>");
                                     $result2 = $dbApi->getRow("hotelroomtype", $hotelroomtypeid[$nr]);
                                     while ($row2 = mysqli_fetch_row($result2)) {
                                         $result3 = $dbApi->getRow("hotel", $row2[2]);
@@ -94,6 +94,7 @@
             }
             @$roombutton=$_POST ["roombutton"];
             if ($roombutton) {
+                $bestilling=$_POST ["Bestilling"];
                 $result = $dbApi->getALLRows("Booking");
                 while($row = mysqli_fetch_row($result)) {
                     if ($row[3]!="0"){
@@ -107,7 +108,7 @@
                     if ($row[3] == "0") {
                         echo("<table>");
                         echo("<form method='post' action='' id='roomform' name='roomform'>");
-                        echo("<tr><td><strong>Bestilling $bookid: </strong></td></tr>");
+                        echo("<tr><td><strong>Bestilling $bestilling: </strong></td></tr>");
                         $result2 = $dbApi->getRow("hotelroomtype", $row[4]);
                         while ($row2 = mysqli_fetch_row($result2)) {
                             $result3 = $dbApi->getRow("hotel", $row2[2]);
@@ -140,7 +141,7 @@
                         $id = $row[3];
                         $result = $dbApi->getRow("Room", $id);
                         while ($row = mysqli_fetch_row($result)) {
-                            print ("<tr><td>Bestilling $x</td></tr>");
+                            print ("<tr><td>Bestilling $bestilling</td></tr>");
                             echo("<tr><td><strong style='color:red'>Du har allerede sjekket inn på rom: $row[1]</strong></td></tr>");
                         }
                     }
