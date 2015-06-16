@@ -1,3 +1,5 @@
+<div id="jsValidateFeedback">Placeholder JS validerings feedback text</div>
+
 <?php
 @$editknapp=$_POST ["editknapp"];
 @$updateknapp=$_POST ["updateknapp"];
