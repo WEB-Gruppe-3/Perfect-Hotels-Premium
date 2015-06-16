@@ -251,7 +251,7 @@ function checkrooms($data) {
                         $result = $dbApi->getRow("Room", $id);
                         while ($row = mysqli_fetch_row($result)) {
                             print ("Bestilling nummer $x<br>");
-                            echo("<p style='color:red'><strong>Du har allerede booket rom $row[1], du kan ikke endre din bestilling.</strong></p>");
+                            echo("<p style='color:red'><strong>Du har allerede sjekket inn på rom $row[1], du kan ikke endre din bestilling.</strong></p>");
                         }
                     }
                 }
@@ -276,14 +276,14 @@ function checkrooms($data) {
                 if ($availablerooms >= 1 ) {
                     $result = $dbApi->updateRow("Booking", $bookingid, $data);
                     if($result) {
-                        echo("<p style='color:green'><strong>Your booking has changed succesfully</strong></p>");
+                        echo("<p style='color:green'><strong>Din booking er nå endret.</strong></p>");
                     }
                     else {
                         echo ("<br><span style='color:red'><strong>Oh noes! it FAILED!</strong></span>");
                     }
                 }
                 else {
-                    echo ("<br><span style='color:red'><strong>Oh noes! There's no more available rooms left in this time period: $newfromdate - $newtodate </strong></span>");
+                    echo ("<br><span style='color:red'><strong>Oh nei! Det finnes ikke flere ledige rom i perioden: $newfromdate - $newtodate </strong></span>");
                 }
             }
 
