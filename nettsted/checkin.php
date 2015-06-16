@@ -7,7 +7,7 @@
         <div id="innholdLeft">
             <h3>Vennligst fyll inn referanse kode:</h3>
             <form method="post" action="" id="checkinform" name="checkinform">
-                <input name="search" type="search">
+                <input name="search" type="search" required="">
                 <input type='submit' value='OK' name='checkinbutton' id='checkinbutton'>
             </form>
             <br>
@@ -18,6 +18,9 @@
             @$checkinbutton=$_POST ["checkinbutton"];
             if ($checkinbutton) {
                 @$input = $_POST['search'];
+                // Trimming spaces
+                $input = str_replace(" ", "", $input);
+
                 $column='Reference';
                 $tablename='CustomerOrder';
                 $data[$column] = $input;
@@ -163,6 +166,9 @@
 
             ?>
         </div>
-    </div>
-    <!-- End of content -->
+    </div><!-- End of content -->
+
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/checkin.js"></script>
+
 <?php require_once("template/end.html") ?>
