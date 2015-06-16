@@ -4,142 +4,175 @@
  * If the ADD button is pressed, validate the inputs for a given table within the ADDFORM.
  * If the EDIT button is pressed, validate the inputs for a given table within the EDITFORM.
  */
-
-// Constants
-goodColor = "green";
-badColor = "red";
-
-/** ************************ Script start ************************ */
 $(function() {
-    errorMessageElement = $("#jsValidateFeedback");
-    editDiv = $("#popup");
-    editForm = $("#EditForm");
-    addDiv = $("#innholdRight");
-    addForm = $("#addForm");
-    selectedTable = $("#table_list").val();
+    // Constants
+    var goodColor = "green";
+    var badColor = "red";
 
-    // Setting onClick handlers for the buttons
-    var updateKnapp = $("#updateknapp");
-    updateKnapp.click(function(event) {
-        onClickUpdate(event);
-    });
+    // Elements
+    var errorMessageElement = $("#jsValidateFeedback");
 
+    var addDiv = $("#innholdRight");
+    var addForm = $("#addForm");
     var addKnapp = $("#addknapp");
+
+    var editDiv = $("#popup");
+    var editForm = $("#EditForm");
+    var editKnapp = $("#updateknapp");
+
+    var selectedTable = $("#table_list").val();
+
+    // Setting onClick listeners for buttons
     addKnapp.click(function(event) {
-        onClickAdd(event);
+        event.preventDefault();
+        onClickAdd();
     });
 
-});
-/** ************************ Script end ************************ */
+    editKnapp.click(function(event) {
+        event.preventDefault();
+        onClickEdit();
+    });
 
-/**
- * ON-CLICK: updateKnapp
- */
-var onClickUpdate = function(event) {
-    event.preventDefault();
+    /**
+     * onClick: addKnapp
+     */
+    var onClickAdd = function() {
+        clearError();
 
-    clearError();
+        switch(selectedTable) {
+            case "booking":
+                validateInputsBooking(addDiv, addForm);
+                break;
+        }
+    };
 
-    var currentContainer = editDiv;
-    var currentForm = editForm;
+    /**
+     * onClick: editKnapp
+     */
+    var onClickEdit = function() {
+        clearError();
 
-    switch(selectedTable) {
-        case "booking":
-            validateInputsBooking(currentContainer, currentForm);
-            break;
-    }
-};
+        switch(selectedTable) {
+            case "booking":
+                validateInputsBooking(editDiv, editForm);
+                break;
+        }
+    };
 
-/**
- * ON-CLICK: addKnapp
- */
-var onClickAdd = function(event) {
-    event.preventDefault();
+    /**
+     * Show error message.
+     */
+    function showError(errorMessage) {
+        var currentText = errorMessageElement.html();
 
-    clearError();
+        if(currentText.length != 0) {
+            errorMessageElement.append(" og " + errorMessage);
+        } else {
+            errorMessageElement.append(errorMessage);
+        }
 
-    var currentContainer = addDiv;
-    var currentForm = addForm;
-
-    switch(selectedTable) {
-        case "booking":
-            validateInputsBooking(currentContainer, currentForm);
-            break;
-    }
-};
-
-/**
- * Show error message.
- */
-function showError(errorMessage) {
-    var currentText = errorMessageElement.html();
-
-    if(currentText.length != 0) {
-        errorMessageElement.append(" og " + errorMessage);
-    } else {
-        errorMessageElement.append(errorMessage);
+        errorMessageElement.show();
     }
 
-    errorMessageElement.show();
-}
-
-/**
- * Clear error message & reset color on all inputs
- */
-function clearError() {
-    errorMessageElement.html("");
-    errorMessageElement.hide();
-    $("input").css("background-color", "");
-}
-
-/**
- * ---------------------- Validate input functions ----------------------
- */
-
-/**
- * Table: Booking
- *
- * READ: Special case in booking. The date inputs in editDiv are called editstartDateInput and editendDateInput.
- */
-function validateInputsBooking(container, form) {
-    var isDatesValid = false;
-    var isRoomValid = false;
-
-    // Inputs
-    var roomDropDown = container.find("[name=RoomID]");
-    var startDateInput = null;
-    var endDateInput = null;
-
-    if(container.attr("id") === "popup") { // 'popup' is editDiv
-        startDateInput = container.find("#editstartDateInput");
-        endDateInput = container.find("#editendDateInput");
-    }
-    else {
-        startDateInput = container.find("#startDateInput");
-        endDateInput = container.find("#endDateInput");
+    /**
+     * Clear error message & reset color on all inputs
+     */
+    function clearError() {
+        errorMessageElement.html("");
+        errorMessageElement.hide();
+        $("input").css("background-color", "");
     }
 
-    // Values
-    var startDateString = startDateInput.val();
-    var endDateString = endDateInput.val();
-    var selectedRoom = roomDropDown.val();
+    /**
+     * ---------------------- Validate input functions ----------------------
+     */
 
-    // Validating dates
-    // Check for empty field.
-    if(startDateString.length < 10 && endDateString.length < 10) {
-        startDateInput.css("background-color", badColor);
-        endDateInput.css("background-color", badColor);
-        showError("Du må sette data i begge datofeltene!");
+    /**
+     * Table: Booking
+     *
+     * READ: Special case in booking. The date inputs in editDiv are called editstartDateInput and editendDateInput.
+     */
+    function validateInputsBooking(container, form) {
+        var isDatesValid = false;
+        var isRoomValid = false;
+
+        // Inputs
+        var roomDropDown = container.find("[name=RoomID]");
+        var startDateInput = null;
+        var endDateInput = null;
+
+        if(container.attr("id") === "popup") { // 'popup' is editDiv
+            startDateInput = container.find("#editstartDateInput");
+            endDateInput = container.find("#editendDateInput");
+
+            // Adding knapp-data to $_POST because it wont do it otherwise.
+            var input = $("<input>")
+                .attr("type", "hidden")
+                .attr("name", "updateknapp").val("Update");
+            form.append($(input));
+        }
+        else {
+            startDateInput = container.find("#startDateInput");
+            endDateInput = container.find("#endDateInput");
+
+            // Adding knapp-data to $_POST because it wont do it otherwise.
+            var input = $("<input>")
+                .attr("type", "hidden")
+                .attr("name", "addknapp").val("Add");
+            form.append($(input));
+        }
+
+        // Values
+        var startDateString = startDateInput.val();
+        var endDateString = endDateInput.val();
+        var selectedRoom = roomDropDown.val();
+
+        // Validating dates
+        // Check for empty field.
+        if(startDateString.length < 10 && endDateString.length < 10) {
+            startDateInput.css("background-color", badColor);
+            endDateInput.css("background-color", badColor);
+            showError("Du må sette data i begge datofeltene!");
+        }
+        else {
+            isDatesValid = true;
+            startDateInput.css("background-color", goodColor);
+            endDateInput.css("background-color", goodColor);
+        }
+
+        if(startDateString.length < 10) {
+            startDateInput.css("background-color", badColor);
+            showError("Du må velge en start-dato!");
+        }
+        else {
+            startDateInput.css("background-color", goodColor);
+        }
+
+        if(endDateString.length < 10) {
+            endDateInput.css("background-color", badColor);
+            showError("Du må velge en slutt-dato!")
+        }
+        else {
+            endDateInput.css("background-color", goodColor);
+        }
+
+        // Validating room
+        if(selectedRoom == 0) {
+            showError("Du må velge et rom!");
+            roomDropDown.css("background-color", badColor);
+        }
+        else {
+            isRoomValid = true;
+            roomDropDown.css("background-color", goodColor);
+        }
+
+        // IF ALL INPUTS ARE VALID HERE, DO FINAL DATE CHECK.
+        if(isDatesValid && isRoomValid) {
+            validateInputsBookingAjaxCheckDates(startDateString, endDateString);
+        }
     }
-    else if(startDateString.length < 10) {
-        startDateInput.css("background-color", badColor);
-        showError("Du må velge en start-dato!");
-    }
-    else if(endDateString.length < 10) {
-        endDateInput.css("background-color", badColor);
-        showError("Du må velge en slutt-dato!")
-    }
-    else {
+
+    function validateInputsBookingAjaxCheckDates(startDateString, endDateString) {
         $.ajax({
             url: "index.ajax.php",
 
@@ -161,114 +194,80 @@ function validateInputsBooking(container, form) {
             },
 
             success: function( data ) {
+                // Check if the dates are valid
+                console.log("Ajax date check. isValid = " + data.isValid +" Msg = "+ data.message);
+
                 if(data.isValid) {
-                    isDatesValid = true;
-                    startDateInput.css("background-color", goodColor);
-                    endDateInput.css("background-color", goodColor);
-                }
-                else {
-                    startDateInput.css("background-color", badColor);
-                    endDateInput.css("background-color", badColor);
+                    console.log("DATES ARE VALID!");
+                    // If the dates are valid, submit the form.
+                    addForm.submit();
+                } else {
+                    console.log("INVALID DATES");
+
                     showError(data.message);
+                    startDateInput.css("background-color", "red");
+                    endDateInput.css("background-color", "red");
                 }
             }
         });
     }
 
-    // Validating room
-    if(selectedRoom == 0) {
-        showError("Du må velge et rom!");
-        roomDropDown.css("background-color", badColor);
-    }
-    else {
-        isRoomValid = true;
-        roomDropDown.css("background-color", goodColor);
+    /**
+     * Table: CustomerOrder
+     */
+    function validateInputsCustomerOrder(container) {
+        var referenceInput = container.find("[name=Reference]");
     }
 
-    // Submit the form if the inputs are valid
-    if(isDatesValid + isRoomValid) {
-        //form.submit();
-        $("#addknapp").unbind();
-        $("#addknapp").click();
+    /**
+     * Table: Hotel
+     */
+    function validateInputsHotel(container) {
+        var nameInput = container.find("[name=Name]");
+        var descriptionInput = container.find("[name=Description]");
     }
 
-}
+    /**
+     * Table: HotelRoomType
+     */
+    // Needs no validation
 
-/**
- * Table: CustomerOrder
- */
-function validateInputsCustomerOrder(container) {
-    var referenceInput = container.find("[name=Reference]");
-}
+    /**
+     * Table: Image
+     */
+    function validateInputsImage(container) {
+        var urlInpur = container.find("[name=URL]");
+        var descriptionInput = container.find("[name=Description]");
+    }
 
-/**
- * Table: Hotel
- */
-function validateInputsHotel(container) {
-    var nameInput = container.find("[name=Name]");
-    var descriptionInput = container.find("[name=Description]");
-}
+    /**
+     * Table: MaintenanceUser
+     */
+    function validateInputsMaintenanceUser(container) {
+        var usernameInput = container.find("[name=UserName]");
+        var passwordInput = container.find("[name=Password]");
+    }
 
-/**
- * Table: HotelRoomType
- */
-// Needs no validation
+    /**
+     * Table: Room
+     */
+    function validateInputsRoom(container) {
+        var roomNumberInput = container.find("[name=RoomNumber]");
+    }
 
-/**
- * Table: Image
- */
-function validateInputsImage(container) {
-    var urlInpur = container.find("[name=URL]");
-    var descriptionInput = container.find("[name=Description]");
-}
-
-/**
- * Table: MaintenanceUser
- */
-function validateInputsMaintenanceUser(container) {
-    var usernameInput = container.find("[name=UserName]");
-    var passwordInput = container.find("[name=Password]");
-}
-
-/**
- * Table: Room
- */
-function validateInputsRoom(container) {
-    var roomNumberInput = container.find("[name=RoomNumber]");
-}
-
-/**
- * Table: RoomType
- */
-function validateInputsRoomType(container) {
-    var nameInput = container.find("[name=Name]");
-    var numBedsInput = container.find(["name=NumOfBeds"]);
-    var priceInput = container.find("[name=Price]");
-    var descriptionInput = container.find("[name=Description]");
-}
+    /**
+     * Table: RoomType
+     */
+    function validateInputsRoomType(container) {
+        var nameInput = container.find("[name=Name]");
+        var numBedsInput = container.find(["name=NumOfBeds"]);
+        var priceInput = container.find("[name=Price]");
+        var descriptionInput = container.find("[name=Description]");
+    }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}); // End $
 
 
 
