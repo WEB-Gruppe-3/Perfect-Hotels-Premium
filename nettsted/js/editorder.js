@@ -66,15 +66,7 @@ $(function() {
         )
     );
 
-    // Setting onClick @ sjekk button
-    var sjekkButton = $("#sjekkButton");
-
-    sjekkButton.click(function(event) {
-        event.preventDefault();
-        requestNumberOfAvailableRooms()
-    });
-
-    // Setting onClick for OK button for referanse input field
+    /** onClick: reference ok button */
     var okButton = $("[name=checkinbutton]");
     var refInput = $("[name=search]");
 
@@ -88,6 +80,36 @@ $(function() {
         }
     });
 
+    /** onClick: sjekkButton */
+    var sjekkButton = $("#sjekkButton");
+    sjekkButton.click(function(event) {
+        // SjekkButton should not submit anything.
+        event.preventDefault();
+
+        // Remove any message that is present from before
+        var htmlElementMsg = $("#sjekkAvailRoomsMsg");
+        htmlElementMsg.html("");
+
+        // Check if the dates are valid.
+        var startDateVal = $("#startDateInput").val();
+        var endDateVal = $("#endDateInput").val();
+        checkDates(startDateVal, endDateVal, true);
+
+    });
+
+
+    /** onClick: Update button */
+    var updateButton = $("#checkbutton");
+    updateButton.click(function(event) {
+        // Prevent the button from submitting
+        event.preventDefault();
+
+        // Run checkDates which will submit the form if the dates are valid
+        var startDateVal = $("#startDateInput").val();
+        var endDateVal = $("#endDateInput").val();
+        checkDates(startDateVal, endDateVal, false);
+    });
+
 
 });
 /* ########################### SCRIPT END ########################### */
@@ -95,6 +117,54 @@ $(function() {
 
 
 /* ########################### AJAX REQUESTS START ########################### */
+function checkDates(startDate, endDate, isCheck) {
+    $.ajax({
+        // The URL for the request
+        url: "editorder.ajax.php",
+
+        // The data to send (will be converted to a query string)
+        data: {
+            requestedData: "dateCheck",
+            startDate: startDate,
+            endDate: endDate
+        },
+
+        // Whether this is a POST or GET request
+        type: "GET",
+
+        // The type of data we expect back
+        dataType : "json",
+
+        // Code to run if the request fails; the raw request and
+        // status codes are passed to the function
+        error: function( xhr, status, errorThrown ) {
+            console.log("Error from isDatesValid() in editorder.js");
+            console.log( "Error: " + errorThrown );
+            console.log( "Status: " + status );
+            console.dir( xhr );
+        },
+
+        // On completion, set data from JSON
+        success: function( json ) {
+            var htmlElementMsg = $("#sjekkAvailRoomsMsg");
+
+            if(! json.isValid) {
+                htmlElementMsg.html(json.message);
+                htmlElementMsg.css("background-color", "red");
+            }
+            else if(isCheck) {
+                requestNumberOfAvailableRooms();
+            }
+            else if(! isCheck) {
+                // submit the form
+                var form = $("#editform");
+                form.submit();
+            }
+        }
+    });
+
+}
+
 function requestNumberOfAvailableRooms() {
     // Get the fucking dataz
     var hotelID = $("[name = 'HotelID']").val();
