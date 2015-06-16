@@ -122,7 +122,7 @@
 
 
                         echo("<tr><td>Fra-Til: $row[1] - $row[2]<input name='ID' type='hidden' value='$bookid'></td><td></td></tr>");
-                        echo ("<tr><td>Velg ditt rom nummer: </td><td><select name=Room type='input'>");
+                        echo ("<tr><td>Velg ditt rom nummer: </td><td><select name=Room type='input' required=''>");
                         echo("<option value='' selected>-</option>");
                         $result5 = $dbApi->getAllRows("Room");
                         while ($row5 = mysqli_fetch_row($result5)) {
