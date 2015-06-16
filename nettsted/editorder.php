@@ -173,7 +173,7 @@ function checkrooms($data) {
                                         echo ("<tr><td>Romtype: $row4[1]</td></tr>");
                                     }
                                 }
-                                echo("<tr><td>Fra-Til: $fromdate[$nr] - $todate[$nr]<input name='ID' type='hidden' value='$bookid[$nr]'></td><td><input type='submit' value='Endre' name='endrebutton' id='endrebutton'></td></tr>");
+                                echo("<tr><td>Fra-Til: $fromdate[$nr] - $todate[$nr]<input name='ID' type='hidden' value='$bookid[$nr]'></td><td><input type='submit' value='Endre' name='endrebutton' id='endrebutton'><input type='submit' value='Slett' name='deleteknapp' id='deleteknapp'></td></tr>");
                                 echo "</form>";
 
                             } else {
@@ -197,7 +197,6 @@ function checkrooms($data) {
             }
             @$endrebutton=$_POST ["endrebutton"];
             if ($endrebutton) {
-                echo $endrebutton;
                 $bookid=$_POST ["ID"];
                 $result = $dbApi->getRow("Booking", $bookid);
                 while ($row = mysqli_fetch_row($result)) {
@@ -243,7 +242,7 @@ function checkrooms($data) {
                         print ("<tr><td>From</td><td><input size='9' id='startDateInput' type='text' name='FromDate' value=$foo[FromDate] readonly required></td></tr>");
                         print ("<tr><td>To</td><td><input size='9' id='endDateInput' type='text' name='ToDate' value=$foo[ToDate] readonly required></td>");
                         print ("<td><input type='button' value='Sjekk' name='sjekkButton' id='sjekkButton'></td></tr>");
-                        print ("<tr><td></td><td id='sjekkAvailRoomsMsg'></td><td><input type='submit' value='Update' name='checkbutton' id='checkbutton'></td></tr></form></table><br>");
+                        print ("<tr><td></td><td id='sjekkAvailRoomsMsg'></td><td><input type='submit' value='Oppdater' name='checkbutton' id='checkbutton'></td></tr></form></table><br>");
                     } else {
                         $id = $row[3];
                         $result = $dbApi->getRow("Room", $id);
@@ -282,6 +281,17 @@ function checkrooms($data) {
                 }
                 else {
                     echo ("<br><span style='color:red'><strong>Oh noes! There's no more available rooms left in this time period: $newfromdate - $newtodate </strong></span>");
+                }
+            }
+
+            if (@$_POST['deleteknapp']) {
+                $id=$_POST ["ID"];
+                $result = $dbApi->deleteRow("booking", $id);
+                if($result) {
+                    echo ("<p style='color:green'><strong>Successfully deleted!</strong></p>");
+                }
+                else {
+                    echo ("<br><span style='color:red'><strong>Deleting of row ($id) in table FAILED!</strong></span>");
                 }
             }
             ?>
