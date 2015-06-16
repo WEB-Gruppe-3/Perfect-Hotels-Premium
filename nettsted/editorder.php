@@ -113,7 +113,7 @@ function checkrooms($data) {
         <div id="innholdLeft">
             <h3>Vennligst fyll inn referanse kode for å endre din bestilling:</h3>
             <form method="post" action="" id="checkinform" name="checkinform">
-                <input name="search" type="search">
+                <input name="search" type="search" required>
                 <input type='submit' value='OK' name='checkinbutton' id='checkinbutton'>
             </form>
             <br>
@@ -124,6 +124,9 @@ function checkrooms($data) {
             @$checkinbutton=$_POST ["checkinbutton"];
             if ($checkinbutton) {
                 @$input = $_POST['search'];
+                // Trimming spaces from input
+                $input = str_replace(" ", "", $input);
+
                 $column='Reference';
                 $tablename='CustomerOrder';
                 $data[$column] = $input;
