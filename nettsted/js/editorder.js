@@ -100,7 +100,8 @@ $(function() {
 
     /** onClick: Update button */
     var updateButton = $("#checkbutton");
-    updateButton.click(function(event) {
+
+    onClickFunction = function(event) {
         // Prevent the button from submitting
         event.preventDefault();
 
@@ -108,6 +109,10 @@ $(function() {
         var startDateVal = $("#startDateInput").val();
         var endDateVal = $("#endDateInput").val();
         checkDates(startDateVal, endDateVal, false);
+    };
+
+    updateButton.click(function(event) {
+        onClickFunction(event);
     });
 
 
@@ -117,7 +122,7 @@ $(function() {
 
 
 /* ########################### AJAX REQUESTS START ########################### */
-function checkDates(startDate, endDate, isCheck) {
+function checkDates(startDate, endDate, isCheck, event) {
     $.ajax({
         // The URL for the request
         url: "editorder.ajax.php",
@@ -156,9 +161,8 @@ function checkDates(startDate, endDate, isCheck) {
                 requestNumberOfAvailableRooms();
             }
             else if(! isCheck) {
-                // submit the form
-                var form = $("#editform");
-                form.submit();
+                $("#checkbutton").unbind();
+                $("#checkbutton").click();
             }
         }
     });

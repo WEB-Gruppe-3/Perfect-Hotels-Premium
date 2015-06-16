@@ -251,7 +251,7 @@ function checkrooms($data) {
                         print ("<tr><td>From</td><td><input size='9' id='startDateInput' type='text' name='FromDate' value=$foo[FromDate] readonly required></td></tr>");
                         print ("<tr><td>To</td><td><input size='9' id='endDateInput' type='text' name='ToDate' value=$foo[ToDate] readonly required></td>");
                         print ("<td><input type='button' value='Sjekk' name='sjekkButton' id='sjekkButton'></td></tr>");
-                        print ("<tr><td></td><td id='sjekkAvailRoomsMsg'></td><td><input type='submit' value='Oppdater' name='checkbutton' id='checkbutton' onclick=\"return confirm('Er du sikker på du vil endre bestillingen?')\"></td></tr></form></table><br>");
+                        print ("<tr><td></td><td id='sjekkAvailRoomsMsg'></td><td><input type='submit' value='Oppdater' name='checkbutton' id='checkbutton'></td></tr></form></table><br>");
                     } else {
                         $id = $row[3];
                         $result = $dbApi->getRow("Room", $id);
