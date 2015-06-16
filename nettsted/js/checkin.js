@@ -5,7 +5,7 @@ $(function() {
     var refInput = $("[name=search]");
 
     okButton.click(function(event) {
-        if(refInput.val() === "" || refInput.val() === " ") {
+        if(refInput.val() === "" || refInput.val() === " " || refInput.val().length < 32) {
             event.preventDefault();
             refInput.css("background-color", "red");
         }
