@@ -373,3 +373,14 @@ nav ul li a:hover {
 
 	opacity: 0.76;
 }
+
+/* derps */
+#checkinDivFtw {
+	background-color: white;
+	padding: 16px;
+}
+
+#editorderFtw {
+	background-color: white;
+	padding: 16px;
+}

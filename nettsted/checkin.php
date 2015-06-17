@@ -4,16 +4,15 @@
 ?>
     <!-- Start of content -->
     <div id="content">
-        <div id="innholdLeft">
+        <div id="checkinDivFtw">
+
             <h3>Vennligst fyll inn referanse kode:</h3>
             <form method="post" action="" id="checkinform" name="checkinform">
                 <input name="search" type="search" required="">
                 <input type='submit' value='OK' name='checkinbutton' id='checkinbutton'>
             </form>
             <br>
-        </div>
 
-        <div id="innholdRight">
             <?php
             @$checkinbutton=$_POST ["checkinbutton"];
             if ($checkinbutton) {

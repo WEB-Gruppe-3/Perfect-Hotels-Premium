@@ -115,16 +115,17 @@ function checkrooms($data) {
 ?>
     <!-- Start of content -->
     <div id="content">
-        <div id="innholdLeft">
-            <h3>Vennligst fyll inn referanse kode for å endre din bestilling:</h3>
-            <form method="post" action="" id="checkinform" name="checkinform">
-                <input name="search" type="search" required>
-                <input type='submit' value='OK' name='checkinbutton' id='checkinbutton'>
-            </form>
-            <br>
-        </div>
 
-        <div id="innholdRight">
+<div id="editorderFtw">
+        <h3>Vennligst fyll inn referanse kode for å endre din bestilling:</h3>
+        <form method="post" action="" id="checkinform" name="checkinform">
+            <input name="search" type="search" required>
+            <input type='submit' value='OK' name='checkinbutton' id='checkinbutton'>
+        </form>
+        <br>
+
+
+
             <?php
             @$checkinbutton=$_POST ["checkinbutton"];
             if ($checkinbutton) {
@@ -308,7 +309,7 @@ function checkrooms($data) {
                 }
             }
             ?>
-        </div>
+</div>
     </div>
     <script src="js/jquery-1.11.3.js"></script>
     <script src="js/jquery-ui-1.11.4/jquery-ui.js"></script>
