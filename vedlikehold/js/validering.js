@@ -314,8 +314,11 @@ $(function() {
         var roomTypeIdInput = $("[name=RoomTypeID]");
         var hotelIdInput = $("[name=HotelID]");
 
+        // Needs no validation.
+        roomTypeIdInput.css("background-color", goodColor);
+        hotelIdInput.css("background-color", goodColor);
 
-
+        submitForm(form);
     }
 
 
@@ -323,8 +326,31 @@ $(function() {
      * Table: Image
      */
     function validateInputsImage(container, form) {
-        var urlInpur = container.find("[name=URL]");
+        var urlInput = container.find("[name=URL]");
         var descriptionInput = container.find("[name=Description]");
+
+        var isUrlValid = false;
+        var isDescriptValid = false;
+
+        if(urlInput.val() == "" || urlInput.val().length > 300) {
+            urlInput.css("background-color", badColor);
+            showError("URL'en må være mellom 1 og 300 bokstaver!")
+        } else {
+            isUrlValid = true;
+        }
+
+        if(descriptionInput.val() == "" || descriptionInput.val().length > 300) {
+            descriptionInput.css("background-color", badColor);
+            showError("Beskrivelsen må være mellom 1 og 300 bokstaver!")
+        } else {
+            isDescriptValid = true;
+        }
+
+        if(isDescriptValid && isUrlValid) {
+            descriptionInput.css("background-color", goodColor);
+            urlInput.css("background-color", goodColor);
+            submitForm(form);
+        }
     }
 
     /**
@@ -333,6 +359,30 @@ $(function() {
     function validateInputsMaintenanceUser(container, form) {
         var usernameInput = container.find("[name=UserName]");
         var passwordInput = container.find("[name=Password]");
+
+        var isUserNameValid = false;
+        var isPasswordValid = false;
+
+        // Max 45 chars
+        if(usernameInput.val() == "" || usernameInput.val().length > 45) {
+            usernameInput.css("background-color", badColor);
+            showError("Brukernavn må være mellom 1 og 45 bokstaver");
+        } else {
+            isUserNameValid = true;
+        }
+
+        if(passwordInput.val() == "" || passwordInput.val().length > 45) {
+            passwordInput.css("background-color", badColor);
+            showError("Passordet må være mellom 1 og 45 bokstaver!");
+        } else {
+            isPasswordValid = true;
+        }
+
+        if(isPasswordValid && isUserNameValid) {
+            passwordInput.css("background-color", goodColor);
+            usernameInput.css("background-color", goodColor);
+            submitForm(form);
+        }
     }
 
     /**
@@ -340,6 +390,18 @@ $(function() {
      */
     function validateInputsRoom(container, form) {
         var roomNumberInput = container.find("[name=RoomNumber]");
+
+        if(isNaN(roomNumberInput.val())) {
+            roomNumberInput.css("background-color", badColor);
+            showError("Romnummer må være et tall!");
+        }
+        else if(roomNumberInput.val() < 0 || roomNumberInput.val() > 999) {
+            showError("Romnummer må bestå av en tallverdi fra 0 til 999");
+        }
+        else {
+            roomNumberInput.css("background-color", goodColor);
+            submitForm(form);
+        }
     }
 
     /**
@@ -347,9 +409,70 @@ $(function() {
      */
     function validateInputsRoomType(container, form) {
         var nameInput = container.find("[name=Name]");
-        var numBedsInput = container.find(["name=NumOfBeds"]);
+        var numBedsInput = container.find("[name=NumOfBeds]");
         var priceInput = container.find("[name=Price]");
         var descriptionInput = container.find("[name=Description]");
+
+        var nameVal = nameInput.val();
+        var numBedsVal = numBedsInput.val();
+        var priceVal = priceInput.val();
+        var descriptVal = descriptionInput.val();
+
+        var isNameValid = false;
+        var isNumBedsValid = false;
+        var isPriceValid = false;
+        var isDescriptValid = false;
+
+        // Validate name (max 45 length)
+        if(nameVal.length < 1 || nameVal.length > 45) {
+            nameInput.css("background-color", badColor);
+            showError("Navn må være mellom 1 til 45 bokstaver!");
+        } else {
+            nameInput.css("background-color", goodColor);
+            isNameValid = true;
+        }
+
+        // Validate number of beds
+        if(isNaN(numBedsVal)) {
+            numBedsInput.css("background-color", badColor);
+            showError("Antall senger må være et tall!");
+        }
+        else if(numBedsVal < 1 || numBedsVal > 10) {
+            numBedsInput.css("background-color", badColor);
+            showError("Antall senger må være et tall mellom 1 til 10!");
+        }
+        else {
+            numBedsInput.css("background-color", goodColor);
+            isNumBedsValid = true;
+        }
+
+        // Validate price
+        if(isNaN(priceVal)) {
+            priceInput.css("background-color", badColor);
+            showError("Pris må være et tall!");
+        }
+        else if(priceVal < 1 || priceVal > 50000) {
+            priceInput.css("background-color", badColor);
+            showError("Pris må være et tall mellom 1 til 50000!");
+        }
+        else {
+            priceInput.css("background-color", goodColor);
+            isPriceValid = true;
+        }
+
+        // Validate description (max 500 length)
+        if(descriptVal.length < 1 || descriptVal.length > 500) {
+            descriptionInput.css("background-color", badColor);
+            showError("Beskrivelsen må være mellom 1 og 500 bokstaver!")
+        } else {
+            descriptionInput.css("background-color", goodColor);
+            isDescriptValid = true;
+        }
+
+        // Submit if all is valid
+        if(isNameValid && isNumBedsValid && isPriceValid && isDescriptValid) {
+            submitForm(form);
+        }
     }
 
     /**
@@ -373,13 +496,3 @@ $(function() {
 
 
 }); // End $
-
-
-
-
-
-
-
-
-
-
