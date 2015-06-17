@@ -16,7 +16,7 @@
         }
         echo ("<td><input type='submit' value='Edit' name='editknapp' id='editknapp' onclick='edit()'>
                             <input type='submit' value='Delete' name='deleteknapp' id='deleteknapp' onclick=\"return confirm('Er du sikker på du vil slette denne raden?')\">
-                          </td><input type='hidden' size='2'name='rowID' value='$row[0]'></form></tr>");
+                          </td><input type='hidden' size='2' name='rowID' value='$row[0]'></form></tr>");
     }
     ?>
     <tr>

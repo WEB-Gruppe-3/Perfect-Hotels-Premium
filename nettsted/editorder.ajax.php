@@ -15,8 +15,7 @@ if(isset($_GET["requestedData"])) {
             break;
 
         case "dateCheck":
-            isDatesValid(   $dbApi,
-                            $_GET["startDate"],
+            isDatesValid(   $_GET["startDate"],
                             $_GET["endDate"]);
             break;
 
@@ -49,7 +48,7 @@ function printNumOfAvailRoomsJSON($dbApi, $hotelID, $roomTypeID, $startDate, $en
 /**
  * Checks if the dates come after today, and that the end date is later than the start date.
  */
-function isDatesValid($dbApi, $startDateString, $endDateString) {
+function isDatesValid($startDateString, $endDateString) {
 
     // The date strings has this format: YYYY-MM-DD
     $startDate = DateTime::createFromFormat("Y-m-d", $startDateString);

@@ -188,6 +188,7 @@ if (@$_POST['deleteknapp']) {
 
 ?>
     <div id="content">
+        <div id="jsValidateFeedback"></div>
         <div id="innholdLeft">
             <form method="post" action="" id="velgtabellknapp" name="velgtabellknapp">
                 <h3>Velg tabell</h3>
@@ -197,12 +198,12 @@ if (@$_POST['deleteknapp']) {
                     while($row = mysqli_fetch_row($result)) {
                         echo("<option value='$row[0]'");
                         if ($row[0]==$valgt_table) {
-                            echo("selected");
+                            echo(" selected");
                         }
                         echo(">" . $row[0] . "</option>");
                     }
                     ?>
-                </select><input type='submit' value='OK' name='velgtabellknapp' id='velgtabellknapp'">
+                </select><input type='submit' value='OK' name='velgtabellknapp' id='velgtabellknapp'>
             </form>
 
         </div>
@@ -218,6 +219,7 @@ if (@$_POST['deleteknapp']) {
     <script src="../nettsted/js/jquery-ui-1.11.4/datepicker-no.js"></script>
     <link rel="stylesheet" href="../nettsted/js/jquery-ui-1.11.4/jquery-ui.css">
     <script src="js/index.js"></script>
+    <script src="js/validering.js"></script>
 
 <?php require_once("template/end.html");
  ?>
