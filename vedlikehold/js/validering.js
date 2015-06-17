@@ -202,14 +202,9 @@ $(function() {
         }
 
         // Validating room
-        if(selectedRoom == 0) {
-            showError("Du må velge et rom!");
-            roomDropDown.css("background-color", badColor);
-        }
-        else {
-            isRoomValid = true;
-            roomDropDown.css("background-color", goodColor);
-        }
+        // Rooms are valid no matter what
+        roomDropDown.css("background-color", goodColor);
+        isRoomValid = true;
 
         // IF ALL INPUTS ARE VALID HERE, DO FINAL DATE CHECK.
         if(isDatesValid && isRoomValid) {
